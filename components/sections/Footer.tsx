@@ -39,9 +39,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid md:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <img src="/Q_Only.png" alt="Qryptix" className="h-9 w-9" />
-              <span className="font-display font-semibold text-lg">QRYPTIX</span>
+            <div className="mb-4">
+              <img src="/logo-wordmark.png" alt="Qryptix" className="h-9 w-auto" />
             </div>
             <p className="text-sm text-mist max-w-xs leading-relaxed mb-5">
               A practical multi-utility token on Base. Solo-founder operated. Pre-sale reservation active · TGE

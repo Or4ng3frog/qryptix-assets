@@ -27,9 +27,8 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-3 group">
-          <img src="/Q_Only.png" alt="Qryptix" className="h-9 w-9 transition-transform group-hover:scale-110" />
-          <span className="font-display font-semibold text-lg tracking-tight">QRYPTIX</span>
+        <a href="#top" className="flex items-center group">
+          <img src="/logo-wordmark.png" alt="Qryptix" className="h-9 w-auto transition-transform group-hover:scale-105" />
         </a>
 
         <nav className="hidden md:flex items-center gap-9">
