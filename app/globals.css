@@ -42,7 +42,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(168, 139, 255, 0.3);
+  background: rgba(157, 92, 255, 0.4);
   color: #fff;
 }
 
@@ -50,13 +50,13 @@ body {
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: #080A11; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #229488, #6B4FD8);
+  background: linear-gradient(180deg, #0A9D8F, #7B2EFF);
   border-radius: 10px;
 }
 
 /* Gradient text utility */
 .text-gradient {
-  background: linear-gradient(120deg, #5FF5E6 0%, #C4AEFF 100%);
+  background: linear-gradient(120deg, #3DFFEC 0%, #B98BFF 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -64,7 +64,7 @@ body {
 
 /* Animated gradient text */
 .text-gradient-flow {
-  background: linear-gradient(120deg, #3DE0D0, #A88BFF, #3DE0D0);
+  background: linear-gradient(120deg, #0FE3CE, #9D5CFF, #0FE3CE);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -76,7 +76,7 @@ body {
 .glass {
   background: rgba(14, 17, 25, 0.6);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(168, 139, 255, 0.12);
+  border: 1px solid rgba(157, 92, 255, 0.16);
 }
 
 /* Glow border on hover */
@@ -90,7 +90,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(120deg, rgba(61,224,208,0.5), rgba(168,139,255,0.5));
+  background: linear-gradient(120deg, rgba(15,227,206,0.7), rgba(157,92,255,0.7));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -113,8 +113,8 @@ body {
 /* Grid background */
 .bg-grid-fade {
   background-image:
-    linear-gradient(rgba(168,139,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168,139,255,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(157,92,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(157,92,255,0.07) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
@@ -142,5 +142,5 @@ body {
 
 /* Conic glow */
 .conic-glow {
-  background: conic-gradient(from 0deg, transparent, rgba(61,224,208,0.3), transparent, rgba(168,139,255,0.3), transparent);
+  background: conic-gradient(from 0deg, transparent, rgba(15,227,206,0.45), transparent, rgba(157,92,255,0.45), transparent);
 }

@@ -14,16 +14,16 @@ const config: Config = {
         carbon: '#0E1119',
         slate: '#161A26',
         steel: '#1F2433',
-        // Brand — from logo
+        // Brand — from logo, punchier / more saturated
         cyan: {
-          DEFAULT: '#3DE0D0',
-          bright: '#5FF5E6',
-          dim: '#229488',
+          DEFAULT: '#0FE3CE',
+          bright: '#3DFFEC',
+          dim: '#0A9D8F',
         },
         violet: {
-          DEFAULT: '#A88BFF',
-          bright: '#C4AEFF',
-          dim: '#6B4FD8',
+          DEFAULT: '#9D5CFF',
+          bright: '#B98BFF',
+          dim: '#7B2EFF',
         },
         // Text
         ghost: '#EEEFF7',
@@ -40,9 +40,9 @@ const config: Config = {
         'giant': ['clamp(2.5rem, 5vw, 4.5rem)', { lineHeight: '1.0', letterSpacing: '-0.03em' }],
       },
       backgroundImage: {
-        'brand-gradient': 'linear-gradient(120deg, #3DE0D0 0%, #A88BFF 100%)',
-        'brand-radial': 'radial-gradient(circle at 50% 0%, rgba(168,139,255,0.15), transparent 70%)',
-        'grid': "linear-gradient(rgba(168,139,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(168,139,255,0.04) 1px, transparent 1px)",
+        'brand-gradient': 'linear-gradient(120deg, #0FE3CE 0%, #6B6BFF 52%, #9D5CFF 100%)',
+        'brand-radial': 'radial-gradient(circle at 50% 0%, rgba(157,92,255,0.28), transparent 70%)',
+        'grid': "linear-gradient(rgba(157,92,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(157,92,255,0.06) 1px, transparent 1px)",
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
