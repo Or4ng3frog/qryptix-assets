@@ -1,11 +1,14 @@
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/sections/Hero';
 import { TrustStrip } from '@/components/sections/TrustStrip';
+import { PresaleSection } from '@/components/sections/PresaleSection';
 import { Features } from '@/components/sections/Features';
 import { Tokenomics } from '@/components/sections/Tokenomics';
-import { Founder } from '@/components/sections/Founder';
 import { Roadmap } from '@/components/sections/Roadmap';
+import { Founder } from '@/components/sections/Founder';
+import { RefundSection } from '@/components/sections/RefundSection';
 import { Miners } from '@/components/sections/Miners';
+import { Community } from '@/components/sections/Community';
 import { WhitepaperCTA, FAQ } from '@/components/sections/FAQ';
 import { RiskDisclosure, Footer } from '@/components/sections/Footer';
 
@@ -16,11 +19,14 @@ export default function Home() {
       <main>
         <Hero />
         <TrustStrip />
+        <PresaleSection />
         <Features />
         <Tokenomics />
-        <Founder />
         <Roadmap />
+        <Founder />
+        <RefundSection />
         <Miners />
+        <Community />
         <WhitepaperCTA />
         <FAQ />
         <RiskDisclosure />

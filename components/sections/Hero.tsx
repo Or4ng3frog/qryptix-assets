@@ -95,10 +95,10 @@ export function Hero() {
             className="flex flex-wrap gap-3"
           >
             <a
-              href="#reserve"
+              href="#presale"
               className="inline-flex items-center gap-2 rounded-full bg-brand-gradient px-7 py-3.5 font-semibold text-void transition-transform hover:scale-105 hover:shadow-[0_8px_30px_-8px_rgba(168,139,255,0.6)]"
             >
-              Reserve Phase 1 Allocation
+              Join PreSale
               <Icon name="arrow" size={18} />
             </a>
             <a
@@ -107,6 +107,12 @@ export function Hero() {
             >
               <Icon name="doc" size={18} />
               Read Whitepaper
+            </a>
+            <a
+              href="/dashboard"
+              className="inline-flex items-center gap-2 rounded-full border border-violet/25 px-7 py-3.5 font-medium text-ghost transition-all hover:border-violet/60 hover:bg-violet/5"
+            >
+              View Dashboard Preview
             </a>
           </motion.div>
         </div>

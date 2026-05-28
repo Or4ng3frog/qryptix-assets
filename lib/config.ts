@@ -139,3 +139,104 @@ export const FAQS: FaqItem[] = [
   { q: 'Why Dubai?', a: 'Dubai (via VARA — Virtual Assets Regulatory Authority) offers a clear regulatory framework well-suited to projects of this scale. The choice is operational — Qryptix itself remains a global, permissionless project once launched on Base.' },
   { q: 'Do I need to do KYC?', a: "Not for the reservation. KYC requirements at purchase time depend on jurisdiction and entity setup at launch. We'll publish exact requirements before the buy flow opens. You are responsible for complying with your local regulations." },
 ];
+
+// ============================================================
+//  PRE-SALE participation parameters
+// ============================================================
+
+export const PRESALE = {
+  // Accepted payment currencies (Base network)
+  currencies: ['USDC', 'USDT', 'ETH'] as const,
+  // Per-wallet limits (USD-equivalent). null = no limit.
+  minBuyUsd: 50,
+  maxBuyUsd: 25000,
+  // TODO: replace with real treasury wallet once entity + multisig live
+  treasuryWallet: '0x0000000000000000000000000000000000000000',
+  // The honest framing — never "investment"
+  framing: 'Early Supporter / PreSale Participation',
+} as const;
+
+// Mandatory acknowledgement checkboxes before any purchase/reservation
+export const PURCHASE_ACKS = [
+  'I understand that Qryptix is an early-stage crypto project, that participation is speculative, and that no listing, liquidity, reward or value increase is guaranteed.',
+  'I have read and accept the PreSale Terms, Refund Policy and Risk Disclosure.',
+] as const;
+
+// ============================================================
+//  REFUND POLICY (display + dashboard logic)
+// ============================================================
+
+export const REFUND_ELIGIBLE = [
+  'Qryptix is not launch-ready by the defined target date',
+  'No viable token launch is carried out',
+  'No functional claim / distribution system is provided',
+  'The project is officially discontinued',
+  'Legal or technical reasons prevent the launch',
+] as const;
+
+export const REFUND_NOT_ELIGIBLE = [
+  'A buyer simply changes their mind',
+  'The market price later falls',
+  'The token does not rise after launch',
+  'Exchange listings take longer than hoped',
+  'Roadmap items are adjusted',
+  'General market risks materialise',
+] as const;
+
+export const REFUND_RULES = [
+  'Refunds are only possible up to Token Claim / TGE — not after tokens are distributed',
+  'Network / gas fees are generally not refundable',
+  'Refund currency matches the original payment currency where possible',
+  'Refund requests are submitted and tracked through the Dashboard',
+] as const;
+
+// Refund request lifecycle (used by dashboard + DB)
+export const REFUND_STATUSES = [
+  'not_requested',
+  'requested',
+  'under_review',
+  'approved',
+  'rejected',
+  'paid',
+] as const;
+export type RefundStatus = (typeof REFUND_STATUSES)[number];
+
+// ============================================================
+//  RISK DISCLOSURE bullets
+// ============================================================
+
+export const RISKS = [
+  'Qryptix is an early crypto project',
+  'Participation is speculative',
+  'Total loss of funds is possible',
+  'No guarantee of value increase',
+  'No guarantee of exchange listing',
+  'No guarantee of liquidity',
+  'No guaranteed rewards',
+  'The hardware / reward layer is planned but not guaranteed',
+  'Regulatory restrictions may apply depending on your country',
+  'You are solely responsible for determining whether you may participate',
+] as const;
+
+// ============================================================
+//  COMMUNITY
+// ============================================================
+
+export const COMMUNITY = {
+  intro: 'Community-first, with transparent updates. No hype, no inflated promises — just regular, honest progress reports from the founder.',
+  channels: [
+    { name: 'Telegram', desc: 'Announcements & early-supporter chat', icon: 'telegram', href: SOCIALS.telegram, cta: 'Join Telegram' },
+    { name: 'Discord', desc: 'Deeper discussion, dev updates, Q&A', icon: 'discord', href: SOCIALS.discord, cta: 'Join Discord' },
+  ],
+} as const;
+
+// ============================================================
+//  PRE-SALE STAGES (for DB seeding + dashboard)
+// ============================================================
+
+export const PRESALE_STAGES = PHASES.map((p, i) => ({
+  stage: i + 1,
+  code: p.id,
+  priceUsd: p.price,
+  status: p.active ? 'active' : i < PHASES.findIndex((x) => x.active) ? 'closed' : 'upcoming',
+}));

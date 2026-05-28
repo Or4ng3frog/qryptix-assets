@@ -1,25 +1,33 @@
 'use client';
 
-import { SITE, SOCIALS, FOUNDER } from '@/lib/config';
+import { SITE, SOCIALS, FOUNDER, RISKS } from '@/lib/config';
 import { Icon } from '../Icon';
 
 export function RiskDisclosure() {
   return (
-    <section id="risk" className="mx-auto max-w-3xl px-6 py-16">
-      <div className="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
-        <h3 className="flex items-center gap-2.5 text-red-400 font-semibold mb-3">
-          <Icon name="alert" size={18} /> Risk Disclosure
+    <section id="risk" className="mx-auto max-w-5xl px-6 py-20 scroll-mt-24">
+      <div className="rounded-3xl border border-red-500/20 bg-red-500/[0.04] p-8 md:p-10">
+        <h3 className="flex items-center gap-2.5 text-red-400 font-display font-medium text-xl mb-2">
+          <Icon name="alert" size={20} /> Risk Disclosure
         </h3>
-        <p className="text-sm text-mist leading-relaxed">
-          Qryptix (QTX) is a speculative digital asset. Token prices can be highly volatile and can lose all
-          value. Nothing on this website constitutes financial, investment, legal, tax, or accounting advice. The
-          project is in an early stage: the smart contract has not yet been independently audited, the operating
-          entity is in setup, and no token purchases are accepted today. The hardware miner program is in
-          manufacturer-selection phase — specifications and pricing are indicative only. Participation may be
-          restricted or prohibited in certain jurisdictions including the European Union under MiCAR. By using this
-          website you confirm you understand these risks and comply with your local laws. Do your own research and
-          only allocate funds you can afford to lose entirely.
+        <p className="text-sm text-mist leading-relaxed mb-6 max-w-3xl">
+          Please read carefully before participating. Participation in the Qryptix PreSale is entirely voluntary
+          and carries substantial risk, including total loss of the funds you contribute.
         </p>
+        <div className="grid md:grid-cols-2 gap-x-8 gap-y-2.5">
+          {RISKS.map((r) => (
+            <div key={r} className="flex gap-2.5 text-sm text-mist">
+              <span className="text-red-400/70 mt-0.5 shrink-0">•</span>
+              <span>{r}</span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-7 pt-5 border-t border-red-500/15">
+          <a href="/risk-disclosure" className="inline-flex items-center gap-2 text-sm font-medium text-red-300 hover:text-red-200 transition-colors">
+            Read the full Risk Disclosure
+            <Icon name="arrow" size={16} />
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -60,9 +68,9 @@ export function Footer() {
           </div>
 
           {[
-            { h: 'Project', links: [['Tokenomics', '#tokenomics'], ['Roadmap', '#roadmap'], ['Founder', '#founder'], ['Whitepaper', '/whitepaper']] },
-            { h: 'Resources', links: [['Basescan Contract', SITE.basescanUrl], ['FAQ', '#faq'], ['Miners', '#miners'], ['Contact', `mailto:${SITE.email}`]] },
-            { h: 'Legal', links: [['Terms of Use', '#'], ['Privacy Policy', '#'], ['Cookie Policy', '#'], ['Risk Disclosure', '#risk']] },
+            { h: 'Project', links: [['PreSale', '#presale'], ['Tokenomics', '#tokenomics'], ['Roadmap', '#roadmap'], ['Whitepaper', '/whitepaper']] },
+            { h: 'Participate', links: [['Dashboard', '/dashboard'], ['Refund Policy', '/refund-policy'], ['Community', '#community'], ['Basescan Contract', SITE.basescanUrl]] },
+            { h: 'Legal', links: [['Terms of Use', '/terms'], ['PreSale Terms', '/presale-terms'], ['Privacy Policy', '/privacy'], ['Risk Disclosure', '/risk-disclosure']] },
           ].map((col) => (
             <div key={col.h}>
               <h4 className="text-xs uppercase tracking-[0.15em] text-fog mb-4">{col.h}</h4>

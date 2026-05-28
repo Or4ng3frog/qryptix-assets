@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { SITE } from '@/lib/config';
+import { Web3Provider } from '@/components/Web3Provider';
 
 export const metadata: Metadata = {
   title: `${SITE.name} (${SITE.ticker}) — ${SITE.tagline}`,
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           className="fixed bottom-0 right-0 -z-10 h-[500px] w-[500px] opacity-50"
           style={{ background: 'radial-gradient(circle, rgba(61,224,208,0.08), transparent 70%)' }}
         />
-        {children}
+        <Web3Provider>{children}</Web3Provider>
       </body>
     </html>
   );

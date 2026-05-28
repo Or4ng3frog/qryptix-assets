@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { SITE } from '@/lib/config';
 
 const NAV = [
+  { label: 'PreSale', href: '#presale' },
   { label: 'Tokenomics', href: '#tokenomics' },
   { label: 'Roadmap', href: '#roadmap' },
-  { label: 'Founder', href: '#founder' },
-  { label: 'Miners', href: '#miners' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Refund', href: '#refund' },
+  { label: 'Community', href: '#community' },
 ];
 
 export function Navbar() {
@@ -45,12 +45,20 @@ export function Navbar() {
           ))}
         </nav>
 
-        <a
-          href="#reserve"
-          className="relative inline-flex items-center gap-2 rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-semibold text-void transition-transform hover:scale-105 hover:shadow-[0_8px_30px_-8px_rgba(168,139,255,0.6)]"
-        >
-          Reserve Spot
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="/dashboard"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full border border-violet/25 px-4 py-2.5 text-sm font-medium text-ghost transition-all hover:border-violet/60 hover:bg-violet/5"
+          >
+            Dashboard
+          </a>
+          <a
+            href="/buy"
+            className="relative inline-flex items-center gap-2 rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-semibold text-void transition-transform hover:scale-105 hover:shadow-[0_8px_30px_-8px_rgba(168,139,255,0.6)]"
+          >
+            Join PreSale
+          </a>
+        </div>
       </div>
     </header>
   );

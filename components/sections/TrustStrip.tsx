@@ -4,12 +4,12 @@ import { SITE } from '@/lib/config';
 import { Icon } from '../Icon';
 
 const TRUST = [
-  { icon: 'boxes', t1: 'Contract on Base', t2: 'Verified on Basescan' },
-  { icon: 'linkedin', t1: 'Doxxed Founder', t2: 'Public on LinkedIn' },
-  { icon: 'shield', t1: 'Fixed 1B Supply', t2: 'Enforced on-chain' },
-  { icon: 'lock', t1: '12-Month LP Lock', t2: 'At launch' },
-  { icon: 'doc', t1: 'Open Whitepaper', t2: 'Full disclosure' },
-  { icon: 'gauge', t1: 'Capped Emissions', t2: 'Degressive schedule' },
+  { icon: 'boxes', t1: 'Base Network', t2: 'Ethereum L2' },
+  { icon: 'shield', t1: 'Fixed Supply', t2: '1B QTX, on-chain' },
+  { icon: 'lock', t1: 'Vesting', t2: 'Transparent schedule' },
+  { icon: 'check', t1: 'Refund Policy', t2: 'Clear & published' },
+  { icon: 'linkedin', t1: 'Founder Doxxed', t2: 'Public on LinkedIn' },
+  { icon: 'doc', t1: 'Transparent PreSale', t2: 'Honest disclosure' },
 ];
 
 export function TrustStrip() {
