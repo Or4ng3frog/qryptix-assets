@@ -20,8 +20,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
+/* Premium Dark Luxe system — editorial serif display + Inter body */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
 :root {
   --void: #05060A;
+  --obsidian: #08080A;
 }
 
 * {
@@ -143,4 +147,86 @@ body {
 /* Conic glow */
 .conic-glow {
   background: conic-gradient(from 0deg, transparent, rgba(15,227,206,0.45), transparent, rgba(157,92,255,0.45), transparent);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Premium Dark Luxe utilities (new system)
+   ───────────────────────────────────────────────────────────── */
+
+/* Static gold gradient text */
+.text-gold {
+  background: linear-gradient(120deg, #F4D88A 0%, #E3B341 48%, #9A6F24 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animated metallic sheen text (gold) */
+.text-gold-sheen {
+  background: linear-gradient(110deg, #9A6F24, #F4D88A, #E3B341, #F4D88A, #9A6F24);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sheen 7s linear infinite;
+}
+
+/* Warm dark glass */
+.glass-luxe {
+  background: rgba(18, 18, 23, 0.62);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(227, 179, 65, 0.16);
+}
+
+/* Gold gradient hairline-border on hover (gold recolor of .glow-border) */
+.glow-gold {
+  position: relative;
+}
+.glow-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(244,216,138,0.7), rgba(154,111,36,0.7));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.glow-gold:hover::before { opacity: 1; }
+
+/* Warm gold grid backdrop */
+.bg-grid-gold {
+  background-image:
+    linear-gradient(rgba(227,179,65,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(227,179,65,0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Gold-tinted selection for luxe pages */
+.sel-gold ::selection {
+  background: rgba(227, 179, 65, 0.35);
+  color: #fff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Accessibility: honor reduced-motion globally (was missing before)
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
