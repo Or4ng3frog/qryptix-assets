@@ -18,13 +18,13 @@ export function FAQ() {
         {FAQS.map((item, i) => {
           const isOpen = open === i;
           return (
-            <div key={i} className="rounded-2xl glass overflow-hidden">
+            <div key={i} className="rounded-2xl glass-luxe overflow-hidden">
               <button
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-violet/[0.03]"
+                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-gold/[0.04] cursor-pointer"
               >
-                <span className="font-medium text-ghost">{item.q}</span>
-                <span className={`text-violet-bright transition-transform shrink-0 ${isOpen ? 'rotate-45' : ''}`}>
+                <span className="font-grotesk font-medium text-ivory">{item.q}</span>
+                <span className={`text-gold transition-transform shrink-0 ${isOpen ? 'rotate-45' : ''}`}>
                   <Icon name="plus" size={20} />
                 </span>
               </button>
@@ -33,7 +33,7 @@ export function FAQ() {
                 style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
               >
                 <div className="overflow-hidden">
-                  <p className="px-6 pb-5 text-sm text-mist leading-relaxed">{item.a}</p>
+                  <p className="px-6 pb-5 text-sm text-ash leading-relaxed">{item.a}</p>
                 </div>
               </div>
             </div>
@@ -47,18 +47,21 @@ export function FAQ() {
 export function WhitepaperCTA() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-20">
-      <div className="relative overflow-hidden rounded-[2rem] glass p-12 md:p-16 text-center">
-        <div className="pointer-events-none absolute inset-0 conic-glow opacity-20 animate-spin-slow" />
+      <div className="relative overflow-hidden rounded-[2rem] glass-luxe p-12 md:p-16 text-center">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20 animate-spin-slow"
+          style={{ background: 'conic-gradient(from 0deg, transparent, rgba(227,179,65,0.45), transparent, rgba(154,111,36,0.4), transparent)' }}
+        />
         <div className="relative">
-          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gradient mb-4">Documentation</div>
-          <h2 className="font-display font-semibold text-giant mb-4">Whitepaper v1.3</h2>
-          <p className="text-mist text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+          <div className="text-xs font-grotesk font-semibold uppercase tracking-eyebrow text-gold mb-4">Documentation</div>
+          <h2 className="font-serif font-semibold text-display text-ivory mb-4">Whitepaper v1.3</h2>
+          <p className="font-grotesk text-ash text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
             The full technical and economic spec — tokenomics, vesting, smart-contract architecture, the miner
             program, security posture, and complete risk disclosure.
           </p>
           <a
             href="/whitepaper"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-gradient px-8 py-4 font-semibold text-void transition-transform hover:scale-105 hover:shadow-[0_8px_30px_-8px_rgba(168,139,255,0.6)]"
+            className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-8 py-4 font-grotesk font-semibold text-obsidian transition-[filter,box-shadow] duration-300 hover:brightness-105 hover:shadow-[0_10px_40px_-12px_rgba(227,179,65,0.5)] cursor-pointer"
           >
             <Icon name="doc" size={18} />
             Read Full Whitepaper

@@ -71,15 +71,16 @@ export type Allocation = {
   color: string;
 };
 
+// Warm metallic ramp (premium dark luxe): bright gold → bronze → muted taupe
 export const ALLOCATIONS: Allocation[] = [
-  { name: 'Ecosystem · Miner Rewards', pct: 30, desc: 'Up to 48 months · degressive ~15% YoY · quarterly caps', color: '#3DE0D0' },
-  { name: 'Treasury / Grants', pct: 16, desc: '3-month cliff · 24-month linear · multisig-controlled', color: '#5FD5C8' },
-  { name: 'Presale (P1–P5)', pct: 12, desc: '10% TGE · 90% linear over 8 months', color: '#7AC5D8' },
-  { name: 'Staking Rewards', pct: 12, desc: 'Up to 36 months · ~10% quarterly degressive', color: '#9BA8F0' },
-  { name: 'Liquidity & Market-Making', pct: 10, desc: 'Initial DEX liquidity · LP locked 12 months', color: '#A88BFF' },
-  { name: 'Team', pct: 10, desc: '12-month cliff · 36-month linear vest', color: '#8E6FE8' },
-  { name: 'Unallocated Reserve', pct: 6, desc: 'Multisig-controlled · future governance', color: '#6B4FD8' },
-  { name: 'Advisors + Community', pct: 4, desc: 'Advisors: 6m cliff · Community: 25% TGE · 6m linear', color: '#4B5563' },
+  { name: 'Ecosystem · Miner Rewards', pct: 30, desc: 'Up to 48 months · degressive ~15% YoY · quarterly caps', color: '#F4D88A' },
+  { name: 'Treasury / Grants', pct: 16, desc: '3-month cliff · 24-month linear · multisig-controlled', color: '#E3B341' },
+  { name: 'Presale (P1–P5)', pct: 12, desc: '10% TGE · 90% linear over 8 months', color: '#D4A24A' },
+  { name: 'Staking Rewards', pct: 12, desc: 'Up to 36 months · ~10% quarterly degressive', color: '#C28F3C' },
+  { name: 'Liquidity & Market-Making', pct: 10, desc: 'Initial DEX liquidity · LP locked 12 months', color: '#A87B2E' },
+  { name: 'Team', pct: 10, desc: '12-month cliff · 36-month linear vest', color: '#8A6A2B' },
+  { name: 'Unallocated Reserve', pct: 6, desc: 'Multisig-controlled · future governance', color: '#6E5A2E' },
+  { name: 'Advisors + Community', pct: 4, desc: 'Advisors: 6m cliff · Community: 25% TGE · 6m linear', color: '#51493A' },
 ];
 
 export type Feature = {

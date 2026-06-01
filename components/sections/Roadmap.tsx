@@ -2,43 +2,40 @@
 
 import { ROADMAP } from '@/lib/config';
 import { SectionHeading } from './SectionHeading';
-import { useReveal } from '@/lib/useReveal';
+import { Stagger, StaggerItem } from '@/components/motion';
 
 const STATUS_STYLE: Record<string, string> = {
   done: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-  now: 'bg-gradient-to-r from-cyan/15 to-violet/15 text-cyan-bright border-violet/30',
-  planned: 'bg-white/5 text-fog border-white/10',
+  now: 'bg-gradient-to-r from-gold/15 to-gold-deep/10 text-gold-bright border-gold/30',
+  planned: 'bg-white/5 text-taupe border-white/10',
 };
 const STATUS_LABEL: Record<string, string> = { done: 'Done', now: 'Now', planned: 'Planned' };
 
-function RoadmapCard({ item, i }: { item: (typeof ROADMAP)[number]; i: number }) {
-  const { ref, visible } = useReveal();
+function RoadmapCard({ item }: { item: (typeof ROADMAP)[number] }) {
   return (
-    <div
-      ref={ref}
-      className={`relative grid md:grid-cols-[150px_1fr] gap-6 rounded-3xl glass p-7 reveal ${visible ? 'visible' : ''} ${
-        item.status === 'now' ? 'border-violet/30 bg-gradient-to-r from-violet/[0.06] to-transparent' : ''
+    <StaggerItem
+      className={`relative grid md:grid-cols-[150px_1fr] gap-6 rounded-3xl glass-luxe p-7 ${
+        item.status === 'now' ? 'border-gold/30 bg-gradient-to-r from-gold/[0.06] to-transparent' : ''
       }`}
-      style={{ transitionDelay: `${i * 80}ms` }}
     >
       <div>
-        <div className="font-display font-medium text-ghost">{item.period}</div>
-        <span className={`inline-block mt-2 rounded-md border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${STATUS_STYLE[item.status]}`}>
+        <div className="font-serif font-medium text-ivory">{item.period}</div>
+        <span className={`inline-block mt-2 rounded-md border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-eyebrow ${STATUS_STYLE[item.status]}`}>
           {STATUS_LABEL[item.status]}
         </span>
       </div>
       <div>
-        <h3 className="font-display font-medium text-lg text-ghost mb-3">{item.title}</h3>
+        <h3 className="font-serif font-medium text-lg text-ivory mb-3">{item.title}</h3>
         <ul className="space-y-1.5">
           {item.items.map((t) => (
-            <li key={t} className="flex gap-2.5 text-sm text-mist">
-              <span className="text-gradient mt-0.5">→</span>
+            <li key={t} className="flex gap-2.5 text-sm text-ash">
+              <span className="text-gold mt-0.5">→</span>
               <span>{t}</span>
             </li>
           ))}
         </ul>
       </div>
-    </div>
+    </StaggerItem>
   );
 }
 
@@ -48,13 +45,13 @@ export function Roadmap() {
       <SectionHeading
         tag="Roadmap"
         title={<>Where we are. Where we&apos;re going.</>}
-        subtitle="Color-coded honestly: green = done & verifiable, gradient = currently active, gray = planned. No vague filler."
+        subtitle="Color-coded honestly: green = done & verifiable, gold = currently active, gray = planned. No vague filler."
       />
-      <div className="flex flex-col gap-4">
-        {ROADMAP.map((item, i) => (
-          <RoadmapCard key={item.period} item={item} i={i} />
+      <Stagger className="flex flex-col gap-4" gap={0.08}>
+        {ROADMAP.map((item) => (
+          <RoadmapCard key={item.period} item={item} />
         ))}
-      </div>
+      </Stagger>
     </section>
   );
 }
