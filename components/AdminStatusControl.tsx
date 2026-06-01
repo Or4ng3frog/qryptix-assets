@@ -42,7 +42,7 @@ export function AdminStatusControl({
         value={status}
         onChange={(e) => update(e.target.value)}
         disabled={saving}
-        className="rounded-lg bg-void/60 border border-white/8 px-2.5 py-1.5 text-xs text-ghost focus:outline-none focus:border-violet/50"
+        className="rounded-lg bg-obsidian/60 border border-white/8 px-2.5 py-1.5 text-xs text-ivory focus:outline-none focus:border-gold/50"
       >
         {options.map((s) => (
           <option key={s} value={s} className="bg-carbon">{s}</option>

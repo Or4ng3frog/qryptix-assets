@@ -58,19 +58,19 @@ export function WalletConnect({ initialAddress }: { initialAddress?: string }) {
   };
 
   return (
-    <div className="glass rounded-2xl p-6">
+    <div className="glass-luxe rounded-2xl p-6">
       <div className="flex items-center gap-2 mb-4">
-        <Icon name="lock" size={16} className="text-violet-bright" />
-        <span className="text-sm font-medium text-ghost">Connect your wallet</span>
+        <Icon name="lock" size={16} className="text-gold" />
+        <span className="text-sm font-medium text-ivory">Connect your wallet</span>
       </div>
 
       {address ? (
-        <div className="rounded-xl bg-void/40 border border-white/5 px-4 py-3 mb-4 flex items-center justify-between">
-          <span className="font-mono text-sm text-ghost">{shortAddr(address)}</span>
+        <div className="rounded-xl bg-obsidian/40 border border-white/5 px-4 py-3 mb-4 flex items-center justify-between">
+          <span className="font-mono text-sm text-ivory">{shortAddr(address)}</span>
           <span className="text-[11px] rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 uppercase tracking-wider font-semibold">Linked</span>
         </div>
       ) : (
-        <p className="text-sm text-mist mb-4">
+        <p className="text-sm text-ash mb-4">
           Link the Base wallet you’ll use for your allocation and any refund. We never ask for your private keys.
         </p>
       )}
@@ -78,7 +78,7 @@ export function WalletConnect({ initialAddress }: { initialAddress?: string }) {
       <button
         onClick={connectInjected}
         disabled={loading}
-        className="w-full rounded-xl bg-brand-gradient py-3 font-semibold text-void transition-transform enabled:hover:scale-[1.02] disabled:opacity-40 mb-3"
+        className="w-full rounded-xl bg-gold-gradient py-3 font-semibold text-obsidian transition-transform enabled:hover:scale-[1.02] disabled:opacity-40 mb-3"
       >
         {address ? 'Reconnect browser wallet' : 'Connect browser wallet'}
       </button>
@@ -88,17 +88,17 @@ export function WalletConnect({ initialAddress }: { initialAddress?: string }) {
           value={manual}
           onChange={(e) => setManual(e.target.value)}
           placeholder="…or paste 0x address"
-          className="flex-grow rounded-xl bg-void/60 border border-white/8 px-4 py-2.5 text-sm text-ghost font-mono focus:outline-none focus:border-violet/50"
+          className="flex-grow rounded-xl bg-obsidian/60 border border-white/8 px-4 py-2.5 text-sm text-ivory font-mono focus:outline-none focus:border-gold/50"
         />
         <button
           onClick={() => save(manual)}
-          className="rounded-xl border border-violet/25 px-4 py-2.5 text-sm text-ghost hover:bg-violet/5 hover:border-violet/60 transition-all"
+          className="rounded-xl border border-gold/25 px-4 py-2.5 text-sm text-ivory hover:bg-gold/5 hover:border-gold/60 transition-all"
         >
           Save
         </button>
       </div>
 
-      {msg && <p className="text-sm text-cyan-bright mt-3">{msg}</p>}
+      {msg && <p className="text-sm text-gold-bright mt-3">{msg}</p>}
       {err && <p className="text-sm text-red-400 mt-3">{err}</p>}
     </div>
   );

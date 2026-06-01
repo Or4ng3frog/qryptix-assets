@@ -75,23 +75,23 @@ function LoginInner() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="border-b border-violet/10">
+      <div className="border-b border-gold/10">
         <div className="mx-auto max-w-6xl px-6 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
             <img src="/Q_Only.png" alt="Qryptix" className="h-8 w-8" />
-            <span className="font-display font-semibold">QRYPTIX</span>
+            <span className="font-serif font-semibold">QRYPTIX</span>
           </a>
-          <a href="/" className="text-sm text-mist hover:text-ghost transition-colors">← Back to home</a>
+          <a href="/" className="text-sm text-ash hover:text-ivory transition-colors">← Back to home</a>
         </div>
       </div>
 
       <div className="flex-grow flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-md">
-          <div className="glass rounded-3xl p-8">
-            <h1 className="font-display font-semibold text-2xl mb-1">
+          <div className="glass-luxe rounded-3xl p-8">
+            <h1 className="font-serif font-semibold text-2xl mb-1">
               {isSignup ? 'Create your account' : 'Sign in'}
             </h1>
-            <p className="text-sm text-mist mb-6">
+            <p className="text-sm text-ash mb-6">
               Access your Qryptix dashboard, PreSale participation, and refund requests.
             </p>
 
@@ -102,50 +102,50 @@ function LoginInner() {
             )}
 
             {/* mode toggle */}
-            <div className="flex gap-2 mb-5 p-1 rounded-xl bg-void/50 border border-white/5">
+            <div className="flex gap-2 mb-5 p-1 rounded-xl bg-obsidian/50 border border-white/5">
               <button
                 onClick={() => setMode('magic')}
-                className={`flex-1 rounded-lg py-2 text-sm font-medium transition-all ${mode === 'magic' ? 'bg-brand-gradient text-void' : 'text-mist'}`}
+                className={`flex-1 rounded-lg py-2 text-sm font-medium transition-all ${mode === 'magic' ? 'bg-gold-gradient text-obsidian' : 'text-ash'}`}
               >
                 Magic link
               </button>
               <button
                 onClick={() => setMode('password')}
-                className={`flex-1 rounded-lg py-2 text-sm font-medium transition-all ${mode === 'password' ? 'bg-brand-gradient text-void' : 'text-mist'}`}
+                className={`flex-1 rounded-lg py-2 text-sm font-medium transition-all ${mode === 'password' ? 'bg-gold-gradient text-obsidian' : 'text-ash'}`}
               >
                 Email + password
               </button>
             </div>
 
-            <label className="block text-xs text-mist mb-1.5">Email</label>
+            <label className="block text-xs text-ash mb-1.5">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full rounded-xl bg-void/60 border border-white/8 px-4 py-3 text-ghost focus:outline-none focus:border-violet/50 transition-colors mb-3"
+              className="w-full rounded-xl bg-obsidian/60 border border-white/8 px-4 py-3 text-ivory focus:outline-none focus:border-gold/50 transition-colors mb-3"
             />
 
             {mode === 'password' && (
               <>
-                <label className="block text-xs text-mist mb-1.5">Password</label>
+                <label className="block text-xs text-ash mb-1.5">Password</label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full rounded-xl bg-void/60 border border-white/8 px-4 py-3 text-ghost focus:outline-none focus:border-violet/50 transition-colors mb-3"
+                  className="w-full rounded-xl bg-obsidian/60 border border-white/8 px-4 py-3 text-ivory focus:outline-none focus:border-gold/50 transition-colors mb-3"
                 />
               </>
             )}
 
-            {msg && <p className="text-sm text-cyan-bright mb-3">{msg}</p>}
+            {msg && <p className="text-sm text-gold-bright mb-3">{msg}</p>}
             {err && <p className="text-sm text-red-400 mb-3">{err}</p>}
 
             <button
               onClick={mode === 'magic' ? handleMagic : handlePassword}
               disabled={loading}
-              className="w-full rounded-xl bg-brand-gradient py-3.5 font-semibold text-void transition-transform enabled:hover:scale-[1.02] disabled:opacity-40 flex items-center justify-center gap-2"
+              className="w-full rounded-xl bg-gold-gradient py-3.5 font-semibold text-obsidian transition-transform enabled:hover:scale-[1.02] disabled:opacity-40 flex items-center justify-center gap-2"
             >
               {loading ? 'Please wait…' : mode === 'magic' ? 'Send magic link' : isSignup ? 'Create account' : 'Sign in'}
               {!loading && <Icon name="arrow" size={16} />}
@@ -154,18 +154,18 @@ function LoginInner() {
             {mode === 'password' && (
               <button
                 onClick={() => setIsSignup(!isSignup)}
-                className="w-full text-center text-sm text-mist hover:text-ghost transition-colors mt-4"
+                className="w-full text-center text-sm text-ash hover:text-ivory transition-colors mt-4"
               >
                 {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Create one"}
               </button>
             )}
           </div>
 
-          <p className="text-xs text-fog text-center mt-5 leading-relaxed">
+          <p className="text-xs text-taupe text-center mt-5 leading-relaxed">
             By signing in you agree to the{' '}
-            <a href="/terms" className="text-mist hover:text-ghost underline">Terms</a>,{' '}
-            <a href="/refund-policy" className="text-mist hover:text-ghost underline">Refund Policy</a>, and{' '}
-            <a href="/risk-disclosure" className="text-mist hover:text-ghost underline">Risk Disclosure</a>.
+            <a href="/terms" className="text-ash hover:text-ivory underline">Terms</a>,{' '}
+            <a href="/refund-policy" className="text-ash hover:text-ivory underline">Refund Policy</a>, and{' '}
+            <a href="/risk-disclosure" className="text-ash hover:text-ivory underline">Risk Disclosure</a>.
           </p>
         </div>
       </div>

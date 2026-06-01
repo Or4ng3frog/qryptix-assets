@@ -10,27 +10,27 @@ export const metadata: Metadata = {
 // ---- Prose helpers ----
 function H2({ id, num, children }: { id: string; num: string; children: React.ReactNode }) {
   return (
-    <h2 id={id} className="font-display font-semibold text-3xl mt-16 mb-4 scroll-mt-24">
-      <span className="font-mono text-xl text-fog mr-4">{num}</span>
+    <h2 id={id} className="font-serif font-semibold text-3xl mt-16 mb-4 scroll-mt-24">
+      <span className="font-mono text-xl text-taupe mr-4">{num}</span>
       {children}
     </h2>
   );
 }
 function H3({ children }: { children: React.ReactNode }) {
-  return <h3 className="font-display font-medium text-xl text-ghost mt-9 mb-3">{children}</h3>;
+  return <h3 className="font-serif font-medium text-xl text-ivory mt-9 mb-3">{children}</h3>;
 }
 function P({ children }: { children: React.ReactNode }) {
-  return <p className="text-mist leading-relaxed mb-4 text-[15.5px]">{children}</p>;
+  return <p className="text-ash leading-relaxed mb-4 text-[15.5px]">{children}</p>;
 }
 function Lead({ children }: { children: React.ReactNode }) {
-  return <p className="text-lg text-ghost leading-relaxed mb-6 pl-5 border-l-2 border-violet">{children}</p>;
+  return <p className="text-lg text-ivory leading-relaxed mb-6 pl-5 border-l-2 border-gold">{children}</p>;
 }
 function UL({ items }: { items: React.ReactNode[] }) {
   return (
     <ul className="space-y-2 mb-4 pl-1">
       {items.map((it, i) => (
-        <li key={i} className="flex gap-2.5 text-mist text-[15.5px]">
-          <span className="text-gradient mt-1">→</span>
+        <li key={i} className="flex gap-2.5 text-ash text-[15.5px]">
+          <span className="text-gold mt-1">→</span>
           <span>{it}</span>
         </li>
       ))}
@@ -39,25 +39,25 @@ function UL({ items }: { items: React.ReactNode[] }) {
 }
 function Callout({ variant = 'info', label, children }: { variant?: 'info' | 'warn' | 'danger'; label: string; children: React.ReactNode }) {
   const styles = {
-    info: 'border-l-violet [&_.lbl]:text-violet-bright',
+    info: 'border-l-gold [&_.lbl]:text-gold',
     warn: 'border-l-amber-400 [&_.lbl]:text-amber-400',
     danger: 'border-l-red-400 [&_.lbl]:text-red-400',
   }[variant];
   return (
-    <div className={`glass rounded-xl border-l-2 p-5 my-5 ${styles}`}>
+    <div className={`glass-luxe rounded-xl border-l-2 p-5 my-5 ${styles}`}>
       <div className="lbl text-[11px] uppercase tracking-[0.12em] font-semibold mb-2">{label}</div>
-      <div className="text-sm text-mist leading-relaxed space-y-2">{children}</div>
+      <div className="text-sm text-ash leading-relaxed space-y-2">{children}</div>
     </div>
   );
 }
 function Table({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
   return (
-    <div className="my-6 rounded-xl border border-violet/10 overflow-hidden glass">
+    <div className="my-6 rounded-xl border border-gold/10 overflow-hidden glass-luxe">
       <table className="w-full text-sm">
         <thead>
-          <tr className="bg-abyss/60">
+          <tr className="bg-onyx/60">
             {head.map((h) => (
-              <th key={h} className="px-4 py-3 text-left text-[11px] uppercase tracking-wider text-ghost font-semibold border-b border-violet/10">
+              <th key={h} className="px-4 py-3 text-left text-[11px] uppercase tracking-wider text-ivory font-semibold border-b border-gold/10">
                 {h}
               </th>
             ))}
@@ -65,9 +65,9 @@ function Table({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
         </thead>
         <tbody>
           {rows.map((r, i) => (
-            <tr key={i} className="border-b border-violet/[0.06] last:border-0 hover:bg-violet/[0.03]">
+            <tr key={i} className="border-b border-gold/[0.06] last:border-0 hover:bg-gold/[0.03]">
               {r.map((c, j) => (
-                <td key={j} className={`px-4 py-3 ${j === 0 ? 'text-ghost font-medium' : 'text-mist'}`}>
+                <td key={j} className={`px-4 py-3 ${j === 0 ? 'text-ivory font-medium' : 'text-ash'}`}>
                   {c}
                 </td>
               ))}
@@ -79,23 +79,23 @@ function Table({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
   );
 }
 const Mono = ({ children }: { children: React.ReactNode }) => (
-  <span className="font-mono text-cyan-bright">{children}</span>
+  <span className="font-mono text-gold-bright">{children}</span>
 );
 
 export default function WhitepaperPage() {
   return (
     <div className="min-h-screen">
       {/* Top bar */}
-      <div className="sticky top-0 z-50 bg-void/90 backdrop-blur-xl border-b border-violet/10">
+      <div className="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-xl border-b border-gold/10">
         <div className="mx-auto max-w-[1280px] px-8 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
             <img src="/Q_Only.png" alt="Qryptix" className="h-8 w-8" />
-            <span className="font-display font-semibold">QRYPTIX</span>
-            <span className="text-xs text-fog ml-2 pl-3 border-l border-violet/15 hidden sm:inline">
+            <span className="font-serif font-semibold">QRYPTIX</span>
+            <span className="text-xs text-taupe ml-2 pl-3 border-l border-gold/15 hidden sm:inline">
               Whitepaper v1.3
             </span>
           </a>
-          <a href="/" className="text-sm text-mist hover:text-ghost transition-colors">
+          <a href="/" className="text-sm text-ash hover:text-ivory transition-colors">
             ← Back to home
           </a>
         </div>
@@ -106,18 +106,18 @@ export default function WhitepaperPage() {
 
         <main className="py-12 pb-32 max-w-3xl">
           {/* Title */}
-          <div className="mb-16 pb-12 border-b border-violet/10">
-            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gradient mb-4">
+          <div className="mb-16 pb-12 border-b border-gold/10">
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold mb-4">
               Qryptix · Technical & Economic Specification
             </div>
-            <h1 className="font-display font-semibold text-5xl mb-4 leading-tight">Qryptix Whitepaper v1.3</h1>
-            <p className="text-xl text-mist leading-relaxed mb-7">
+            <h1 className="font-serif font-semibold text-5xl mb-4 leading-tight">Qryptix Whitepaper v1.3</h1>
+            <p className="text-xl text-ash leading-relaxed mb-7">
               A practical multi-utility token on Base (Ethereum L2), with a hardware-backed rewards layer and
               transparent emissions. This document describes what QTX is, how it works, and what it is not.
             </p>
             <div className="flex flex-wrap gap-2">
               {['ERC-20', 'Base · chain 8453', '1B total supply', 'LP locked 12m', 'TGE Q1 2027'].map((t) => (
-                <span key={t} className="rounded-full glass px-3 py-1.5 text-xs font-mono text-mist">
+                <span key={t} className="rounded-full glass-luxe px-3 py-1.5 text-xs font-mono text-ash">
                   {t}
                 </span>
               ))}
@@ -146,11 +146,11 @@ export default function WhitepaperPage() {
             <Mono>{SITE.email}</Mono>.
           </P>
           <Callout label="Quick facts">
-            <p><strong className="text-ghost">Total supply:</strong> 1,000,000,000 QTX (fixed, no mint function after deployment).</p>
-            <p><strong className="text-ghost">Network:</strong> Base mainnet (chain ID 8453). Compatible with all EVM tooling.</p>
-            <p><strong className="text-ghost">Vesting:</strong> 10% at TGE, 90% linear over 8 months for presale buyers. Team locked 12 months + 36-month linear.</p>
-            <p><strong className="text-ghost">LP lock:</strong> Initial DEX liquidity locked for 12 months at launch.</p>
-            <p><strong className="text-ghost">Presale:</strong> 5 phases · $0.006 → $0.015 → $0.030 → $0.060 → $0.125 per QTX.</p>
+            <p><strong className="text-ivory">Total supply:</strong> 1,000,000,000 QTX (fixed, no mint function after deployment).</p>
+            <p><strong className="text-ivory">Network:</strong> Base mainnet (chain ID 8453). Compatible with all EVM tooling.</p>
+            <p><strong className="text-ivory">Vesting:</strong> 10% at TGE, 90% linear over 8 months for presale buyers. Team locked 12 months + 36-month linear.</p>
+            <p><strong className="text-ivory">LP lock:</strong> Initial DEX liquidity locked for 12 months at launch.</p>
+            <p><strong className="text-ivory">Presale:</strong> 5 phases · $0.006 → $0.015 → $0.030 → $0.060 → $0.125 per QTX.</p>
           </Callout>
 
           {/* 02 Problem */}
@@ -211,12 +211,12 @@ export default function WhitepaperPage() {
           <H3>4.1 Contract design</H3>
           <P>QTX is a standard ERC-20 on Base, with the following supplementary mechanisms:</P>
           <UL items={[
-            <><strong className="text-ghost">Vesting registry:</strong> on-chain allocations with cliff and linear-release parameters per category.</>,
-            <><strong className="text-ghost">Claim portal:</strong> lets presale participants claim vested tokens after TGE.</>,
-            <><strong className="text-ghost">Multisig ownership:</strong> critical functions controlled by a 3-of-5 multisig post-launch.</>,
-            <><strong className="text-ghost">LP lock:</strong> 12-month timelock on initial DEX liquidity via an established third-party locker.</>,
+            <><strong className="text-ivory">Vesting registry:</strong> on-chain allocations with cliff and linear-release parameters per category.</>,
+            <><strong className="text-ivory">Claim portal:</strong> lets presale participants claim vested tokens after TGE.</>,
+            <><strong className="text-ivory">Multisig ownership:</strong> critical functions controlled by a 3-of-5 multisig post-launch.</>,
+            <><strong className="text-ivory">LP lock:</strong> 12-month timelock on initial DEX liquidity via an established third-party locker.</>,
           ]} />
-          <pre className="rounded-xl glass border border-violet/10 p-5 my-5 overflow-x-auto font-mono text-[13px] text-mist leading-relaxed">
+          <pre className="rounded-xl glass-luxe border border-gold/10 p-5 my-5 overflow-x-auto font-mono text-[13px] text-ash leading-relaxed">
 {`// Simplified — QTX inherits OpenZeppelin's ERC-20
 contract QryptixToken is ERC20, Ownable {
     uint256 public constant TOTAL_SUPPLY =
@@ -321,9 +321,9 @@ contract QryptixToken is ERC20, Ownable {
             ]}
           />
           <H3>7.1 Reservation phase</H3>
-          <P>Today the site accepts <strong className="text-ghost">reservations</strong>, not purchases. A reservation records email, wallet address, and intended amount, and locks in the current phase price. No funds are accepted; reservations can be cancelled anytime.</P>
+          <P>Today the site accepts <strong className="text-ivory">reservations</strong>, not purchases. A reservation records email, wallet address, and intended amount, and locks in the current phase price. No funds are accepted; reservations can be cancelled anytime.</P>
           <H3>7.2 Purchase preconditions</H3>
-          <P>The buy flow activates only when <strong className="text-ghost">all</strong> of the following are met:</P>
+          <P>The buy flow activates only when <strong className="text-ivory">all</strong> of the following are met:</P>
           <UL items={[
             'Smart-contract audit completed by a recognised provider and published.',
             'Operating entity established with a published address.',
@@ -339,7 +339,7 @@ contract QryptixToken is ERC20, Ownable {
           <H2 id="miners" num="08">Hardware miner program</H2>
           <P>The primary mechanism for distributing the 30% Ecosystem allocation. Operators run physical hardware that contributes verified work and earn QTX in return.</P>
           <Callout variant="warn" label="Status as of May 2026">
-            <p>The miner program is in <strong className="text-ghost">manufacturer-selection phase</strong>. No units are available for purchase. Published specifications are indicative and may change. Pre-orders are not accepted.</p>
+            <p>The miner program is in <strong className="text-ivory">manufacturer-selection phase</strong>. No units are available for purchase. Published specifications are indicative and may change. Pre-orders are not accepted.</p>
           </Callout>
           <H3>8.1 Device tiers (indicative)</H3>
           <Table
@@ -373,12 +373,12 @@ contract QryptixToken is ERC20, Ownable {
           <H3>10.2 Treasury operations</H3>
           <P>The 16% Treasury funds development and audits, legal and compliance, infrastructure, ecosystem grants, and a contingency reserve. Quarterly transparency reports detail expenditures by category.</P>
           <H3>10.3 Future governance</H3>
-          <P>Token-weighted governance is planned post-launch. Core economic parameters (total supply, cliff durations, LP lock) are <strong className="text-ghost">not</strong> governance-adjustable; scope is added incrementally as the system matures.</P>
+          <P>Token-weighted governance is planned post-launch. Core economic parameters (total supply, cliff durations, LP lock) are <strong className="text-ivory">not</strong> governance-adjustable; scope is added incrementally as the system matures.</P>
 
           {/* 11 Security */}
           <H2 id="security" num="11">Security & audits</H2>
           <H3>11.1 Audit status</H3>
-          <P>As of May 2026, the smart contract has <strong className="text-ghost">not yet been independently audited</strong>. Vendor selection is in progress (candidates: Coinsult, CertiK, Hacken). The buy flow will not activate until the audit is completed and published.</P>
+          <P>As of May 2026, the smart contract has <strong className="text-ivory">not yet been independently audited</strong>. Vendor selection is in progress (candidates: Coinsult, CertiK, Hacken). The buy flow will not activate until the audit is completed and published.</P>
           <Callout variant="warn" label="Why this matters">
             <p>Many presales advertise &quot;audit in progress&quot; with vendor logos without an active engagement. We do not list vendor logos until an audit is actively underway with a signed engagement.</p>
           </Callout>
@@ -438,14 +438,14 @@ contract QryptixToken is ERC20, Ownable {
           </Callout>
 
           {/* Bottom nav */}
-          <div className="mt-20 pt-8 border-t border-violet/10 flex gap-4">
-            <a href="/" className="flex-1 rounded-2xl glass p-6 transition-all hover:border-violet/30">
-              <div className="text-[11px] uppercase tracking-wider text-fog mb-1.5">← Back to</div>
-              <div className="font-display font-medium text-ghost">Qryptix Home</div>
+          <div className="mt-20 pt-8 border-t border-gold/10 flex gap-4">
+            <a href="/" className="flex-1 rounded-2xl glass-luxe p-6 transition-all hover:border-gold/30">
+              <div className="text-[11px] uppercase tracking-wider text-taupe mb-1.5">← Back to</div>
+              <div className="font-serif font-medium text-ivory">Qryptix Home</div>
             </a>
-            <a href={`mailto:${SITE.email}`} className="flex-1 rounded-2xl glass p-6 transition-all hover:border-violet/30">
-              <div className="text-[11px] uppercase tracking-wider text-fog mb-1.5">Questions?</div>
-              <div className="font-display font-medium text-ghost">{SITE.email}</div>
+            <a href={`mailto:${SITE.email}`} className="flex-1 rounded-2xl glass-luxe p-6 transition-all hover:border-gold/30">
+              <div className="text-[11px] uppercase tracking-wider text-taupe mb-1.5">Questions?</div>
+              <div className="font-serif font-medium text-ivory">{SITE.email}</div>
             </a>
           </div>
         </main>

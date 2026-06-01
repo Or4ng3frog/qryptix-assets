@@ -23,8 +23,8 @@ export default async function WalletPage() {
         {/* Claim section — disabled until TGE */}
         <Card>
           <div className="flex items-center gap-2 mb-4">
-            <Icon name="doc" size={16} className="text-violet-bright" />
-            <span className="text-sm font-medium text-ghost">Token claim</span>
+            <Icon name="doc" size={16} className="text-gold" />
+            <span className="text-sm font-medium text-ivory">Token claim</span>
           </div>
 
           <div className="rounded-xl border border-amber-400/20 bg-amber-400/[0.05] px-4 py-3 mb-4">
@@ -35,22 +35,22 @@ export default async function WalletPage() {
 
           <div className="space-y-3 mb-5">
             <div className="flex justify-between text-sm">
-              <span className="text-mist">Claimable now</span>
-              <span className="font-mono text-fog">0 QTX</span>
+              <span className="text-ash">Claimable now</span>
+              <span className="font-mono text-taupe">0 QTX</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-mist">Unlocks at TGE</span>
-              <span className="font-mono text-cyan-bright">{fmtQtx(allocation.unlocked_at_tge)} QTX</span>
+              <span className="text-ash">Unlocks at TGE</span>
+              <span className="font-mono text-gold-bright">{fmtQtx(allocation.unlocked_at_tge)} QTX</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-mist">Total allocation</span>
-              <span className="font-mono text-ghost">{fmtQtx(allocation.total_qtx)} QTX</span>
+              <span className="text-ash">Total allocation</span>
+              <span className="font-mono text-ivory">{fmtQtx(allocation.total_qtx)} QTX</span>
             </div>
           </div>
 
           <button
             disabled
-            className="w-full rounded-xl border border-white/8 py-3 font-semibold text-fog cursor-not-allowed"
+            className="w-full rounded-xl border border-white/8 py-3 font-semibold text-taupe cursor-not-allowed"
           >
             Claim unavailable until TGE
           </button>

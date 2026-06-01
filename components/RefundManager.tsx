@@ -66,23 +66,23 @@ export function RefundManager({
   return (
     <div className="grid md:grid-cols-2 gap-5">
       {/* Request form */}
-      <div className="glass rounded-2xl p-6">
+      <div className="glass-luxe rounded-2xl p-6">
         <div className="flex items-center gap-2 mb-4">
-          <Icon name="shield" size={16} className="text-violet-bright" />
-          <span className="text-sm font-medium text-ghost">Request a refund</span>
+          <Icon name="shield" size={16} className="text-gold" />
+          <span className="text-sm font-medium text-ivory">Request a refund</span>
         </div>
 
         {refundable.length === 0 ? (
-          <p className="text-sm text-mist">
+          <p className="text-sm text-ash">
             No confirmed purchases are currently eligible for a new refund request.
           </p>
         ) : (
           <>
-            <label className="block text-xs text-mist mb-1.5">Purchase</label>
+            <label className="block text-xs text-ash mb-1.5">Purchase</label>
             <select
               value={selected}
               onChange={(e) => setSelected(e.target.value)}
-              className="w-full rounded-xl bg-void/60 border border-white/8 px-4 py-3 text-ghost text-sm focus:outline-none focus:border-violet/50 mb-3"
+              className="w-full rounded-xl bg-obsidian/60 border border-white/8 px-4 py-3 text-ivory text-sm focus:outline-none focus:border-gold/50 mb-3"
             >
               {refundable.map((p) => (
                 <option key={p.id} value={p.id} className="bg-carbon">
@@ -91,51 +91,51 @@ export function RefundManager({
               ))}
             </select>
 
-            <label className="block text-xs text-mist mb-1.5">Reason (optional)</label>
+            <label className="block text-xs text-ash mb-1.5">Reason (optional)</label>
             <textarea
               value={reason}
               onChange={(e) => setReason(e.target.value)}
               rows={3}
               placeholder="Briefly describe why you're requesting a refund…"
-              className="w-full rounded-xl bg-void/60 border border-white/8 px-4 py-3 text-ghost text-sm focus:outline-none focus:border-violet/50 mb-3 resize-none"
+              className="w-full rounded-xl bg-obsidian/60 border border-white/8 px-4 py-3 text-ivory text-sm focus:outline-none focus:border-gold/50 mb-3 resize-none"
             />
 
             <button
               onClick={submit}
               disabled={loading}
-              className="w-full rounded-xl bg-brand-gradient py-3 font-semibold text-void transition-transform enabled:hover:scale-[1.02] disabled:opacity-40"
+              className="w-full rounded-xl bg-gold-gradient py-3 font-semibold text-obsidian transition-transform enabled:hover:scale-[1.02] disabled:opacity-40"
             >
               {loading ? 'Submitting…' : 'Submit refund request'}
             </button>
           </>
         )}
 
-        {msg && <p className="text-sm text-cyan-bright mt-3">{msg}</p>}
+        {msg && <p className="text-sm text-gold-bright mt-3">{msg}</p>}
         {err && <p className="text-sm text-red-400 mt-3">{err}</p>}
 
-        <p className="text-xs text-fog mt-4 leading-relaxed">
+        <p className="text-xs text-taupe mt-4 leading-relaxed">
           Refunds are possible only under the published{' '}
-          <a href="/refund-policy" className="text-violet-bright hover:underline">Refund Policy</a>, and only up to
+          <a href="/refund-policy" className="text-gold hover:underline">Refund Policy</a>, and only up to
           Token Claim / TGE.
         </p>
       </div>
 
       {/* Request history */}
-      <div className="glass rounded-2xl p-6">
-        <span className="text-sm font-medium text-ghost block mb-4">Your refund requests</span>
+      <div className="glass-luxe rounded-2xl p-6">
+        <span className="text-sm font-medium text-ivory block mb-4">Your refund requests</span>
         {localRefunds.length === 0 ? (
-          <p className="text-sm text-mist">No refund requests yet.</p>
+          <p className="text-sm text-ash">No refund requests yet.</p>
         ) : (
           <div className="space-y-2">
             {localRefunds.map((r) => (
-              <div key={r.id} className="rounded-xl bg-void/40 border border-white/5 px-4 py-3">
+              <div key={r.id} className="rounded-xl bg-obsidian/40 border border-white/5 px-4 py-3">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-fog">{new Date(r.requested_at).toLocaleDateString()}</span>
+                  <span className="text-xs text-taupe">{new Date(r.requested_at).toLocaleDateString()}</span>
                   <StatusBadge status={r.status} />
                 </div>
-                {r.reason && <p className="text-sm text-mist">{r.reason}</p>}
+                {r.reason && <p className="text-sm text-ash">{r.reason}</p>}
                 {r.refund_tx_hash && (
-                  <p className="text-xs text-cyan-bright font-mono mt-1">Tx: {r.refund_tx_hash.slice(0, 12)}…</p>
+                  <p className="text-xs text-gold-bright font-mono mt-1">Tx: {r.refund_tx_hash.slice(0, 12)}…</p>
                 )}
               </div>
             ))}

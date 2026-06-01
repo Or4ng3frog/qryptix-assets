@@ -39,79 +39,79 @@ export default async function DashboardOverview() {
         {/* Linked wallet */}
         <Card>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-ghost flex items-center gap-2">
-              <Icon name="lock" size={16} className="text-violet-bright" /> Linked wallet
+            <span className="text-sm font-medium text-ivory flex items-center gap-2">
+              <Icon name="lock" size={16} className="text-gold" /> Linked wallet
             </span>
-            <a href="/dashboard/wallet" className="text-xs text-mist hover:text-ghost">Manage →</a>
+            <a href="/dashboard/wallet" className="text-xs text-ash hover:text-ivory cursor-pointer">Manage →</a>
           </div>
           {primaryWallet ? (
-            <div className="font-mono text-sm text-ghost">{shortAddr(primaryWallet.address)}</div>
+            <div className="font-mono text-sm text-ivory">{shortAddr(primaryWallet.address)}</div>
           ) : (
-            <div className="text-sm text-mist">No wallet linked yet</div>
+            <div className="text-sm text-ash">No wallet linked yet</div>
           )}
-          <div className="text-xs text-fog mt-1">Base · chain {primaryWallet?.chain_id ?? 8453}</div>
+          <div className="text-xs text-taupe mt-1">Base · chain {primaryWallet?.chain_id ?? 8453}</div>
         </Card>
 
         {/* Refund eligibility */}
         <Card>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-ghost flex items-center gap-2">
-              <Icon name="shield" size={16} className="text-violet-bright" /> Refund eligibility
+            <span className="text-sm font-medium text-ivory flex items-center gap-2">
+              <Icon name="shield" size={16} className="text-gold" /> Refund eligibility
             </span>
-            <a href="/dashboard/refund" className="text-xs text-mist hover:text-ghost">Details →</a>
+            <a href="/dashboard/refund" className="text-xs text-ash hover:text-ivory cursor-pointer">Details →</a>
           </div>
           {hasRefund ? (
             <StatusBadge status={refunds[0].status} />
           ) : (
-            <div className="text-sm text-mist">
+            <div className="text-sm text-ash">
               Eligible to request under the{' '}
-              <a href="/refund-policy" className="text-violet-bright hover:underline">Refund Policy</a>
+              <a href="/refund-policy" className="text-gold hover:underline cursor-pointer">Refund Policy</a>
             </div>
           )}
-          <div className="text-xs text-fog mt-2">Refunds possible only up to Token Claim / TGE</div>
+          <div className="text-xs text-taupe mt-2">Refunds possible only up to Token Claim / TGE</div>
         </Card>
       </div>
 
       {/* Allocation summary */}
       <Card className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-medium text-ghost flex items-center gap-2">
-            <Icon name="doc" size={16} className="text-violet-bright" /> Allocation summary
+          <span className="text-sm font-medium text-ivory flex items-center gap-2">
+            <Icon name="doc" size={16} className="text-gold" /> Allocation summary
           </span>
-          <a href="/dashboard/vesting" className="text-xs text-mist hover:text-ghost">Vesting →</a>
+          <a href="/dashboard/vesting" className="text-xs text-ash hover:text-ivory cursor-pointer">Vesting →</a>
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <div className="text-[10px] uppercase tracking-wider text-fog mb-1">Total allocation</div>
-            <div className="font-mono font-semibold text-ghost">{fmtQtx(allocation.total_qtx)} QTX</div>
+            <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1">Total allocation</div>
+            <div className="font-mono font-semibold text-ivory">{fmtQtx(allocation.total_qtx)} QTX</div>
           </div>
           <div>
-            <div className="text-[10px] uppercase tracking-wider text-fog mb-1">Unlocked at TGE</div>
-            <div className="font-mono font-semibold text-cyan-bright">{fmtQtx(allocation.unlocked_at_tge)} QTX</div>
+            <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1">Unlocked at TGE</div>
+            <div className="font-mono font-semibold text-gold-bright">{fmtQtx(allocation.unlocked_at_tge)} QTX</div>
           </div>
           <div>
-            <div className="text-[10px] uppercase tracking-wider text-fog mb-1">Locked</div>
-            <div className="font-mono font-semibold text-mist">{fmtQtx(allocation.locked_qtx)} QTX</div>
+            <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1">Locked</div>
+            <div className="font-mono font-semibold text-ash">{fmtQtx(allocation.locked_qtx)} QTX</div>
           </div>
         </div>
-        <p className="text-xs text-fog mt-4">{allocation.vesting_note}</p>
+        <p className="text-xs text-taupe mt-4">{allocation.vesting_note}</p>
       </Card>
 
       {/* Recent participation */}
       <Card>
         <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-medium text-ghost">Recent participation</span>
-          <a href="/dashboard/transactions" className="text-xs text-mist hover:text-ghost">View all →</a>
+          <span className="text-sm font-medium text-ivory">Recent participation</span>
+          <a href="/dashboard/transactions" className="text-xs text-ash hover:text-ivory cursor-pointer">View all →</a>
         </div>
         {purchases.length === 0 ? (
-          <p className="text-sm text-mist py-4 text-center">No participation yet.</p>
+          <p className="text-sm text-ash py-4 text-center">No participation yet.</p>
         ) : (
           <div className="space-y-2">
             {purchases.slice(0, 3).map((p) => (
-              <div key={p.id} className="flex items-center justify-between rounded-xl bg-void/40 border border-white/5 px-4 py-3">
+              <div key={p.id} className="flex items-center justify-between rounded-xl bg-obsidian/40 border border-white/5 px-4 py-3">
                 <div>
-                  <div className="text-sm text-ghost font-medium">{fmtQtx(p.qtx_amount)} QTX</div>
-                  <div className="text-xs text-fog">{fmtMoney(p.amount_paid, p.payment_currency)} · {new Date(p.created_at).toLocaleDateString()}</div>
+                  <div className="text-sm text-ivory font-medium">{fmtQtx(p.qtx_amount)} QTX</div>
+                  <div className="text-xs text-taupe">{fmtMoney(p.amount_paid, p.payment_currency)} · {new Date(p.created_at).toLocaleDateString()}</div>
                 </div>
                 <StatusBadge status={p.status} />
               </div>
