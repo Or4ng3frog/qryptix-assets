@@ -35,20 +35,20 @@ export function DashboardNav() {
           <a
             key={item.href}
             href={item.href}
-            className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-all ${
+            className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-grotesk font-medium whitespace-nowrap transition-all cursor-pointer ${
               active
-                ? 'bg-gradient-to-r from-cyan/10 to-violet/10 border border-violet/25 text-ghost'
-                : 'text-mist hover:text-ghost hover:bg-white/[0.03] border border-transparent'
+                ? 'bg-gradient-to-r from-gold/15 to-gold-deep/10 border border-gold/25 text-ivory'
+                : 'text-ash hover:text-ivory hover:bg-white/[0.03] border border-transparent'
             }`}
           >
-            <Icon name={item.icon} size={17} className={active ? 'text-violet-bright' : ''} />
+            <Icon name={item.icon} size={17} className={active ? 'text-gold' : ''} />
             {item.label}
           </a>
         );
       })}
       <button
         onClick={signOut}
-        className="hidden lg:flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium text-fog hover:text-mist transition-colors mt-auto"
+        className="hidden lg:flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-grotesk font-medium text-taupe hover:text-ash transition-colors mt-auto cursor-pointer"
       >
         <Icon name="external" size={17} />
         Sign out

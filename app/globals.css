@@ -38,23 +38,23 @@ html {
 }
 
 body {
-  background: var(--void);
-  color: #EEEFF7;
-  font-family: 'Satoshi', system-ui, sans-serif;
+  background: var(--obsidian);
+  color: #F4F1EA;
+  font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(157, 92, 255, 0.4);
+  background: rgba(227, 179, 65, 0.35);
   color: #fff;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #080A11; }
+::-webkit-scrollbar-track { background: #0C0C10; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #0A9D8F, #7B2EFF);
+  background: linear-gradient(180deg, #9A6F24, #E3B341);
   border-radius: 10px;
 }
 
