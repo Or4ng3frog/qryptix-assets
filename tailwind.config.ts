@@ -47,12 +47,12 @@ const config: Config = {
         fog: '#676B82',
       },
       fontFamily: {
-        // New luxe system
+        // Luxe system
         serif: ['Playfair Display', 'Georgia', 'serif'], // display headlines
         grotesk: ['Inter', 'system-ui', 'sans-serif'],   // body / UI
-        // Legacy (retained during rebuild)
-        display: ['ClashDisplay', 'system-ui', 'sans-serif'],
-        sans: ['Satoshi', 'system-ui', 'sans-serif'],
+        // Legacy aliases now repointed to the new fonts (Satoshi/Clash retired)
+        display: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       fontSize: {

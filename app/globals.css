@@ -2,22 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Display font — Clash Display (distinctive geometric) */
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('https://fonts.cdnfonts.com/s/64257/ClashDisplay-Variable.woff2') format('woff2');
-  font-weight: 200 700;
-  font-display: swap;
-}
-
-/* Body — Satoshi (refined, characterful) */
-@font-face {
-  font-family: 'Satoshi';
-  src: url('https://fonts.cdnfonts.com/s/85546/Satoshi-Variable.woff2') format('woff2');
-  font-weight: 300 900;
-  font-display: swap;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* Premium Dark Luxe system — editorial serif display + Inter body */
