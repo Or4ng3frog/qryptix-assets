@@ -106,6 +106,27 @@ export type Miner = {
   glyph: string;
 };
 
+// DePIN / hardware layer — concept explainer. Framed as design intent (the
+// miner program is pre-launch), NOT live network telemetry. Honest-marketing
+// framing: targets/parameters only, never implied live earnings.
+export const DEPIN = {
+  intro:
+    'QTX is backed by a decentralized physical infrastructure layer: independently-operated Qryptix miners contribute hashpower, and a share of emissions is routed on-chain to the people running the hardware. It is designed to tie token value to real, verifiable work — not promises.',
+  pillars: [
+    { icon: 'cpu', title: 'Distributed miners', desc: 'Permissionless hardware operated by supporters worldwide — no central farm.' },
+    { icon: 'gauge', title: 'Verifiable work', desc: 'Contribution is measured on-chain; rewards follow proof, not trust.' },
+    { icon: 'boxes', title: 'Rewards routed on-chain', desc: '30% of fixed supply earmarked for the ecosystem & miner rewards layer.' },
+    { icon: 'shield', title: 'Capped & degressive', desc: 'Emissions taper ~15% YoY with quarterly caps — sustainable by design.' },
+  ],
+  // Real protocol parameters (fixed by design), labelled as such — not a live feed.
+  params: [
+    { label: 'Miner rewards', value: '30%', sub: 'of fixed supply' },
+    { label: 'Emissions', value: '~15%', sub: 'YoY degressive' },
+    { label: 'Network', value: 'Base', sub: 'Ethereum L2' },
+    { label: 'Supply', value: '1B', sub: 'fixed · QTX' },
+  ],
+};
+
 export const MINERS: Miner[] = [
   { tier: 'Nano', hashrate: '~100 MH/s', power: '~100 W', price: '$299', glyph: '◇' },
   { tier: 'Core', hashrate: '~250 MH/s', power: '~250 W', price: '$699', glyph: '◈' },
