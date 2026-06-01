@@ -32,7 +32,7 @@ export function Hero() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
         {/* Left: copy */}
         <Stagger>
-          <StaggerItem className="inline-flex items-center gap-2.5 rounded-full glass-luxe px-4 py-2 text-xs font-medium text-gold-bright mb-7">
+          <StaggerItem className="inline-flex items-center gap-2.5 rounded-full glass-luxe px-4 py-2 text-xs font-grotesk font-medium text-champagne mb-7">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />

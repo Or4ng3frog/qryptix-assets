@@ -44,6 +44,13 @@ not investments; prominent risk disclosure).
 **Functional (dashboard/status — keep semantic):** success `#4ADE80`, warning `#E3B341`,
 danger `#F87171`, info `#9CC3E8`. Use sparingly; the brand accent is gold.
 
+**Restraint calibration (locked 2026-06-01):** gold is used *sparingly*. Reserve gold for:
+primary CTA fills, **one** accent word per headline, active/selected states, key metric
+emphasis, and small status dots. Everything else is near-black surfaces + ivory/ash text
+with **neutral** hairline borders (`rgba(244,241,234,0.06)`); promote borders to gold only
+on hover or for a single featured element. Eyebrows: muted `gold` (not `gold-bright`).
+Glows subtle (≤0.14 alpha). When in doubt, use ivory — not gold.
+
 **Rules**
 - Gold is the *only* brand accent. No cyan/violet from the old design. No second bright hue.
 - Cool neutral `#9CC3E8` permitted only for tiny data/link affordances, never as a fill.

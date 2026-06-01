@@ -1,6 +1,5 @@
 'use client';
 
-import { SITE } from '@/lib/config';
 import { Icon } from '../Icon';
 
 const TRUST = [
@@ -15,18 +14,18 @@ const TRUST = [
 export function TrustStrip() {
   const items = [...TRUST, ...TRUST];
   return (
-    <div className="relative border-y border-violet/10 bg-abyss/50 py-6 overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-void to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-void to-transparent" />
+    <div className="relative border-y border-white/[0.06] bg-onyx/50 py-6 overflow-hidden">
+      <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-obsidian to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-obsidian to-transparent" />
       <div className="flex marquee-track w-max gap-10">
         {items.map((item, i) => (
           <div key={i} className="flex items-center gap-3 shrink-0">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan/15 to-violet/15 border border-violet/20 text-cyan">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 border border-gold/20 text-gold">
               <Icon name={item.icon} size={18} />
             </div>
             <div>
-              <div className="text-sm font-semibold text-ghost">{item.t1}</div>
-              <div className="text-xs text-fog">{item.t2}</div>
+              <div className="text-sm font-grotesk font-semibold text-ivory">{item.t1}</div>
+              <div className="text-xs text-taupe">{item.t2}</div>
             </div>
           </div>
         ))}
