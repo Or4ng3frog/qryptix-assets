@@ -25,26 +25,6 @@ const config: Config = {
         ivory: '#F4F1EA',
         ash: '#A8A39A',
         taupe: '#6E6A62',
-
-        // ── Legacy tokens (old cyan/violet system — retained during rebuild) ──
-        void: '#05060A',
-        abyss: '#080A11',
-        carbon: '#0E1119',
-        slate: '#161A26',
-        steel: '#1F2433',
-        cyan: {
-          DEFAULT: '#0FE3CE',
-          bright: '#3DFFEC',
-          dim: '#0A9D8F',
-        },
-        violet: {
-          DEFAULT: '#9D5CFF',
-          bright: '#B98BFF',
-          dim: '#7B2EFF',
-        },
-        ghost: '#EEEFF7',
-        mist: '#A4A7BD',
-        fog: '#676B82',
       },
       fontFamily: {
         // Luxe system
@@ -76,10 +56,6 @@ const config: Config = {
         'gold-sheen': 'linear-gradient(110deg, #9A6F24, #F4D88A, #E3B341, #F4D88A, #9A6F24)',
         'obsidian-fade': 'radial-gradient(ellipse at 50% 0%, rgba(227,179,65,0.14), transparent 70%)',
         'grid-gold': "linear-gradient(rgba(227,179,65,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(227,179,65,0.05) 1px, transparent 1px)",
-        // Legacy
-        'brand-gradient': 'linear-gradient(120deg, #0FE3CE 0%, #6B6BFF 52%, #9D5CFF 100%)',
-        'brand-radial': 'radial-gradient(circle at 50% 0%, rgba(157,92,255,0.28), transparent 70%)',
-        'grid': "linear-gradient(rgba(157,92,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(157,92,255,0.06) 1px, transparent 1px)",
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

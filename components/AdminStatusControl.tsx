@@ -45,7 +45,7 @@ export function AdminStatusControl({
         className="rounded-lg bg-obsidian/60 border border-white/8 px-2.5 py-1.5 text-xs text-ivory focus:outline-none focus:border-gold/50"
       >
         {options.map((s) => (
-          <option key={s} value={s} className="bg-carbon">{s}</option>
+          <option key={s} value={s} className="bg-onyx">{s}</option>
         ))}
       </select>
       {saved && <span className="text-xs text-emerald-400">✓</span>}

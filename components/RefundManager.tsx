@@ -85,7 +85,7 @@ export function RefundManager({
               className="w-full rounded-xl bg-obsidian/60 border border-white/8 px-4 py-3 text-ivory text-sm focus:outline-none focus:border-gold/50 mb-3"
             >
               {refundable.map((p) => (
-                <option key={p.id} value={p.id} className="bg-carbon">
+                <option key={p.id} value={p.id} className="bg-onyx">
                   {fmtQtx(p.qtx_amount)} QTX · {fmtMoney(p.amount_paid, p.payment_currency)} · {new Date(p.created_at).toLocaleDateString()}
                 </option>
               ))}

@@ -49,7 +49,6 @@ components/
 lib/
   config.ts           → ★ ALL CONTENT + FEATURE FLAGS live here
   whitepaper.ts       → whitepaper section index (for sidebar)
-  useReveal.ts        → scroll-reveal hook
 
 public/
   Q_Only.png          → logo (header/footer)
