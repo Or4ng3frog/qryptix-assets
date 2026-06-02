@@ -3,22 +3,65 @@
 import { MINERS } from '@/lib/config';
 import { SectionHeading } from './SectionHeading';
 import { Stagger, StaggerItem } from '@/components/motion';
+import { GlowCard } from '@/components/ui/GlowCard';
 
-function MinerCard({ m }: { m: (typeof MINERS)[number] }) {
+function SpecRow({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
-    <StaggerItem className="group glow-gold h-full rounded-3xl glass-luxe p-7 text-center transition-transform hover:-translate-y-1">
-      <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gold/10 border border-gold/20 text-3xl text-gold transition-transform group-hover:scale-110">
-        {m.glyph}
-      </div>
-      <h3 className="font-serif font-medium text-xl text-ivory mb-1">{m.tier}</h3>
-      <div className="text-xs text-taupe leading-relaxed mb-5 font-mono">
-        {m.hashrate} · {m.power}
-        <br />
-        Indicative: {m.price}
-      </div>
-      <button className="w-full rounded-xl border border-gold/25 py-2.5 text-sm font-grotesk text-ivory transition-all hover:border-gold/60 hover:bg-gold/5 cursor-pointer">
-        Register interest
-      </button>
+    <div className="flex items-center justify-between border-b border-white/[0.05] pb-2 last:border-0 last:pb-0">
+      <span className="text-[11px] uppercase tracking-eyebrow text-taupe">{label}</span>
+      <span className={`font-mono text-sm ${accent ? 'text-gold' : 'text-ivory'}`}>{value}</span>
+    </div>
+  );
+}
+
+function MinerCard({ m, rank }: { m: (typeof MINERS)[number]; rank: number }) {
+  return (
+    <StaggerItem className="h-full">
+      <GlowCard className="group glow-gold flex h-full flex-col rounded-3xl glass-luxe overflow-hidden transition-transform duration-300 hover:-translate-y-1.5">
+        {/* Device faceplate */}
+        <div className="relative px-6 pt-6 pb-5 border-b border-white/[0.06]">
+          <span className="absolute top-4 right-5 font-mono text-[11px] text-taupe">
+            {String(rank).padStart(2, '0')}
+          </span>
+          <div
+            className="relative mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-2xl border border-gold/20 bg-gradient-to-br from-gold/10 to-transparent overflow-hidden"
+          >
+            {/* faceplate grid */}
+            <div
+              aria-hidden
+              className="absolute inset-0 opacity-40"
+              style={{
+                backgroundImage:
+                  'linear-gradient(rgba(227,179,65,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(227,179,65,0.12) 1px, transparent 1px)',
+                backgroundSize: '14px 14px',
+              }}
+            />
+            {/* core glow */}
+            <div
+              aria-hidden
+              className="absolute inset-0 opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+              style={{ background: 'radial-gradient(circle at center, rgba(227,179,65,0.22), transparent 65%)' }}
+            />
+            <span className="relative text-4xl text-gold transition-transform duration-300 group-hover:scale-110">
+              {m.glyph}
+            </span>
+          </div>
+          <div className="text-center">
+            <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-0.5">Qryptix Miner</div>
+            <h3 className="font-serif font-medium text-xl text-ivory">{m.tier}</h3>
+          </div>
+        </div>
+
+        {/* Spec comparison */}
+        <div className="flex flex-grow flex-col gap-2.5 p-6">
+          <SpecRow label="Hashrate" value={m.hashrate} />
+          <SpecRow label="Power draw" value={m.power} />
+          <SpecRow label="Indicative" value={m.price} accent />
+          <button className="mt-4 w-full rounded-xl border border-gold/25 py-2.5 text-sm font-grotesk text-ivory transition-all hover:border-gold/60 hover:bg-gold/5 cursor-pointer">
+            Register interest
+          </button>
+        </div>
+      </GlowCard>
     </StaggerItem>
   );
 }
@@ -27,13 +70,13 @@ export function Miners() {
   return (
     <section id="miners" className="mx-auto max-w-7xl px-6 py-28 scroll-mt-24">
       <SectionHeading
-        tag="Hardware"
+        tag="Hardware · Miner Fleet"
         title={<>Qryptix Miners.</>}
         subtitle="The miner program is in manufacturer-selection phase. No purchases today. Register interest to be notified when the first batch opens — pricing and specs may change."
       />
-      <Stagger className="grid grid-cols-2 lg:grid-cols-4 gap-5" gap={0.07}>
-        {MINERS.map((m) => (
-          <MinerCard key={m.tier} m={m} />
+      <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" gap={0.08}>
+        {MINERS.map((m, i) => (
+          <MinerCard key={m.tier} m={m} rank={i + 1} />
         ))}
       </Stagger>
       <p className="text-center text-sm text-ash mt-8 max-w-2xl mx-auto">
