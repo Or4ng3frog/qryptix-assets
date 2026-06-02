@@ -35,10 +35,16 @@ export async function getDashboardData(): Promise<DashboardData | null> {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return null;
 
+  // Purchases may be linked by user_id OR by email (verified email-only
+  // purchases). RLS still restricts rows to this user / their email.
+  const purchaseFilter = user.email
+    ? `user_id.eq.${user.id},email.eq.${user.email.toLowerCase()}`
+    : `user_id.eq.${user.id}`;
+
   const [profileRes, walletsRes, purchasesRes, allocRes, refundsRes] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', user.id).single(),
     supabase.from('wallets').select('*').eq('user_id', user.id).order('is_primary', { ascending: false }),
-    supabase.from('purchases').select('*').eq('user_id', user.id).order('created_at', { ascending: false }),
+    supabase.from('purchases').select('*').or(purchaseFilter).order('created_at', { ascending: false }),
     supabase.from('token_allocations').select('*').eq('user_id', user.id).single(),
     supabase.from('refund_requests').select('*').eq('user_id', user.id).order('requested_at', { ascending: false }),
   ]);

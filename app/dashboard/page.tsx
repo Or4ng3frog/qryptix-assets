@@ -34,6 +34,18 @@ export default async function DashboardOverview() {
         <StatCard label="Claim status" value="Locked" sub="Until TGE" />
       </div>
 
+      {/* On-chain confirmation + refund policy note */}
+      <Card className="mb-6">
+        <p className="text-xs text-ash leading-relaxed flex gap-2.5">
+          <Icon name="shield" size={14} className="text-gold shrink-0 mt-0.5" />
+          <span>
+            Your purchase is recorded after on-chain confirmation. Tokens are not claimable until TGE. Refund
+            eligibility is governed by the{' '}
+            <a href="/refund-policy" className="text-gold hover:underline">Qryptix refund policy</a>.
+          </span>
+        </p>
+      </Card>
+
       {/* Status cards row */}
       <div className="grid md:grid-cols-2 gap-4 mb-6">
         {/* Linked wallet */}

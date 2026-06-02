@@ -28,7 +28,7 @@ export default async function TransactionsPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-onyx/60 text-left">
-                  {['Date', 'Amount', 'Currency', 'QTX', 'Stage', 'Tx hash', 'Status'].map((h) => (
+                  {['Date', 'Amount', 'Currency', 'QTX', 'Stage', 'Tx hash', 'Status', 'Refund'].map((h) => (
                     <th key={h} className="px-4 py-3 text-[11px] uppercase tracking-wider text-taupe font-semibold border-b border-gold/10 whitespace-nowrap">
                       {h}
                     </th>
@@ -45,12 +45,19 @@ export default async function TransactionsPage() {
                     <td className="px-4 py-3 text-ash">P{p.presale_stage}</td>
                     <td className="px-4 py-3 font-mono text-xs text-ash whitespace-nowrap">
                       {p.tx_hash ? (
-                        <a href={`https://basescan.org/tx/${p.tx_hash}`} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+                        <a href={`https://${p.chain_id === 84532 ? 'sepolia.basescan.org' : 'basescan.org'}/tx/${p.tx_hash}`} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
                           {shortHash(p.tx_hash)}
                         </a>
                       ) : '—'}
                     </td>
                     <td className="px-4 py-3"><StatusBadge status={p.status} /></td>
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      {p.refund_eligible ? (
+                        <span className="text-[11px] rounded-md border border-gold/25 bg-gold/5 text-gold-bright px-2 py-0.5 uppercase tracking-wider font-semibold">Eligible</span>
+                      ) : (
+                        <span className="text-taupe text-xs">—</span>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
