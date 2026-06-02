@@ -154,11 +154,16 @@ export function PresaleSection() {
           </div>
 
           {/* Stat tiles */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
             {tiles.map((s) => (
-              <div key={s.label} className="rounded-2xl bg-obsidian/40 border border-white/[0.06] p-4">
-                <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1.5">{s.label}</div>
-                <div className="font-mono font-semibold text-lg text-gold">{s.value}</div>
+              <div
+                key={s.label}
+                className="flex flex-col rounded-2xl bg-obsidian/40 border border-white/[0.06] p-4"
+              >
+                <div className="text-[10px] uppercase tracking-eyebrow leading-tight text-taupe min-h-[2.4em]">
+                  {s.label}
+                </div>
+                <div className="font-mono font-semibold text-lg text-gold mt-1.5">{s.value}</div>
                 <div className="text-[11px] text-taupe mt-0.5">{s.sub}</div>
               </div>
             ))}
@@ -176,19 +181,21 @@ export function PresaleSection() {
             track your participation, allocation, and refund eligibility.
           </p>
 
-          <a
-            href="/buy"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-gold-gradient py-3.5 font-grotesk font-semibold text-obsidian transition-[filter,box-shadow] duration-300 hover:brightness-105 hover:shadow-[0_10px_40px_-12px_rgba(227,179,65,0.5)] mb-3 cursor-pointer"
-          >
-            Join PreSale
-            <Icon name="arrow" size={18} />
-          </a>
-          <a
-            href="/dashboard"
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-gold/25 py-3 text-sm font-grotesk font-medium text-ivory transition-all hover:border-gold/60 hover:bg-gold/5 mb-6 cursor-pointer"
-          >
-            View Dashboard Preview
-          </a>
+          <div className="flex flex-col gap-3.5 mb-6">
+            <a
+              href="/buy"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gold-gradient px-6 py-3.5 font-grotesk font-semibold text-obsidian transition-[filter,box-shadow] duration-300 hover:brightness-105 hover:shadow-[0_10px_40px_-12px_rgba(227,179,65,0.5)] cursor-pointer"
+            >
+              Join PreSale
+              <Icon name="arrow" size={18} />
+            </a>
+            <a
+              href="/dashboard"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-gold/25 px-6 py-3.5 text-sm font-grotesk font-medium text-ivory transition-all hover:border-gold/60 hover:bg-gold/5 cursor-pointer"
+            >
+              View Dashboard Preview
+            </a>
+          </div>
 
           <div className="space-y-2.5 pt-5 border-t border-white/[0.06]">
             {notes.map((n) => (
