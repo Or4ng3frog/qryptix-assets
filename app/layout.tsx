@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { SITE } from '@/lib/config';
 import { Web3Provider } from '@/components/Web3Provider';
+import { ScrollProgress } from '@/components/motion/ScrollProgress';
 
 export const metadata: Metadata = {
   title: `${SITE.name} (${SITE.ticker}) — ${SITE.tagline}`,
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           className="fixed bottom-0 right-0 -z-10 h-[500px] w-[500px] opacity-40"
           style={{ background: 'radial-gradient(circle, rgba(154,111,36,0.12), transparent 70%)' }}
         />
+        <ScrollProgress />
         <Web3Provider>{children}</Web3Provider>
       </body>
     </html>
