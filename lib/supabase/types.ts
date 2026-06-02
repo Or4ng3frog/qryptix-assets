@@ -44,17 +44,29 @@ export interface PresaleStage {
 
 export interface Purchase {
   id: string;
-  user_id: string;
+  user_id: string | null;
+  email: string | null;
   wallet_address: string | null;
+  chain_id: number | null;
   amount_paid: number;
   payment_currency: string;
+  payment_token: string | null;
+  payment_token_address: string | null;
+  treasury_wallet: string | null;
   amount_paid_usd: number | null;
+  amount_paid_token_units: string | null;
   qtx_amount: number;
   presale_stage: number | null;
+  phase: string | null;
+  price_usd: number | null;
   tx_hash: string | null;
   status: PurchaseStatus;
+  refund_eligible: boolean | null;
+  refund_requested_at: string | null;
+  refund_processed_at: string | null;
   created_at: string;
   confirmed_at: string | null;
+  updated_at: string | null;
 }
 
 export interface RefundRequest {

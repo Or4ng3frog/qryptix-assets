@@ -1,13 +1,15 @@
 'use client';
 
 import { createConfig, http } from 'wagmi';
-import { base } from 'wagmi/chains';
+import { base, baseSepolia } from 'wagmi/chains';
 import { injected, coinbaseWallet, walletConnect } from 'wagmi/connectors';
 
 const wcProjectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
 
+// Both networks are configured so the wallet works in either mode; the active
+// target for purchases is decided by NEXT_PUBLIC_CHAIN_MODE (see lib/chains.ts).
 export const wagmiConfig = createConfig({
-  chains: [base],
+  chains: [base, baseSepolia],
   connectors: [
     injected(),
     coinbaseWallet({ appName: 'Qryptix' }),
@@ -15,30 +17,12 @@ export const wagmiConfig = createConfig({
   ],
   transports: {
     [base.id]: http(process.env.NEXT_PUBLIC_BASE_RPC_URL || 'https://mainnet.base.org'),
+    [baseSepolia.id]: http(process.env.NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'),
   },
   ssr: true,
 });
 
-// Payment token addresses on Base
-export const TOKENS = {
-  USDC: {
-    address: (process.env.NEXT_PUBLIC_USDC_ADDRESS || '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913') as `0x${string}`,
-    decimals: 6,
-  },
-  USDT: {
-    address: (process.env.NEXT_PUBLIC_USDT_ADDRESS || '0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2') as `0x${string}`,
-    decimals: 6,
-  },
-  ETH: {
-    address: null, // native
-    decimals: 18,
-  },
-} as const;
-
-export const TREASURY = (process.env.NEXT_PUBLIC_TREASURY_WALLET ||
-  '0x0000000000000000000000000000000000000000') as `0x${string}`;
-
-// Minimal ERC-20 ABI for transfers
+// Minimal ERC-20 ABI for transfers + balance reads.
 export const ERC20_ABI = [
   {
     name: 'transfer',
@@ -58,3 +42,6 @@ export const ERC20_ABI = [
     outputs: [{ name: '', type: 'uint256' }],
   },
 ] as const;
+
+// Re-export the active-network token + treasury for convenience.
+export { ACTIVE_USDC, TREASURY, ACTIVE_CHAIN_ID, ACTIVE_CHAIN_LABEL, CHAIN_MODE } from './chains';

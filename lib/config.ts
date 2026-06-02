@@ -4,10 +4,23 @@
 // ============================================================
 
 export const FEATURES = {
-  // Flip to true ONLY after: audit published + entity finalized + multisig live
-  BUY_FLOW_ENABLED: false,
+  // Env-driven. Flip NEXT_PUBLIC_BUY_FLOW_ENABLED=true ONLY after: audit published
+  // + entity finalized + multisig treasury live + testnet purchase verified.
+  // Defaults to false when the env var is unset.
+  BUY_FLOW_ENABLED: process.env.NEXT_PUBLIC_BUY_FLOW_ENABLED === 'true',
   // Show the bonus campaign (set real end date when ready)
   BONUS_CAMPAIGN_ENABLED: false,
+} as const;
+
+// Active presale stage parameters — the single server-trusted source for
+// price/limits/caps used by /api/purchase validation.
+export const PURCHASE_PARAMS = {
+  phaseCode: 'P1',
+  stage: 1,
+  priceUsd: 0.006,
+  stageAllocationQtx: 17_000_000,
+  minUsd: 50,
+  maxUsdPerWallet: 25_000,
 } as const;
 
 export const SITE = {
