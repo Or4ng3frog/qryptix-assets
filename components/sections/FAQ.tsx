@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { FAQS, SITE } from '@/lib/config';
 import { SectionHeading } from './SectionHeading';
+import { QuantumField } from '@/components/motion/QuantumField';
+import { GlowCard } from '@/components/ui/GlowCard';
 import { Icon } from '../Icon';
 
 export function FAQ() {
@@ -47,12 +49,16 @@ export function FAQ() {
 export function WhitepaperCTA() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-20">
-      <div className="relative overflow-hidden rounded-[2rem] glass-luxe p-12 md:p-16 text-center">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-20 animate-spin-slow"
-          style={{ background: 'conic-gradient(from 0deg, transparent, rgba(227,179,65,0.45), transparent, rgba(154,111,36,0.4), transparent)' }}
-        />
-        <div className="relative">
+      <GlowCard className="relative overflow-hidden rounded-[2rem] glass-luxe p-12 md:p-16 text-center">
+        {/* layered backdrop — bookends the hero's quantum field */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <QuantumField className="absolute inset-0 opacity-40" />
+          <div
+            className="absolute inset-0 opacity-20 animate-spin-slow"
+            style={{ background: 'conic-gradient(from 0deg, transparent, rgba(227,179,65,0.45), transparent, rgba(154,111,36,0.4), transparent)' }}
+          />
+        </div>
+        <div className="relative z-10">
           <div className="text-xs font-grotesk font-semibold uppercase tracking-eyebrow text-gold mb-4">Documentation</div>
           <h2 className="font-serif font-semibold text-display text-ivory mb-4">Whitepaper v1.3</h2>
           <p className="font-grotesk text-ash text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
@@ -68,7 +74,7 @@ export function WhitepaperCTA() {
             <Icon name="arrow" size={18} />
           </a>
         </div>
-      </div>
+      </GlowCard>
     </section>
   );
 }

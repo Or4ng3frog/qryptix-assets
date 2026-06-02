@@ -41,6 +41,17 @@ body {
   border-radius: 10px;
 }
 
+/* Keyboard focus rings (gold) — visible only for keyboard nav, follows element shape */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid rgba(227, 179, 65, 0.75);
+  outline-offset: 2px;
+}
+
 /* Noise texture overlay */
 .noise::after {
   content: '';
