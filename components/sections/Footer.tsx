@@ -36,7 +36,7 @@ export function RiskDisclosure() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-onyx/50 pt-16 pb-8 mt-12">
+    <footer className="border-t border-white/[0.06] bg-onyx/50 pt-12 sm:pt-16 pb-12 sm:pb-8 mt-12">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid md:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
           <div>

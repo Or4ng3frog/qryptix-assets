@@ -70,7 +70,7 @@ export function Roadmap() {
   const fillHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section id="roadmap" className="mx-auto max-w-5xl px-6 py-28 scroll-mt-24">
+    <section id="roadmap" className="mx-auto max-w-5xl px-6 py-20 sm:py-28 scroll-mt-24">
       <SectionHeading
         tag="Roadmap"
         title={<>Where we are. Where we&apos;re going.</>}

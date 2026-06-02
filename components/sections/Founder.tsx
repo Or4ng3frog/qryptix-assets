@@ -8,7 +8,7 @@ export function Founder() {
   const socialLink =
     'inline-flex items-center gap-2 rounded-xl border border-gold/20 bg-obsidian/40 px-4 py-2.5 text-sm text-ivory transition-all hover:border-gold/50 hover:bg-gold/5 cursor-pointer';
   return (
-    <section id="founder" className="mx-auto max-w-7xl px-6 py-28 scroll-mt-24">
+    <section id="founder" className="mx-auto max-w-7xl px-6 py-20 sm:py-28 scroll-mt-24">
       <Reveal className="relative overflow-hidden rounded-[2rem] glass-luxe p-10 md:p-14 grid md:grid-cols-[220px_1fr] gap-12 items-center">
         {/* Ambient glow */}
         <div className="pointer-events-none absolute -top-1/3 right-0 h-96 w-96 opacity-40" style={{ background: 'radial-gradient(circle, rgba(227,179,65,0.13), transparent 60%)' }} />

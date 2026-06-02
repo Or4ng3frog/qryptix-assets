@@ -19,7 +19,7 @@ function FeatureCard({ icon, title, desc }: { icon: string; title: string; desc:
 
 export function Features() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-28">
+    <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
       <SectionHeading
         tag="Why Qryptix"
         title={<>Built for actual utility.</>}

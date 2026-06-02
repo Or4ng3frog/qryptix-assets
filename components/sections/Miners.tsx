@@ -68,7 +68,7 @@ function MinerCard({ m, rank }: { m: (typeof MINERS)[number]; rank: number }) {
 
 export function Miners() {
   return (
-    <section id="miners" className="mx-auto max-w-7xl px-6 py-28 scroll-mt-24">
+    <section id="miners" className="mx-auto max-w-7xl px-6 py-20 sm:py-28 scroll-mt-24">
       <SectionHeading
         tag="Hardware · Miner Fleet"
         title={<>Qryptix Miners.</>}

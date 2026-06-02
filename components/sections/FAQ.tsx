@@ -10,7 +10,7 @@ import { Icon } from '../Icon';
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="mx-auto max-w-3xl px-6 py-28 scroll-mt-24">
+    <section id="faq" className="mx-auto max-w-3xl px-6 py-20 sm:py-28 scroll-mt-24">
       <SectionHeading
         tag="FAQ"
         title={<>Honest answers.</>}

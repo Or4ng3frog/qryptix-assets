@@ -29,7 +29,7 @@ export function PresaleSection() {
   ];
 
   return (
-    <section id="presale" className="mx-auto max-w-7xl px-6 py-28 scroll-mt-24">
+    <section id="presale" className="mx-auto max-w-7xl px-6 py-20 sm:py-28 scroll-mt-24">
       <SectionHeading
         tag="PreSale · Early Supporter Participation"
         title={<>Join the PreSale.</>}

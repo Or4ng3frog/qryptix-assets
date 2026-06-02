@@ -15,7 +15,7 @@ const STATS = [
 
 export function Hero() {
   return (
-    <section id="top" className="sel-gold relative pt-36 pb-28 overflow-hidden">
+    <section id="top" className="sel-gold relative pt-28 pb-20 sm:pt-36 sm:pb-28 overflow-hidden">
       {/* ── Background depth layers ── */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         {/* volumetric crown glow */}
@@ -23,8 +23,8 @@ export function Hero() {
           className="absolute -top-24 left-1/2 -translate-x-1/2 h-[720px] w-[1200px] opacity-70"
           style={{ background: 'radial-gradient(ellipse at center, rgba(227,179,65,0.16), transparent 70%)' }}
         />
-        {/* quantum data network */}
-        <QuantumField className="absolute inset-0 opacity-[0.6]" />
+        {/* quantum data network — calmer on mobile */}
+        <QuantumField className="absolute inset-0 opacity-40 sm:opacity-[0.6]" />
         {/* deep warm corner glow */}
         <div
           className="absolute bottom-[-12%] right-[4%] h-[440px] w-[440px] opacity-40"

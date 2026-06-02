@@ -7,7 +7,7 @@ import { Icon } from '../Icon';
 
 export function RefundSection() {
   return (
-    <section id="refund" className="mx-auto max-w-7xl px-6 py-28 scroll-mt-24">
+    <section id="refund" className="mx-auto max-w-7xl px-6 py-20 sm:py-28 scroll-mt-24">
       <SectionHeading
         tag="Refund Policy"
         title={<>Clear on refunds.</>}

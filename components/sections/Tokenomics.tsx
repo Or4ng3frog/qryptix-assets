@@ -27,7 +27,7 @@ function Donut({ progress }: { progress: MotionValue<number> }) {
 
   let offset = 0;
   return (
-    <svg ref={ref} viewBox="0 0 200 200" className="w-72 h-72 -rotate-90">
+    <svg ref={ref} viewBox="0 0 200 200" className="w-56 h-56 sm:w-72 sm:h-72 -rotate-90">
       <circle cx="100" cy="100" r={OR} fill="none" stroke="rgba(244,241,234,0.06)" strokeWidth="2" />
       <motion.circle
         cx="100"
@@ -104,7 +104,7 @@ export function Tokenomics() {
   }));
 
   return (
-    <section ref={sectionRef} id="tokenomics" className="mx-auto max-w-7xl px-6 py-28 scroll-mt-24">
+    <section ref={sectionRef} id="tokenomics" className="mx-auto max-w-7xl px-6 py-20 sm:py-28 scroll-mt-24">
       <SectionHeading
         tag="Tokenomics"
         title={
@@ -116,15 +116,15 @@ export function Tokenomics() {
         }
         subtitle="Every allocation is hard-coded in the contract on Base. Vesting and lock schedules are enforced on-chain — not promises."
       />
-      <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:items-start">
+      <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-8 sm:gap-12 lg:items-start">
         {/* Sticky cinematic donut */}
         <div className="lg:sticky lg:top-28 self-start">
-          <div className="relative flex flex-col items-center justify-center glass-luxe rounded-3xl p-10">
+          <div className="relative flex flex-col items-center justify-center glass-luxe rounded-3xl p-6 sm:p-10">
             <div className="relative">
               <Donut progress={scrollYProgress} />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <div className="text-[10px] uppercase tracking-eyebrow text-taupe">Total Supply</div>
-                <div className="font-serif font-semibold text-5xl text-gold mt-1">1B</div>
+                <div className="font-serif font-semibold text-4xl sm:text-5xl text-gold mt-1">1B</div>
                 <div className="text-sm text-ash mt-1">QTX · Fixed</div>
               </div>
             </div>
@@ -146,7 +146,7 @@ export function Tokenomics() {
         {/* Right: utility split + animated allocation bars */}
         <div>
           {/* Utility split — links supply to function */}
-          <div className="glass-luxe rounded-2xl p-5 mb-5">
+          <div className="glass-luxe rounded-2xl p-5 sm:p-6 mb-5">
             <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-3">Supply by utility</div>
             <div className="flex h-3 overflow-hidden rounded-full bg-white/[0.05]">
               {groups.map((g) => (
@@ -160,7 +160,7 @@ export function Tokenomics() {
                 />
               ))}
             </div>
-            <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-3">
               {groups.map((g) => (
                 <div key={g.label} className="flex items-start gap-2">
                   <span className="mt-1 h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: g.shade }} />
