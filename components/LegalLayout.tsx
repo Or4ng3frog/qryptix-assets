@@ -1,4 +1,5 @@
 import { SITE } from '@/lib/config';
+import { Logo } from './Logo';
 
 export function LegalLayout({
   title,
@@ -17,8 +18,7 @@ export function LegalLayout({
       <div className="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-xl border-b border-white/[0.06]">
         <div className="mx-auto max-w-4xl px-6 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3 cursor-pointer">
-            <img src="/Q_Only.png" alt="Qryptix" className="h-8 w-8" />
-            <span className="font-serif font-semibold text-ivory">QRYPTIX</span>
+            <Logo variant="full" size={30} />
           </a>
           <a href="/" className="text-sm font-grotesk text-ash hover:text-ivory transition-colors cursor-pointer">
             ← Back to home

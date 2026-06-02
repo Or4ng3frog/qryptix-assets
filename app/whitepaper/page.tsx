@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { WhitepaperSidebar } from '@/components/WhitepaperSidebar';
+import { Logo } from '@/components/Logo';
 import { SITE } from '@/lib/config';
 
 export const metadata: Metadata = {
@@ -89,8 +90,7 @@ export default function WhitepaperPage() {
       <div className="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-xl border-b border-gold/10">
         <div className="mx-auto max-w-[1280px] px-8 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
-            <img src="/Q_Only.png" alt="Qryptix" className="h-8 w-8" />
-            <span className="font-serif font-semibold">QRYPTIX</span>
+            <Logo variant="full" size={30} />
             <span className="text-xs text-taupe ml-2 pl-3 border-l border-gold/15 hidden sm:inline">
               Whitepaper v1.3
             </span>

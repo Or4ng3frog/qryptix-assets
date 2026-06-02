@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { BuyFlow } from '@/components/BuyFlow';
 import { FEATURES, PHASES, PHASE_PROGRESS, PRESALE, SITE } from '@/lib/config';
 import { Icon } from '@/components/Icon';
+import { Logo } from '@/components/Logo';
 
 export const metadata: Metadata = {
   title: 'Join PreSale — Qryptix',
@@ -23,8 +24,7 @@ export default function BuyPage() {
       <div className="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-xl border-b border-white/[0.06]">
         <div className="mx-auto max-w-5xl px-6 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3 cursor-pointer">
-            <img src="/Q_Only.png" alt="Qryptix" className="h-8 w-8" />
-            <span className="font-serif font-semibold text-ivory">QRYPTIX</span>
+            <Logo variant="full" size={30} />
           </a>
           <div className="flex items-center gap-4">
             <a href="/dashboard" className="text-sm font-grotesk text-ash hover:text-ivory transition-colors cursor-pointer">Dashboard</a>

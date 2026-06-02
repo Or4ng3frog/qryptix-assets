@@ -1,4 +1,5 @@
 import { DashboardNav } from '@/components/DashboardNav';
+import { Logo } from '@/components/Logo';
 import { getDashboardData } from '@/lib/dashboard-data';
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -10,8 +11,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <div className="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-xl border-b border-white/[0.06]">
         <div className="mx-auto max-w-6xl px-6 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3 cursor-pointer">
-            <img src="/Q_Only.png" alt="Qryptix" className="h-8 w-8" />
-            <span className="font-serif font-semibold text-ivory">QRYPTIX</span>
+            <Logo variant="full" size={30} />
             <span className="text-xs text-taupe ml-2 pl-3 border-l border-white/15 hidden sm:inline">Dashboard</span>
           </a>
           <div className="flex items-center gap-3">

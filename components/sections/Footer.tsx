@@ -2,6 +2,7 @@
 
 import { SITE, SOCIALS, FOUNDER, RISKS } from '@/lib/config';
 import { Icon } from '../Icon';
+import { Logo } from '../Logo';
 
 export function RiskDisclosure() {
   return (
@@ -40,7 +41,7 @@ export function Footer() {
         <div className="grid md:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
           <div>
             <div className="mb-4">
-              <img src="/logo-wordmark.png" alt="Qryptix" className="h-9 w-auto" />
+              <Logo variant="full" size={34} />
             </div>
             <p className="font-grotesk text-sm text-ash max-w-xs leading-relaxed mb-5">
               A practical multi-utility token on Base. Solo-founder operated. Pre-sale reservation active · TGE

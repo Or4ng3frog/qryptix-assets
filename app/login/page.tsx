@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { SUPABASE_CONFIGURED } from '@/lib/data';
 import { Icon } from '@/components/Icon';
+import { Logo } from '@/components/Logo';
 
 function LoginInner() {
   const params = useSearchParams();
@@ -78,8 +79,7 @@ function LoginInner() {
       <div className="border-b border-gold/10">
         <div className="mx-auto max-w-6xl px-6 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
-            <img src="/Q_Only.png" alt="Qryptix" className="h-8 w-8" />
-            <span className="font-serif font-semibold">QRYPTIX</span>
+            <Logo variant="full" size={30} />
           </a>
           <a href="/" className="text-sm text-ash hover:text-ivory transition-colors">← Back to home</a>
         </div>

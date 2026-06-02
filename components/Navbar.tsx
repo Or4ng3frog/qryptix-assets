@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { SITE } from '@/lib/config';
+import { Logo } from './Logo';
 
 const NAV = [
   { label: 'PreSale', href: '#presale' },
@@ -28,7 +29,7 @@ export function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-6 flex items-center justify-between">
         <a href="#top" className="flex items-center group">
-          <img src="/logo-wordmark.png" alt="Qryptix" className="h-9 w-auto transition-transform group-hover:scale-105" />
+          <Logo variant="full" size={34} className="transition-transform group-hover:scale-105" />
         </a>
 
         <nav className="hidden md:flex items-center gap-9">

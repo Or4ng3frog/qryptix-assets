@@ -4,6 +4,7 @@ import { SUPABASE_CONFIGURED, MOCK_PURCHASES, MOCK_REFUNDS } from '@/lib/data';
 import { AdminStatusControl } from '@/components/AdminStatusControl';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Icon } from '@/components/Icon';
+import { Logo } from '@/components/Logo';
 import { fmtQtx, fmtMoney, shortHash } from '@/components/dashboard-ui';
 import type { Purchase, RefundRequest } from '@/lib/supabase/types';
 
@@ -38,8 +39,7 @@ export default async function AdminPage() {
       <div className="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-xl border-b border-gold/10">
         <div className="mx-auto max-w-6xl px-6 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
-            <img src="/Q_Only.png" alt="Qryptix" className="h-8 w-8" />
-            <span className="font-serif font-semibold">QRYPTIX</span>
+            <Logo variant="full" size={30} />
             <span className="text-xs text-taupe ml-2 pl-3 border-l border-gold/15">Admin</span>
           </a>
           <a href="/dashboard" className="text-sm text-ash hover:text-ivory transition-colors">← Dashboard</a>
