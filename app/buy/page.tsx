@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { BuyFlow } from '@/components/BuyFlow';
-import { FEATURES, PHASES, PHASE_PROGRESS, PRESALE, SITE } from '@/lib/config';
+import { FEATURES, PHASES, PRESALE } from '@/lib/config';
 import { Icon } from '@/components/Icon';
 import { Logo } from '@/components/Logo';
 
@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 export default function BuyPage() {
   const active = PHASES.find((p) => p.active) ?? PHASES[0];
-  const pct = Math.round((PHASE_PROGRESS.reserved / PHASE_PROGRESS.cap) * 100);
   const notes = [
     'Tokens are not claimable until launch / TGE',
     'Participation is speculative',
@@ -64,12 +63,9 @@ export default function BuyPage() {
                 <span className="text-sm font-grotesk font-medium text-ivory">Stage {active.id}</span>
                 <span className="text-xs text-taupe font-mono">{PRESALE.currencies.join(' · ')}</span>
               </div>
-              <div className="flex justify-between text-sm mb-2">
-                <span className="text-ash">Allocation</span>
-                <span className="font-semibold text-ivory">{PHASE_PROGRESS.reserved} / {PHASE_PROGRESS.cap}</span>
-              </div>
-              <div className="h-2 rounded-full bg-obsidian/60 overflow-hidden mb-4">
-                <div className="h-full rounded-full bg-gold-gradient" style={{ width: `${pct}%` }} />
+              <div className="flex justify-between text-sm mb-4">
+                <span className="text-ash">Allocation cap</span>
+                <span className="font-semibold text-ivory font-mono">{active.allocation}</span>
               </div>
               <div className="flex gap-1.5">
                 {PHASES.map((p) => (

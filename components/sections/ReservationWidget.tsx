@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FEATURES, PHASES, PHASE_PROGRESS } from '@/lib/config';
+import { FEATURES, PHASES } from '@/lib/config';
 import { Icon } from '../Icon';
 
 export function ReservationWidget() {
@@ -13,7 +13,6 @@ export function ReservationWidget() {
   const [loading, setLoading] = useState(false);
 
   const qtx = (parseFloat(usdc) || 0) / activePhase.price;
-  const pct = Math.round((PHASE_PROGRESS.reserved / PHASE_PROGRESS.cap) * 100);
 
   const handleSubmit = async () => {
     if (!email || !wallet) return;
@@ -61,17 +60,10 @@ export function ReservationWidget() {
         ))}
       </div>
 
-      {/* Progress */}
-      <div className="mb-6">
-        <div className="flex justify-between text-xs mb-2">
-          <span className="text-ash">Phase 1 Allocation</span>
-          <span className="font-semibold text-ivory">
-            {PHASE_PROGRESS.reserved} / {PHASE_PROGRESS.cap} reserved
-          </span>
-        </div>
-        <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
-          <div className="h-full rounded-full bg-gold-gradient transition-all" style={{ width: `${pct}%` }} />
-        </div>
+      {/* Stage capacity — factual parameters, no live-counter theatre */}
+      <div className="mb-6 flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-xs">
+        <span className="text-ash">Phase 1 allocation cap</span>
+        <span className="font-mono font-semibold text-ivory">{activePhase.allocation}</span>
       </div>
 
       {submitted ? (

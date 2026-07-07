@@ -1,6 +1,6 @@
 'use client';
 
-import { SITE, SOCIALS, FOUNDER, RISKS } from '@/lib/config';
+import { SITE, SOCIALS, FOUNDER, RISKS, CONTRACT_PUBLISHED } from '@/lib/config';
 import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 
@@ -69,7 +69,7 @@ export function Footer() {
 
           {[
             { h: 'Project', links: [['PreSale', '#presale'], ['Tokenomics', '#tokenomics'], ['Roadmap', '#roadmap'], ['Whitepaper', '/whitepaper']] },
-            { h: 'Participate', links: [['Dashboard', '/dashboard'], ['Refund Policy', '/refund-policy'], ['Community', '#community'], ['Basescan Contract', SITE.basescanUrl]] },
+            { h: 'Participate', links: [['Dashboard', '/dashboard'], ['Refund Policy', '/refund-policy'], ['Community', '#community'], CONTRACT_PUBLISHED ? ['Basescan Contract', SITE.basescanUrl] : ['Contract — published after audit', '/whitepaper']] },
             { h: 'Legal', links: [['Terms of Use', '/terms'], ['PreSale Terms', '/presale-terms'], ['Privacy Policy', '/privacy'], ['Risk Disclosure', '/risk-disclosure']] },
           ].map((col) => (
             <div key={col.h}>

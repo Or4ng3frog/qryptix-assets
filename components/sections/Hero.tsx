@@ -54,8 +54,8 @@ export function Hero() {
           <StaggerItem>
             <p className="font-grotesk text-lg text-ash max-w-lg mb-9 leading-relaxed">
               QTX is a multi-utility token on Base with a hardware-backed rewards layer.
-              Fixed 1B supply, on-chain vesting, LP locked 12 months — built and operated
-              by a single doxxed founder.
+              Fixed 1B supply, a published vesting schedule, LP locked 12 months at TGE —
+              built and operated by a single doxxed founder.
             </p>
           </StaggerItem>
 

@@ -28,7 +28,7 @@ export const SITE = {
   ticker: 'QTX',
   tagline: 'A practical multi-utility token on Base.',
   description:
-    'QTX is an ERC-20 token on Base with a hardware-backed rewards layer, fixed 1B supply, and transparent on-chain vesting. Built and operated by a single doxxed founder.',
+    'QTX is an ERC-20 token on Base with a hardware-backed rewards layer, fixed 1B supply, and a transparent, published vesting schedule. Built and operated by a single doxxed founder.',
   domain: 'qryptix.io',
   email: 'dennis@qryptix.io',
   // TODO: replace with real verified contract address
@@ -75,7 +75,9 @@ export const PHASES: Phase[] = [
   { id: 'P5', price: 0.125, allocation: '~28M QTX', raiseTarget: '~$3.5M', active: false },
 ];
 
-export const PHASE_PROGRESS = { reserved: 237, cap: 1000 };
+// True once the real contract address replaces the zero-address placeholder.
+// Gates public Basescan links so we never link to a 0x000… token page.
+export const CONTRACT_PUBLISHED = !SITE.contractAddress.startsWith('0x0000000000');
 
 export type Allocation = {
   name: string;
@@ -156,7 +158,7 @@ export type RoadmapItem = {
 
 export const ROADMAP: RoadmapItem[] = [
   { period: 'Q3 2025', status: 'done', title: 'Token Contract Deployed on Base', items: ['ERC-20 contract live on Base mainnet (verified)', '1B total supply, fixed', 'Website v1 launched'] },
-  { period: 'Q2 2026', status: 'now', title: 'Reservation Phase · Operating Entity', items: ['Pre-sale reservations open (Phase 1 at $0.006)', 'Operating entity setup in progress (Dubai · VARA-aligned)', 'Smart-contract audit in vendor selection', 'Whitepaper v1.3 published'] },
+  { period: 'Q2–Q3 2026', status: 'now', title: 'Reservation Phase · Operating Entity', items: ['Pre-sale reservations open (Phase 1 at $0.006)', 'Operating entity setup in progress (Dubai · VARA-aligned)', 'Smart-contract audit in vendor selection', 'Whitepaper v1.3 published'] },
   { period: 'Q3–Q4 2026', status: 'planned', title: 'Audit · Multisig · Hardware Prototype', items: ['Independent smart-contract audit published', 'Treasury migrated to 3-of-5 multisig', 'Miner hardware prototype', 'Staking program testnet'] },
   { period: 'Q1 2027', status: 'planned', title: 'TGE & Initial DEX Listing', items: ['Token Generation Event — claim portal live', 'Initial DEX listing on Base · LP locked 12 months', '10% unlock at TGE, 90% vests over 8 months'] },
   { period: 'Early Q2 2027', status: 'planned', title: 'Hardware Batch #1', items: ['First miner batch ships — contingent on validation', 'Firmware OTA + device management portal', 'Post-launch optimization based on telemetry'] },

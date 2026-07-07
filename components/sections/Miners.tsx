@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { MINERS } from '@/lib/config';
 import { SectionHeading } from './SectionHeading';
-import { Stagger, StaggerItem } from '@/components/motion';
+import { Reveal, Stagger, StaggerItem } from '@/components/motion';
 import { GlowCard } from '@/components/ui/GlowCard';
+import minerFamily from '@/public/assets/miner-family.webp';
 
 function SpecRow({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
@@ -74,6 +76,31 @@ export function Miners() {
         title={<>Qryptix Miners.</>}
         subtitle="The miner program is in manufacturer-selection phase. No purchases today. Register interest to be notified when the first batch opens — pricing and specs may change."
       />
+
+      {/* Family design study — one design DNA across all four tiers */}
+      <Reveal className="mb-10">
+        <div className="relative overflow-hidden rounded-[2rem] glass-luxe">
+          <Image
+            src={minerFamily}
+            alt="Industrial design concept study: four Qryptix miner tiers — Nano, Core, Pro and Ultra — sharing one design language, ascending in size"
+            className="w-full h-auto"
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            placeholder="blur"
+          />
+          <span className="hidden sm:inline-flex absolute top-5 left-5 items-center gap-1.5 rounded-full glass-luxe px-3 py-1.5 font-mono text-[10px] uppercase tracking-eyebrow text-gold-bright">
+            Industrial design concept
+          </span>
+          <span className="hidden sm:inline-flex absolute bottom-5 right-5 rounded-full bg-obsidian/70 border border-white/[0.08] px-3 py-1.5 font-mono text-[10px] uppercase tracking-eyebrow text-ash">
+            Hardware form factor not final
+          </span>
+        </div>
+        {/* On small screens the band is too short for overlays — labels sit below */}
+        <div className="sm:hidden mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 font-mono text-[10px] uppercase tracking-eyebrow">
+          <span className="text-gold-bright">Industrial design concept</span>
+          <span className="text-taupe">Form factor not final</span>
+        </div>
+      </Reveal>
+
       <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" gap={0.08}>
         {MINERS.map((m, i) => (
           <MinerCard key={m.tier} m={m} rank={i + 1} />

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { PHASES, PHASE_PROGRESS, PRESALE } from '@/lib/config';
+import { PHASES, PRESALE } from '@/lib/config';
 import { SectionHeading } from './SectionHeading';
 import { Reveal } from '@/components/motion';
 import { GlowCard } from '@/components/ui/GlowCard';
@@ -11,7 +11,6 @@ export function PresaleSection() {
   const active = PHASES.find((p) => p.active) ?? PHASES[0];
   const activeIdx = PHASES.findIndex((p) => p.active);
   const next = PHASES[activeIdx + 1];
-  const pct = Math.round((PHASE_PROGRESS.reserved / PHASE_PROGRESS.cap) * 100);
   const maxPrice = Math.max(...PHASES.map((p) => p.price));
 
   const tiles = [
@@ -115,24 +114,16 @@ export function PresaleSection() {
             </div>
           </div>
 
-          {/* Stage reservation progress */}
-          <div className="mb-7">
-            <div className="mb-2 flex justify-between text-sm">
-              <span className="text-ash">Stage {active.id} allocation</span>
-              <span className="font-semibold text-ivory font-mono">
-                {PHASE_PROGRESS.reserved} / {PHASE_PROGRESS.cap}
-              </span>
-            </div>
-            <div className="h-2 rounded-full bg-obsidian/60 overflow-hidden">
-              <motion.div
-                className="h-full rounded-full bg-gold-gradient"
-                initial={{ width: 0 }}
-                whileInView={{ width: `${pct}%` }}
-                viewport={{ once: true, margin: '0px 0px -60px 0px' }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              />
-            </div>
-            <div className="text-xs text-taupe mt-1.5">{pct}% of this stage reserved</div>
+          {/* Reservation status — factual, no fabricated fill */}
+          <div className="mb-7 flex items-center gap-3 rounded-2xl bg-obsidian/40 border border-white/[0.06] px-4 py-3.5">
+            <span className="relative flex h-2 w-2 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
+            </span>
+            <span className="text-sm text-ash">
+              Reservations open · <span className="text-ivory">no payment today</span> · your Stage {active.id} price
+              locks at reservation
+            </span>
           </div>
 
           {/* Vesting strip */}

@@ -12,6 +12,162 @@ const C = 2 * Math.PI * R;
 const OR = 92; // outer scroll-progress ring radius
 const OC = 2 * Math.PI * OR;
 
+// Release schedules per allocation — sourced 1:1 from Whitepaper v1.3 §6
+// (cliff / vesting / TGE table). Months from TGE; axis spans 48 months.
+type Sched = {
+  name: string;
+  pct: number;
+  cliff: number; // months locked before vesting starts
+  vest: number; // vesting window length in months
+  degressive?: boolean; // emission tapers over the window
+  tgePct?: number; // % of this allocation unlocked at TGE
+  locked?: number; // LP lock window (tokens live, pool locked)
+  governance?: boolean; // no schedule — multisig/governance gated
+  note: string;
+};
+
+const VESTING: Sched[] = [
+  { name: 'Ecosystem / Miner Rewards', pct: 30, cliff: 0, vest: 48, degressive: true, note: 'Up to 48m · degressive' },
+  { name: 'Treasury / Grants', pct: 16, cliff: 3, vest: 24, note: '3m cliff · 24m linear' },
+  { name: 'Presale (P1–P5)', pct: 12, cliff: 0, vest: 8, tgePct: 10, note: '10% TGE · 8m linear' },
+  { name: 'Staking Rewards', pct: 12, cliff: 0, vest: 36, degressive: true, note: 'Up to 36m · degressive' },
+  { name: 'Liquidity & Market-Making', pct: 10, cliff: 0, vest: 0, tgePct: 100, locked: 12, note: '100% TGE · LP locked 12m' },
+  { name: 'Team', pct: 10, cliff: 12, vest: 36, note: '12m cliff · 36m linear' },
+  { name: 'Unallocated Reserve', pct: 6, cliff: 0, vest: 0, governance: true, note: 'Governance-gated · no schedule' },
+  { name: 'Advisors', pct: 2, cliff: 6, vest: 12, note: '6m cliff · 12m linear' },
+  { name: 'Community / Airdrop', pct: 2, cliff: 0, vest: 6, tgePct: 25, note: '25% TGE · 6m linear' },
+];
+
+const AXIS_MONTHS = 48;
+const hatch =
+  'repeating-linear-gradient(135deg, rgba(244,241,234,0.16) 0 2px, transparent 2px 6px)';
+
+function TimelineRow({ s }: { s: Sched }) {
+  const w = (m: number) => `${(m / AXIS_MONTHS) * 100}%`;
+  return (
+    <div className="group grid grid-cols-1 sm:grid-cols-[200px_1fr_170px] items-center gap-x-4 gap-y-1.5 rounded-lg px-2 py-2 transition-colors hover:bg-white/[0.02]">
+      {/* Label */}
+      <div className="flex items-baseline justify-between sm:justify-start gap-2 min-w-0">
+        <span className="text-[13px] font-grotesk text-ivory truncate">{s.name}</span>
+        <span className="font-mono text-xs font-semibold text-gold shrink-0">{s.pct}%</span>
+      </div>
+
+      {/* Bar lane */}
+      <div className="relative h-4">
+        {/* month gridlines at 12/24/36/48 */}
+        {[25, 50, 75, 100].map((x) => (
+          <span key={x} aria-hidden className="absolute inset-y-0 w-px bg-white/[0.05]" style={{ left: `${x}%` }} />
+        ))}
+        <div className="absolute inset-0 flex items-center gap-[2px]">
+          {s.governance ? (
+            <span className="h-[6px] w-full rounded-full border border-dashed border-white/15" />
+          ) : (
+            <>
+              {s.cliff > 0 && (
+                <motion.span
+                  className="h-4 rounded-l-md border border-white/10 origin-left"
+                  style={{ width: w(s.cliff), backgroundImage: hatch }}
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                />
+              )}
+              {s.locked ? (
+                <motion.span
+                  className="h-4 rounded-md border border-gold/30 origin-left"
+                  style={{ width: w(s.locked), backgroundImage: hatch }}
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                />
+              ) : null}
+              {s.vest > 0 && (
+                <motion.span
+                  className={`h-4 origin-left ${s.cliff > 0 ? 'rounded-r-md' : 'rounded-md'}`}
+                  style={{
+                    width: w(s.vest),
+                    background: s.degressive
+                      ? 'linear-gradient(90deg, #E3B341 0%, rgba(227,179,65,0.10) 100%)'
+                      : 'linear-gradient(90deg, #E3B341, #C28F3C)',
+                  }}
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                />
+              )}
+            </>
+          )}
+        </div>
+        {/* TGE unlock marker */}
+        {s.tgePct ? (
+          <span
+            aria-hidden
+            className="absolute top-1/2 -translate-y-1/2 -left-1 h-2 w-2 rotate-45 bg-gold-bright ring-2 ring-obsidian"
+          />
+        ) : null}
+      </div>
+
+      {/* Schedule — direct label, no tooltip needed */}
+      <span className="font-mono text-[11px] text-taupe sm:text-right">{s.note}</span>
+    </div>
+  );
+}
+
+function ReleaseTimeline() {
+  return (
+    <div className="glass-luxe rounded-3xl p-6 sm:p-8 mt-8">
+      <div className="flex flex-wrap items-end justify-between gap-3 mb-5">
+        <div>
+          <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1.5">Release timeline</div>
+          <h3 className="font-serif font-medium text-xl text-ivory">When supply unlocks.</h3>
+        </div>
+        {/* Legend */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] font-grotesk text-ash">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2.5 w-5 rounded-sm" style={{ background: 'linear-gradient(90deg, #E3B341, #C28F3C)' }} />
+            Vesting window
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2.5 w-5 rounded-sm border border-white/15" style={{ backgroundImage: hatch }} />
+            Cliff / locked
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rotate-45 bg-gold-bright" />
+            TGE unlock
+          </span>
+        </div>
+      </div>
+
+      {/* Month axis */}
+      <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr_170px] gap-x-4 px-2 mb-1">
+        <span className="hidden sm:block" />
+        <div className="hidden sm:flex justify-between font-mono text-[10px] uppercase tracking-wide text-taupe">
+          <span>TGE</span>
+          <span>12m</span>
+          <span>24m</span>
+          <span>36m</span>
+          <span>48m</span>
+        </div>
+        <span className="hidden sm:block" />
+      </div>
+
+      <div className="flex flex-col gap-0.5">
+        {VESTING.map((s) => (
+          <TimelineRow key={s.name} s={s} />
+        ))}
+      </div>
+
+      <p className="mt-5 pt-4 border-t border-white/[0.06] text-xs text-taupe font-grotesk">
+        Months from TGE (planned Q1 2027). Degressive bars fade to indicate a declining emission rate.
+        Schedules as published in Whitepaper v1.3 §6 — designed for on-chain enforcement at TGE.
+      </p>
+    </div>
+  );
+}
+
 // Utility grouping (by ALLOCATIONS index) — ties supply to function.
 const GROUPS = [
   { label: 'Network & rewards', idx: [0, 3], desc: 'Miner + staking emissions', shade: '#F4D88A' },
@@ -114,7 +270,7 @@ export function Tokenomics() {
             <span className="text-gold">30% to mining rewards.</span>
           </>
         }
-        subtitle="Every allocation is hard-coded in the contract on Base. Vesting and lock schedules are enforced on-chain — not promises."
+        subtitle="Every allocation is fixed and published up front. Vesting and lock schedules are designed for on-chain enforcement — the audited contract will be linked here before any purchase opens."
       />
       <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-8 sm:gap-12 lg:items-start">
         {/* Sticky cinematic donut */}
@@ -183,6 +339,9 @@ export function Tokenomics() {
           </Stagger>
         </div>
       </div>
+
+      {/* Cliffs & vesting windows — real schedule data, full width */}
+      <ReleaseTimeline />
     </section>
   );
 }

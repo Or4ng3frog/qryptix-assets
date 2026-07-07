@@ -1,88 +1,48 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { DEPIN } from '@/lib/config';
 import { SectionHeading } from './SectionHeading';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion';
 import { GlowCard } from '@/components/ui/GlowCard';
 import { Icon } from '../Icon';
+import proofNetwork from '@/public/assets/proof-network.webp';
 
-// Satellite node positions (in a 320x320 viewBox, hub at centre 160,160)
-const NODES = [
-  { x: 160, y: 36 },
-  { x: 282, y: 104 },
-  { x: 282, y: 216 },
-  { x: 160, y: 284 },
-  { x: 38, y: 216 },
-  { x: 38, y: 104 },
-];
+// The reward path as real UI text — mirrors the left→right progression in the visual.
+const CHAIN = ['Physical work', 'Signal', 'Verification', 'Network', 'Recorded state'];
 
-// Spokes that carry a travelling pulse out from the hub.
-const PULSES = [
-  { node: 0, dur: 2.6, delay: 0 },
-  { node: 2, dur: 3.0, delay: 0.9 },
-  { node: 4, dur: 2.8, delay: 1.7 },
-];
-
-function Topology() {
+/**
+ * Cinematic system visual: a physical node emits a signal that passes a
+ * verification gate, fans out, and lands in a ledger grid. A single native
+ * gold pulse travels the etched trace — light as information, not decoration.
+ */
+function ProofChainVisual() {
   const reduce = useReducedMotion();
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[420px]">
-      {/* soft glow */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-70"
-        style={{ background: 'radial-gradient(circle at center, rgba(227,179,65,0.14), transparent 65%)' }}
+    <div className="relative overflow-hidden rounded-[2rem] glass-luxe">
+      <Image
+        src={proofNetwork}
+        alt="System concept: a machined hardware node sends a gold signal trace through a verification gate that fans out into a recessed ledger grid"
+        className="w-full h-auto"
+        sizes="(min-width: 1280px) 1216px, 100vw"
+        placeholder="blur"
       />
-      <svg viewBox="0 0 320 320" className="relative h-full w-full">
-        {/* links */}
-        {NODES.map((n, i) => (
-          <line
-            key={`l-${i}`}
-            x1="160"
-            y1="160"
-            x2={n.x}
-            y2={n.y}
-            stroke="rgba(227,179,65,0.28)"
-            strokeWidth="1"
-          />
-        ))}
-        {/* ring */}
-        <circle cx="160" cy="160" r="124" fill="none" stroke="rgba(244,241,234,0.06)" strokeWidth="1" />
-
-        {/* satellite nodes */}
-        {NODES.map((n, i) => (
-          <g key={`n-${i}`} className="animate-pulse-glow" style={{ animationDelay: `${i * 0.4}s`, transformOrigin: 'center' }}>
-            <circle cx={n.x} cy={n.y} r="6" fill="#E3B341" />
-            <circle cx={n.x} cy={n.y} r="11" fill="none" stroke="rgba(227,179,65,0.4)" strokeWidth="1" />
-          </g>
-        ))}
-
-        {/* travelling pulses out from the hub */}
-        {!reduce &&
-          PULSES.map((p, i) => (
-            <motion.circle
-              key={`pulse-${i}`}
-              r={3}
-              fill="#F4D88A"
-              initial={{ cx: 160, cy: 160, opacity: 0 }}
-              animate={{
-                cx: [160, NODES[p.node].x],
-                cy: [160, NODES[p.node].y],
-                opacity: [0, 1, 1, 0],
-              }}
-              transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: 'linear' }}
-            />
-          ))}
-
-        {/* hub */}
-        <circle cx="160" cy="160" r="22" fill="#0C0C10" stroke="rgba(227,179,65,0.5)" strokeWidth="1.5" />
-        <circle cx="160" cy="160" r="9" fill="#F4D88A" />
-      </svg>
-
-      {/* hub label */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-[34px] text-center">
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-taupe">QTX core</span>
-      </div>
+      {/* Travelling pulse along the main trace (mapped to the image's light path) */}
+      {!reduce && (
+        <motion.span
+          aria-hidden
+          className="absolute h-[3px] w-10 rounded-full"
+          style={{
+            top: '67.4%',
+            background: 'linear-gradient(90deg, transparent, rgba(244,216,138,0.9))',
+            boxShadow: '0 0 12px 2px rgba(227,179,65,0.55)',
+          }}
+          initial={{ left: '21%', opacity: 0 }}
+          animate={{ left: ['21%', '57%'], opacity: [0, 0.9, 0.9, 0] }}
+          transition={{ duration: 4.5, repeat: Infinity, repeatDelay: 2.5, ease: 'linear' }}
+        />
+      )}
     </div>
   );
 }
@@ -100,29 +60,43 @@ export function NetworkSection() {
         subtitle={DEPIN.intro}
       />
 
-      <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-12 items-center">
-        {/* Topology visual */}
-        <Reveal>
-          <div className="glass-luxe rounded-[2rem] p-8">
-            <Topology />
-          </div>
-        </Reveal>
-
-        {/* Pillars */}
-        <Stagger className="grid sm:grid-cols-2 gap-4" gap={0.08}>
-          {DEPIN.pillars.map((p) => (
-            <StaggerItem key={p.title} className="h-full">
-              <GlowCard className="group glow-gold h-full rounded-2xl glass-luxe p-6 transition-transform duration-300 hover:-translate-y-1">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 border border-gold/20 text-gold mb-4 transition-transform group-hover:scale-110">
-                  <Icon name={p.icon} size={20} />
-                </div>
-                <h3 className="font-serif font-medium text-lg text-ivory mb-1.5">{p.title}</h3>
-                <p className="font-grotesk text-sm text-ash leading-relaxed">{p.desc}</p>
-              </GlowCard>
-            </StaggerItem>
+      {/* The value chain, cinematically */}
+      <Reveal>
+        <ProofChainVisual />
+        {/* Reward path as native text */}
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+          {CHAIN.map((step, i) => (
+            <span key={step} className="flex items-center gap-3">
+              <span
+                className={`font-mono text-[11px] uppercase tracking-eyebrow ${
+                  i === 2 ? 'text-gold-bright' : 'text-ash'
+                }`}
+              >
+                {step}
+              </span>
+              {i < CHAIN.length - 1 && <span className="text-gold/50 text-xs">→</span>}
+            </span>
           ))}
-        </Stagger>
-      </div>
+        </div>
+        <p className="mt-3 text-center text-xs text-taupe font-grotesk">
+          System concept — illustrates the intended reward path, not live infrastructure.
+        </p>
+      </Reveal>
+
+      {/* Pillars */}
+      <Stagger className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4" gap={0.08}>
+        {DEPIN.pillars.map((p) => (
+          <StaggerItem key={p.title} className="h-full">
+            <GlowCard className="group glow-gold h-full rounded-2xl glass-luxe p-6 transition-transform duration-300 hover:-translate-y-1">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 border border-gold/20 text-gold mb-4 transition-transform group-hover:scale-110">
+                <Icon name={p.icon} size={20} />
+              </div>
+              <h3 className="font-serif font-medium text-lg text-ivory mb-1.5">{p.title}</h3>
+              <p className="font-grotesk text-sm text-ash leading-relaxed">{p.desc}</p>
+            </GlowCard>
+          </StaggerItem>
+        ))}
+      </Stagger>
 
       {/* Design-parameter band (honest: not live telemetry) */}
       <Reveal className="mt-8">
