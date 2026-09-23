@@ -31,4 +31,4 @@ This document describes the current feature branch. See [docs/PURCHASE-FLOW.md](
 4. Database migrations applied and RLS checked; full Base Sepolia purchase and refund-flow tests passed.
 5. Only then consider `NEXT_PUBLIC_CHAIN_MODE=mainnet` and `NEXT_PUBLIC_BUY_FLOW_ENABLED=true`. The domain switch is separate from enabling purchases.
 
-The Q1 2027 TGE and early Q2 2027 miner batch are conditional targets, not fixed commitments. The first hardware batch also depends on prototype validation, production and approvals.
+The Q2 2027 TGE and early Q3 2027 miner batch are conditional targets, not fixed commitments. The first hardware batch also depends on prototype validation, production and approvals.

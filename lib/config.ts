@@ -38,7 +38,7 @@ export const SITE = {
   chainId: 8453,
   totalSupply: '1,000,000,000',
   lpLock: '12 months',
-  tgeTarget: 'Q1 2027',
+  tgeTarget: 'Q2 2027',
 } as const;
 
 export const SOCIALS = {
@@ -156,12 +156,12 @@ export type RoadmapItem = {
 export const ROADMAP: RoadmapItem[] = [
   { period: 'Q3 2025', status: 'done', title: 'Website v1 launched', items: ['Initial Qryptix website published'] },
   { period: 'Current work', status: 'now', title: 'Direct Purchase Preparation · Operating Entity', items: ['USDC direct purchase flow built, currently disabled', 'Operating entity and jurisdiction to be finalised', 'Audit and independent review still required', 'Whitepaper v1.3 published; updated release copy in review'] },
-  { period: 'Through Q4 2026 · target', status: 'planned', title: 'Audit · Multisig · Hardware Prototype', items: ['Verified token contract address and independent audit report published', 'Treasury configured as multisig', 'Claim and vesting mechanism tested', 'Miner prototype validated before manufacturing commitments'] },
-  { period: 'Q1 2027 · target', status: 'planned', title: 'TGE & Initial DEX Listing', items: ['Only after audit, entity, treasury and claim readiness', 'TGE and claim portal launch', 'Initial DEX listing on Base · planned LP lock of 12 months', 'Planned vesting: 10% at TGE, 90% over 8 months'] },
-  { period: 'Early Q2 2027 · estimate', status: 'planned', title: 'Hardware Batch #1', items: ['Shipping depends on validated prototype, production and required approvals', 'Firmware, device management and support ready before dispatch'] },
+  { period: 'Through Q1 2027 · target', status: 'planned', title: 'Audit · Multisig · Hardware Prototype', items: ['Verified token contract address and independent audit report published', 'Treasury configured as multisig', 'Claim and vesting mechanism tested', 'Miner prototype validated before manufacturing commitments'] },
+  { period: 'Q2 2027 · target', status: 'planned', title: 'TGE & Initial DEX Listing', items: ['Only after audit, entity, treasury and claim readiness', 'TGE and claim portal launch', 'Initial DEX listing on Base · planned LP lock of 12 months', 'Planned vesting: 10% at TGE, 90% over 8 months'] },
+  { period: 'Early Q3 2027 · estimate', status: 'planned', title: 'Hardware Batch #1', items: ['Shipping depends on validated prototype, production and required approvals', 'Firmware, device management and support ready before dispatch'] },
 ];
 
-export const ROADMAP_NOTE = 'Q1 2027 for TGE and early Q2 2027 for hardware are targets, not confirmed dates. Both depend on the preceding audit, legal, technical and manufacturing milestones; they may move.';
+export const ROADMAP_NOTE = 'Q2 2027 for TGE and early Q3 2027 for hardware are targets, not confirmed dates. Both depend on the preceding audit, legal, technical and manufacturing milestones; they may move.';
 
 export type FaqItem = { q: string; a: string };
 
@@ -170,7 +170,7 @@ export const FAQS: FaqItem[] = [
   { q: 'Who is behind Qryptix?', a: 'Dennis Klahn, independent developer based in Germany. Qryptix is currently a solo-founder project; the final operating entity and jurisdiction have not been published. LinkedIn and GitHub are linked in the Founder section.' },
   { q: 'Is the smart contract audited?', a: 'No independent audit report is linked here. Purchases will remain disabled until an independent audit has been completed, findings addressed and the report published.' },
   { q: 'How will I buy QTX?', a: 'When purchases open, connect a self-custody wallet on Base, enter your USDC amount, review the terms and approve the transfer. The server checks the confirmed on-chain payment before recording QTX in your dashboard. Claim begins at TGE.' },
-  { q: 'When will tokens be claimable?', a: 'The current target for TGE is Q1 2027, conditional on the audit, legal setup and claim contract. The planned schedule is 10% at TGE and 90% vesting linearly over 8 months. Final claim terms and dates must be confirmed before purchases open.' },
+  { q: 'When will tokens be claimable?', a: 'The current target for TGE is Q2 2027, conditional on the audit, legal setup and claim contract. The planned schedule is 10% at TGE and 90% vesting linearly over 8 months. Final claim terms and dates must be confirmed before purchases open.' },
   { q: 'What if the project fails or is delayed?', a: 'No payment is accepted while the sale is closed. Once purchases open, refund eligibility is governed by the published Refund Policy. QTX is speculative and could lose all value.' },
   { q: 'Where will Qryptix operate?', a: 'The final operating entity, jurisdiction and participant eligibility will be published before purchases open. Access may be restricted depending on applicable law.' },
   { q: 'Do I need to do KYC?', a: "KYC requirements at purchase time depend on jurisdiction and entity setup. We'll publish exact requirements before purchases open. You are responsible for complying with your local regulations." },

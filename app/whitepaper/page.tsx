@@ -117,7 +117,7 @@ export default function WhitepaperPage() {
             </p>
             <p className="text-xs text-taupe mb-5">Draft content review · September 2026 · based on Whitepaper v1.3 (May 2026). Formal version and legal review pending.</p>
             <div className="flex flex-wrap gap-2">
-              {['ERC-20 design', 'Base · chain 8453', '1B planned supply', '12m LP lock planned', 'TGE Q1 2027 target'].map((t) => (
+              {['ERC-20 design', 'Base · chain 8453', '1B planned supply', '12m LP lock planned', 'TGE Q2 2027 target'].map((t) => (
                 <span key={t} className="rounded-full glass-luxe px-3 py-1.5 text-xs font-mono text-ash">
                   {t}
                 </span>
@@ -137,7 +137,7 @@ export default function WhitepaperPage() {
             The project is operated by a solo founder; the final operating entity and jurisdiction have not been
             published. QTX is planned to be sold by direct purchase with USDC on Base. The purchase flow
             will only be enabled after an independent smart-contract audit is published and the operating entity is finalised.
-            The first hardware miner batch is planned to ship in early Q2 2027, contingent on prototype validation
+            The first hardware miner batch is estimated for early Q3 2027, contingent on prototype validation
             with selected manufacturers.
           </P>
           <P>
@@ -326,7 +326,7 @@ contract QryptixToken is ERC20, Ownable {
           <H3>7.3 Purchase mechanics (when active)</H3>
           <P>When the sale opens, participants pay USDC on Base from a self-custody wallet. The server verifies the on-chain transfer and records the purchase at the applicable stage price. No priority window or reservation is offered.</P>
           <H3>7.4 Claim at TGE</H3>
-          <P>No tokens are delivered immediately. The current TGE target is Q1 2027, subject to audit, legal and claim readiness. The planned unlock is 10% at TGE, with the remaining 90% vesting linearly over 8 months; final terms must be confirmed before purchases open.</P>
+          <P>No tokens are delivered immediately. The current TGE target is Q2 2027, subject to audit, legal and claim readiness. The planned unlock is 10% at TGE, with the remaining 90% vesting linearly over 8 months; final terms must be confirmed before purchases open.</P>
 
           {/* 08 Miners */}
           <H2 id="miners" num="08">Hardware miner program</H2>
@@ -347,7 +347,7 @@ contract QryptixToken is ERC20, Ownable {
           <H3>8.2 Reward distribution</H3>
           <P>The proposed model would distribute rewards pro-rata to verified contribution per emission window, subject to individual operator caps. Verification and cap rules are not yet implemented or published.</P>
           <H3>8.3 Manufacturing & delivery</H3>
-          <P>The first batch is estimated for early Q2 2027, conditional on prototype validation, production planning and required approvals. This document does not establish a confirmed shipping date.</P>
+          <P>The first batch is estimated for early Q3 2027, conditional on prototype validation, production planning and required approvals. This document does not establish a confirmed shipping date.</P>
 
           {/* 09 Staking */}
           <H2 id="staking" num="09">Staking design</H2>

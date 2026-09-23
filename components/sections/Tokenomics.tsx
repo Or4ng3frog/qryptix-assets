@@ -161,7 +161,7 @@ function ReleaseTimeline() {
       </div>
 
       <p className="mt-5 pt-4 border-t border-white/[0.06] text-xs text-taupe font-grotesk">
-        Months from the targeted TGE (Q1 2027). Degressive bars illustrate a planned declining emission rate.
+        Months from the targeted TGE (Q2 2027). Degressive bars illustrate a planned declining emission rate.
         Schedules are proposals based on Whitepaper v1.3 §6; contract implementation and audit remain outstanding.
       </p>
     </div>
