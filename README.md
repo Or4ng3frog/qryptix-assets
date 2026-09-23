@@ -3,6 +3,10 @@
 Modern, dark, marketing-forward landing page + whitepaper for Qryptix (QTX),
 a multi-utility token on Base.
 
+Proposed utility: verified hardware operators would receive QTX from a reserved
+30% of the fixed supply. A future web store could let players spend QTX on
+cosmetics in participating games. The store and game integrations are not live.
+
 Stack: **Next.js 14 (App Router) · React 18 · TypeScript · Tailwind CSS · Framer Motion**
 
 ---

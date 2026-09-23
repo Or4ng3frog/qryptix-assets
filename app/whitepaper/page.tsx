@@ -5,7 +5,7 @@ import { SITE, ROADMAP, ROADMAP_NOTE } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: 'Qryptix Whitepaper — Draft Revision',
-  description: 'The full technical and economic specification for Qryptix (QTX): tokenomics, vesting, architecture, miner program, security, and risk disclosure.',
+  description: 'Draft Qryptix (QTX) specification: fixed supply, proposed miner rewards, future cosmetic game store, vesting, security and risks.',
 };
 
 // ---- Prose helpers ----
@@ -112,8 +112,9 @@ export default function WhitepaperPage() {
             </div>
             <h1 className="font-serif font-semibold text-5xl mb-4 leading-tight">Qryptix Whitepaper</h1>
             <p className="text-xl text-ash leading-relaxed mb-7">
-              A proposed multi-utility token on Base (Ethereum L2), with a planned hardware rewards layer and
-              transparent emission design. This draft distinguishes current progress from planned mechanisms.
+              A proposed token on Base (Ethereum L2), with rewards from a fixed pool for verified hardware
+              contributions and a planned web store for cosmetics in participating games. This draft distinguishes
+              current progress from proposed mechanisms.
             </p>
             <p className="text-xs text-taupe mb-5">Draft content review · September 2026 · based on Whitepaper v1.3 (May 2026). Formal version and legal review pending.</p>
             <div className="flex flex-wrap gap-2">
@@ -129,9 +130,9 @@ export default function WhitepaperPage() {
           <H2 id="summary" num="01">Executive summary</H2>
           <Lead>
             Qryptix (QTX) is a planned ERC-20 token on Base, Coinbase&apos;s Ethereum Layer-2 network. A verified
-            public contract address has not yet been published. It is designed for trading, payments, hardware-backed mining rewards, and staking —
-            built around a planned fixed supply of 1,000,000,000 QTX, a proposed on-chain vesting design, and a transparent
-            five-phase pre-sale.
+            public contract address has not yet been published. Its planned fixed supply is 1,000,000,000 QTX.
+            Proposed uses include miner rewards from an allocated pool, staking, and spending QTX on cosmetics
+            in participating games through a future web store. Vesting and a five-phase pre-sale are also proposed.
           </Lead>
           <P>
             The project is operated by a solo founder; the final operating entity and jurisdiction have not been
@@ -171,13 +172,13 @@ export default function WhitepaperPage() {
           </P>
           <P>
             Qryptix is designed against both patterns. The proposed token utility includes rewards for verified
-            hardware contribution and stakers, contingent on implementation. The project structure aims to be verifiable: doxxed
+            hardware contribution, staking and future cosmetic purchases, contingent on implementation. The project structure aims to be verifiable: doxxed
             founder, planned on-chain tokenomics, and a direct purchase flow gated until audit and entity are in place.
           </P>
 
           {/* 03 Solution */}
           <H2 id="solution" num="03">The Qryptix approach</H2>
-          <P>The design rests on three principles, each chosen because it is verifiable rather than aspirational.</P>
+          <P>The proposed design has four parts, each requiring validation before it can operate.</P>
           <H3>3.1 Verifiable on-chain mechanics</H3>
           <P>
             The intended contract design covers total supply, vesting, liquidity lock duration and emission caps.
@@ -187,15 +188,29 @@ export default function WhitepaperPage() {
           <H3>3.2 Hardware-backed utility</H3>
           <P>
             The proposed 30% ecosystem allocation is intended for rewards from verified hardware contributions.
-            Hardware, verification and emission controls are still to be implemented and validated. The proposed
-            reward schedule runs for up to 48 months with decreasing emissions.
+            Miners would receive QTX from that preallocated pool; they would not mint additional QTX. Hardware,
+            verification and distribution controls are still to be implemented and validated. The proposed
+            reward schedule runs for up to 48 months with decreasing distributions.
           </P>
           <P>
             The hardware program is a proposed product. Manufacturer engagement is at
             a concept stage in this document; no preorders are accepted here, and published specifications are explicitly
             indicative until validated against working prototypes.
           </P>
-          <H3>3.3 Transparency over momentum</H3>
+          <H3>3.3 Proposed use in games</H3>
+          <P>
+            A future Qryptix web store is proposed as a place for players to spend QTX on cosmetic items such as
+            skins in participating games. After a verified payment, a participating game would deliver the item
+            to the player account. This requires an operating store, game developer integrations and review of
+            the applicable platform payment rules. No games, store items or partnerships are confirmed here;
+            no cosmetics can currently be purchased with QTX.
+          </P>
+          <P>
+            QTX game payments would depend on players wanting the available items and developers supporting
+            delivery. Miner distributions alone do not establish demand for the token. Pricing, settlement,
+            refunds and the treatment of cross-game purchases still need to be defined with the first game partner.
+          </P>
+          <H3>3.4 Transparency over momentum</H3>
           <P>
             Where most presales optimise for fast capital intake, Qryptix is structured to optimise for participant
             safety. No payment is taken before the purchase flow opens, and activation is
@@ -240,7 +255,8 @@ contract QryptixToken is ERC20, Ownable {
           <P>
             A Next.js dApp for presale and claim interfaces; a Postgres database for verified purchase
             records; planned event indexers reading from Base for state synchronisation; and the manufacturer-side firmware
-            stack for miners (specified separately).
+            stack for miners (specified separately). A separate game store and developer integration for account-linked
+            cosmetic delivery are proposed, with no implementation or partner announced.
           </P>
 
           {/* 05 Tokenomics */}
@@ -262,11 +278,9 @@ contract QryptixToken is ERC20, Ownable {
           />
           <H3>5.1 Allocation rationale</H3>
           <P>
-            The 30% Ecosystem allocation is intentionally large because hardware-backed utility is the project&apos;s
-            primary differentiator. Distributing it over up to 48 months under a degressive schedule keeps
-            emissions meaningful for early operators while preventing supply shocks. Treasury (16%) funds multi-year
-            operations without forcing premature token sales. The 12% presale allocation is deliberately
-            conservative; many comparable projects allocate 20–30%, creating significant post-TGE sell pressure.
+            The proposed 30% Ecosystem allocation reserves existing QTX for verified hardware contributors.
+            A degressive distribution over up to 48 months is intended to limit the release rate.
+            Treasury (16%) is allocated to operations, and 12% of the planned supply is allocated to the pre-sale.
           </P>
 
           {/* 06 Vesting */}
@@ -408,6 +422,8 @@ contract QryptixToken is ERC20, Ownable {
           <P>Miner development depends on manufacturer engagement, prototype validation, and supply-chain conditions. The program may be delayed, scaled down, or cancelled. Any alternative use of the Ecosystem allocation would require a published decision process and applicable terms.</P>
           <H3>13.6 Market risk</H3>
           <P>Post-TGE price would be market-determined. An initial liquidity lock is planned, but secondary trading may be thin or volatile. No price support is promised.</P>
+          <H3>13.7 Game adoption risk</H3>
+          <P>The proposed cosmetic store depends on games integrating QTX payments and delivering items to player accounts. Mobile platform rules, developer agreements and player demand may prevent or delay this use. There is no confirmed store or game integration today.</P>
 
           {/* 14 Roadmap */}
           <H2 id="roadmap" num="14">Roadmap</H2>

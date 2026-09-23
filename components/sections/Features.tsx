@@ -23,7 +23,7 @@ export function Features() {
       <SectionHeading
         tag="Why Qryptix"
         title={<>Built for actual utility.</>}
-        subtitle="Proposed on-chain transparency, a planned hardware program and emission caps to be verified before launch."
+        subtitle="A proposed path from verified hardware contributions to QTX rewards and cosmetic purchases in participating games. Hardware, store and integrations still need to be built."
       />
       <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-5" gap={0.07}>
         {WHY_FEATURES.map((f) => (

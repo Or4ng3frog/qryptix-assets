@@ -44,7 +44,7 @@ export function Footer() {
               <Logo variant="full" size={34} />
             </div>
             <p className="font-grotesk text-sm text-ash max-w-xs leading-relaxed mb-5">
-              A practical multi-utility token on Base. Solo-founder operated. Direct PreSale planned · TGE
+              Planned miner rewards and cosmetic game spending on Base. Solo-founder operated. Direct PreSale planned · TGE
               planned {SITE.tgeTarget}.
             </p>
             <div className="flex gap-2.5">
@@ -66,7 +66,7 @@ export function Footer() {
           </div>
 
           {[
-            { h: 'Project', links: [['PreSale', '#presale'], ['Tokenomics', '#tokenomics'], ['Roadmap', '#roadmap'], ['Whitepaper', '/whitepaper']] },
+            { h: 'Project', links: [['PreSale', '#presale'], ['Games (planned)', '#games'], ['Tokenomics', '#tokenomics'], ['Roadmap', '#roadmap'], ['Whitepaper', '/whitepaper']] },
             { h: 'Participate', links: [['Dashboard', '/dashboard'], ['Refund Policy', '/refund-policy'], ['Community', '#community'], CONTRACT_PUBLISHED ? ['Basescan Contract', SITE.basescanUrl] : ['Contract — published after audit', '/whitepaper']] },
             { h: 'Legal', links: [['Terms of Use', '/terms'], ['PreSale Terms', '/presale-terms'], ['Privacy Policy', '/privacy'], ['Risk Disclosure', '/risk-disclosure']] },
           ].map((col) => (

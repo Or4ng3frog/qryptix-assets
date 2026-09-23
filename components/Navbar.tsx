@@ -8,9 +8,9 @@ import { Logo } from './Logo';
 const NAV = [
   { label: 'PreSale', href: '#presale' },
   { label: 'Tokenomics', href: '#tokenomics' },
+  { label: 'Games', href: '#games' },
   { label: 'Roadmap', href: '#roadmap' },
   { label: 'Refund', href: '#refund' },
-  { label: 'Community', href: '#community' },
 ];
 
 export function Navbar() {

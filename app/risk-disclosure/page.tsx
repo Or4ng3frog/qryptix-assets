@@ -29,7 +29,8 @@ export default function RiskDisclosurePage() {
       <P>
         Nothing on {SITE.domain} or in any related material constitutes a promise or guarantee of value, profit,
         listing, liquidity, or rewards. The hardware and reward layer described in our materials is planned but not
-        guaranteed and may be delayed, scaled down, or cancelled.
+        guaranteed and may be delayed, scaled down, or cancelled. The proposed cosmetic web store has no
+        confirmed game integration and may never become available.
       </P>
 
       <H2>4. Total loss</H2>
