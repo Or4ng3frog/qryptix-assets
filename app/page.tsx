@@ -3,6 +3,7 @@ import { Hero } from '@/components/sections/Hero';
 import { TrustStrip } from '@/components/sections/TrustStrip';
 import { PresaleSection } from '@/components/sections/PresaleSection';
 import { Features } from '@/components/sections/Features';
+import { GameUtility } from '@/components/sections/GameUtility';
 import { NetworkSection } from '@/components/sections/NetworkSection';
 import { Tokenomics } from '@/components/sections/Tokenomics';
 import { Roadmap } from '@/components/sections/Roadmap';
@@ -22,6 +23,7 @@ export default function Home() {
         <TrustStrip />
         <PresaleSection />
         <Features />
+        <GameUtility />
         <NetworkSection />
         <Miners />
         <Tokenomics />

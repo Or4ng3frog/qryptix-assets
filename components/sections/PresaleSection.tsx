@@ -25,6 +25,7 @@ export function PresaleSection() {
     'Tokens are not claimable until launch / TGE',
     'Participation is speculative',
     'No guaranteed listing, liquidity, value increase or rewards',
+    'The cosmetic game store and game integrations are planned, not available',
     'Refund option applies only under the published Refund Policy',
   ];
 

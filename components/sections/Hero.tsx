@@ -9,7 +9,7 @@ import { PurchaseWidget } from './PurchaseWidget';
 import { Icon } from '../Icon';
 
 const STATS = [
-  { label: 'Total Supply', value: '1B QTX', icon: 'boxes' },
+  { label: 'Planned Supply', value: '1B QTX', icon: 'boxes' },
   { label: 'Network', value: 'Base · L2', icon: 'cpu' },
   { label: 'Planned LP Lock', value: '12 months', icon: 'lock' },
 ];
@@ -54,9 +54,9 @@ export function Hero() {
 
           <StaggerItem>
             <p className="font-grotesk text-lg text-ash max-w-lg mb-9 leading-relaxed">
-              QTX is planned as a multi-utility token on Base with a proposed hardware rewards layer.
-              Planned fixed 1B supply, a published vesting schedule and a proposed 12-month LP lock at TGE —
-              built and operated by a single doxxed founder.
+              QTX is planned for rewards from verified hardware contributions and future cosmetic purchases
+              in participating games. The 1B supply would be fixed: miner rewards would come from a reserved
+              allocation. The hardware, game store and integrations are still in development.
             </p>
           </StaggerItem>
 

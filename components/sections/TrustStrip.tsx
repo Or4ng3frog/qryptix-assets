@@ -4,11 +4,11 @@ import { Icon } from '../Icon';
 
 const TRUST = [
   { icon: 'boxes', t1: 'Base Network', t2: 'Ethereum L2' },
-  { icon: 'shield', t1: 'Fixed Supply', t2: '1B QTX, on-chain' },
-  { icon: 'lock', t1: 'Vesting', t2: 'Transparent schedule' },
-  { icon: 'check', t1: 'Refund Policy', t2: 'Clear & published' },
+  { icon: 'shield', t1: 'Planned Supply', t2: '1B QTX, no new minting' },
+  { icon: 'lock', t1: 'Vesting', t2: 'Proposed schedule' },
+  { icon: 'check', t1: 'Refund Policy', t2: 'Draft under review' },
   { icon: 'linkedin', t1: 'Founder Doxxed', t2: 'Public on LinkedIn' },
-  { icon: 'doc', t1: 'Transparent PreSale', t2: 'Honest disclosure' },
+  { icon: 'gamepad', t1: 'Game Store', t2: 'Cosmetics concept' },
 ];
 
 export function TrustStrip() {

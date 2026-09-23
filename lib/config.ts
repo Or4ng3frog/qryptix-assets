@@ -26,9 +26,9 @@ export const PURCHASE_PARAMS = {
 export const SITE = {
   name: 'Qryptix',
   ticker: 'QTX',
-  tagline: 'A practical multi-utility token on Base.',
+  tagline: 'Planned rewards for hardware contribution and spending in games.',
   description:
-    'QTX is a planned ERC-20 token on Base with a proposed hardware rewards layer, fixed 1B supply and a published vesting plan. Built by a solo founder.',
+    'QTX is a planned token on Base: a fixed 1B supply, proposed rewards for verified hardware contributions and a future web store for cosmetic items in participating games. No game integration or store is live.',
   domain: 'qryptix.io',
   email: 'dennis@qryptix.io',
   // TODO: replace with real verified contract address
@@ -103,11 +103,11 @@ export type Feature = {
 
 export const WHY_FEATURES: Feature[] = [
   { icon: 'zap', title: 'Base L2 Speed', desc: "Built on Coinbase's Base. Sub-second confirmations, fees in fractions of a cent, full EVM compatibility." },
-  { icon: 'cpu', title: 'Hardware Program', desc: 'QTX rewards are designed to track verified contributions from future Qryptix Miners. Hardware prototypes still require validation.' },
+  { icon: 'cpu', title: 'Hardware Program', desc: 'Future Qryptix Miners would earn QTX from the allocated 30% reward pool for verified contributions. They would not mint new QTX. Prototypes still require validation.' },
   { icon: 'gauge', title: 'Capped Emissions', desc: 'Degressive reward schedule with quarterly caps. Designed to prevent runaway inflation and protect long-term holders.' },
   { icon: 'lock', title: 'Planned LP Lock', desc: 'Initial liquidity is intended to be locked for 12 months at TGE. Team vesting is planned over 36 months after a 12-month cliff.' },
   { icon: 'shield', title: 'Planned Multisig', desc: 'A multisig treasury is required before purchases open. Quarterly transparency reports are planned.' },
-  { icon: 'boxes', title: 'EVM Compatible', desc: 'Standard ERC-20 on Base. Works with MetaMask, Coinbase Wallet, and the broader Ethereum ecosystem.' },
+  { icon: 'gamepad', title: 'Planned Game Store', desc: 'The proposed web store would let players spend QTX on cosmetics in participating games. No store or game integration is available yet.' },
 ];
 
 export type Miner = {
@@ -127,7 +127,7 @@ export const DEPIN = {
   pillars: [
     { icon: 'cpu', title: 'Distributed miners', desc: 'Independent hardware operation is planned; no public fleet is running yet.' },
     { icon: 'gauge', title: 'Verifiable work', desc: 'On-chain contribution verification is part of the proposed design.' },
-    { icon: 'boxes', title: 'Rewards routed on-chain', desc: '30% of fixed supply earmarked for the ecosystem & miner rewards layer.' },
+    { icon: 'boxes', title: 'Rewards from a fixed pool', desc: '30% of the proposed fixed supply is earmarked for miner rewards; verified contributions would distribute existing QTX.' },
     { icon: 'shield', title: 'Capped & degressive', desc: 'Emissions taper ~15% YoY with quarterly caps — sustainable by design.' },
   ],
   // Real protocol parameters (fixed by design), labelled as such — not a live feed.
@@ -170,6 +170,8 @@ export const FAQS: FaqItem[] = [
   { q: 'Who is behind Qryptix?', a: 'Dennis Klahn, independent developer based in Germany. Qryptix is currently a solo-founder project; the final operating entity and jurisdiction have not been published. LinkedIn and GitHub are linked in the Founder section.' },
   { q: 'Is the smart contract audited?', a: 'No independent audit report is linked here. Purchases will remain disabled until an independent audit has been completed, findings addressed and the report published.' },
   { q: 'How will I buy QTX?', a: 'When purchases open, connect a self-custody wallet on Base, enter your USDC amount, review the terms and approve the transfer. The server checks the confirmed on-chain payment before recording QTX in your dashboard. Claim begins at TGE.' },
+  { q: 'What could I use QTX for?', a: 'The proposed gaming use is a separate web store where players could spend QTX on cosmetic items for participating games. This requires an operational store, agreements with game developers, account delivery and review of applicable platform rules. No games or items are available yet.' },
+  { q: 'Do miners create new QTX?', a: 'No. The planned supply is fixed at 1 billion QTX, with no additional minting. A proposed 30% allocation would be distributed as rewards for verified hardware contributions if the miner program is implemented.' },
   { q: 'When will tokens be claimable?', a: 'The current target for TGE is Q2 2027, conditional on the audit, legal setup and claim contract. The planned schedule is 10% at TGE and 90% vesting linearly over 8 months. Final claim terms and dates must be confirmed before purchases open.' },
   { q: 'What if the project fails or is delayed?', a: 'No payment is accepted while the sale is closed. Once purchases open, refund eligibility is governed by the published Refund Policy. QTX is speculative and could lose all value.' },
   { q: 'Where will Qryptix operate?', a: 'The final operating entity, jurisdiction and participant eligibility will be published before purchases open. Access may be restricted depending on applicable law.' },
@@ -249,6 +251,7 @@ export const RISKS = [
   'No guarantee of liquidity',
   'No guaranteed rewards',
   'The hardware / reward layer is planned but not guaranteed',
+  'The game store and game integrations are planned but not guaranteed',
   'Regulatory restrictions may apply depending on your country',
   'You are solely responsible for determining whether you may participate',
 ] as const;

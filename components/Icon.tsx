@@ -3,6 +3,7 @@ import React from 'react';
 const paths: Record<string, React.ReactNode> = {
   zap: <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />,
   cpu: <><rect x="6" y="6" width="12" height="12" rx="1" /><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2M9 9h6v6H9z" /></>,
+  gamepad: <><path d="M6 8h12a4 4 0 0 1 3.9 3.1l1 5a2 2 0 0 1-3.2 2l-2.5-2H6.8l-2.5 2a2 2 0 0 1-3.2-2l1-5A4 4 0 0 1 6 8z" /><path d="M7 11v4m-2-2h4m7-1h.01M19 14h.01" /></>,
   gauge: <><path d="M12 14l4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></>,
   lock: <><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></>,
   shield: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />,
