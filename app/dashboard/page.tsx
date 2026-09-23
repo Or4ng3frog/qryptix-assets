@@ -1,5 +1,6 @@
 import { getDashboardData } from '@/lib/dashboard-data';
 import { PHASES, SITE } from '@/lib/config';
+import { PURCHASE_READY } from '@/lib/chains';
 import { PageTitle, StatCard, Card, fmtQtx, fmtMoney, shortAddr } from '@/components/dashboard-ui';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Icon } from '@/components/Icon';
@@ -30,7 +31,7 @@ export default async function DashboardOverview() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard label="Purchased QTX" value={fmtQtx(totalQtx)} sub="Confirmed only" />
         <StatCard label="Total paid" value={`$${totalPaidUsd.toLocaleString()}`} sub="USD-equivalent" />
-        <StatCard label="Current stage" value={activeStage.id} sub={`$${activeStage.price.toFixed(3)} / QTX`} />
+        <StatCard label={PURCHASE_READY ? 'Current stage' : 'Planned stage'} value={activeStage.id} sub={`$${activeStage.price.toFixed(3)} / QTX`} />
         <StatCard label="Claim status" value="Locked" sub="Until TGE" />
       </div>
 
@@ -68,19 +69,16 @@ export default async function DashboardOverview() {
         <Card>
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-medium text-ivory flex items-center gap-2">
-              <Icon name="shield" size={16} className="text-gold" /> Refund eligibility
+              <Icon name="shield" size={16} className="text-gold" /> Refund requests
             </span>
             <a href="/dashboard/refund" className="text-xs text-ash hover:text-ivory cursor-pointer">Details →</a>
           </div>
           {hasRefund ? (
             <StatusBadge status={refunds[0].status} />
           ) : (
-            <div className="text-sm text-ash">
-              Eligible to request under the{' '}
-              <a href="/refund-policy" className="text-gold hover:underline cursor-pointer">Refund Policy</a>
-            </div>
+            <div className="text-sm text-ash">{totalPaidUsd > 0 ? 'Requests assessed under the Refund Policy' : 'No confirmed purchases to request a refund for'}</div>
           )}
-          <div className="text-xs text-taupe mt-2">Refunds possible only up to Token Claim / TGE</div>
+          <div className="text-xs text-taupe mt-2">Requests are assessed under the final Refund Policy</div>
         </Card>
       </div>
 

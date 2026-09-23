@@ -143,7 +143,8 @@ export async function POST(req: NextRequest) {
     phase: PURCHASE_PARAMS.phaseCode,
     price_usd: PURCHASE_PARAMS.priceUsd,
     status: 'confirmed',
-    refund_eligible: true,
+    // Eligibility requires a case-by-case assessment under the final policy.
+    refund_eligible: false,
     confirmed_at: new Date().toISOString(),
   });
   if (error) {

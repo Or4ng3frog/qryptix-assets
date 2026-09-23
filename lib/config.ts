@@ -42,10 +42,7 @@ export const SITE = {
 } as const;
 
 export const SOCIALS = {
-  twitter: '#', // TODO
-  telegram: '#', // TODO
-  discord: '#', // TODO
-  github: 'https://github.com/Or4ng3frog',
+  github: 'https://github.com/Or4ng3frog/qryptix-assets',
   linkedin: 'https://www.linkedin.com/in/dennis-klahn-63022a204/',
 } as const;
 
@@ -92,7 +89,7 @@ export const ALLOCATIONS: Allocation[] = [
   { name: 'Treasury / Grants', pct: 16, desc: '3-month cliff · 24-month linear · multisig-controlled', color: '#E3B341' },
   { name: 'Presale (P1–P5)', pct: 12, desc: '10% TGE · 90% linear over 8 months', color: '#D4A24A' },
   { name: 'Staking Rewards', pct: 12, desc: 'Up to 36 months · ~10% quarterly degressive', color: '#C28F3C' },
-  { name: 'Liquidity & Market-Making', pct: 10, desc: 'Initial DEX liquidity · LP locked 12 months', color: '#A87B2E' },
+  { name: 'Liquidity & Market-Making', pct: 10, desc: 'Initial DEX liquidity · 12-month LP lock planned', color: '#A87B2E' },
   { name: 'Team', pct: 10, desc: '12-month cliff · 36-month linear vest', color: '#8A6A2B' },
   { name: 'Unallocated Reserve', pct: 6, desc: 'Multisig-controlled · future governance', color: '#6E5A2E' },
   { name: 'Advisors + Community', pct: 4, desc: 'Advisors: 6m cliff · Community: 25% TGE · 6m linear', color: '#51493A' },
@@ -170,12 +167,12 @@ export type FaqItem = { q: string; a: string };
 
 export const FAQS: FaqItem[] = [
   { q: 'Can I buy QTX today?', a: 'Not yet. Qryptix will use direct purchases with USDC on Base. The purchase flow remains disabled until the audit, operating entity, treasury and legal requirements are complete. No payment or allocation is accepted before then.' },
-  { q: 'Who is behind Qryptix?', a: 'Dennis Klahn, independent developer based in Bremen, Germany. Solo founder, fully doxxed. LinkedIn and GitHub are linked in the Founder section. No fake team, no anonymous advisors. Operations move to a Dubai-based entity once setup is complete.' },
+  { q: 'Who is behind Qryptix?', a: 'Dennis Klahn, independent developer based in Germany. Qryptix is currently a solo-founder project; the final operating entity and jurisdiction have not been published. LinkedIn and GitHub are linked in the Founder section.' },
   { q: 'Is the smart contract audited?', a: 'No independent audit report is linked here. Purchases will remain disabled until an independent audit has been completed, findings addressed and the report published.' },
   { q: 'How will I buy QTX?', a: 'When purchases open, connect a self-custody wallet on Base, enter your USDC amount, review the terms and approve the transfer. The server checks the confirmed on-chain payment before recording QTX in your dashboard. Claim begins at TGE.' },
   { q: 'When will tokens be claimable?', a: 'The current target for TGE is Q1 2027, conditional on the audit, legal setup and claim contract. The planned schedule is 10% at TGE and 90% vesting linearly over 8 months. Final claim terms and dates must be confirmed before purchases open.' },
   { q: 'What if the project fails or is delayed?', a: 'No payment is accepted while the sale is closed. Once purchases open, refund eligibility is governed by the published Refund Policy. QTX is speculative and could lose all value.' },
-  { q: 'Why Dubai?', a: 'Dubai (via VARA — Virtual Assets Regulatory Authority) offers a clear regulatory framework well-suited to projects of this scale. The choice is operational — Qryptix itself remains a global, permissionless project once launched on Base.' },
+  { q: 'Where will Qryptix operate?', a: 'The final operating entity, jurisdiction and participant eligibility will be published before purchases open. Access may be restricted depending on applicable law.' },
   { q: 'Do I need to do KYC?', a: "KYC requirements at purchase time depend on jurisdiction and entity setup. We'll publish exact requirements before purchases open. You are responsible for complying with your local regulations." },
 ];
 
@@ -206,7 +203,7 @@ export const PURCHASE_ACKS = [
 // ============================================================
 
 export const REFUND_ELIGIBLE = [
-  'Qryptix is not launch-ready by the defined target date',
+  'Any binding launch deadline stated in the final purchase terms is missed',
   'No viable token launch is carried out',
   'No functional claim / distribution system is provided',
   'The project is officially discontinued',
@@ -218,12 +215,11 @@ export const REFUND_NOT_ELIGIBLE = [
   'The market price later falls',
   'The token does not rise after launch',
   'Exchange listings take longer than hoped',
-  'Roadmap items are adjusted',
   'General market risks materialise',
 ] as const;
 
 export const REFUND_RULES = [
-  'Refunds are only possible up to Token Claim / TGE — not after tokens are distributed',
+  'Requests are assessed under the final Refund Policy; no automatic refund after tokens are claimed or distributed',
   'Network / gas fees are generally not refundable',
   'Refund currency matches the original payment currency where possible',
   'Refund requests are submitted and tracked through the Dashboard',
@@ -262,10 +258,10 @@ export const RISKS = [
 // ============================================================
 
 export const COMMUNITY = {
-  intro: 'Community-first, with transparent updates. No hype, no inflated promises — just regular, honest progress reports from the founder.',
+  intro: 'Follow the public project repository or contact the founder directly. Community channels will be linked when they exist.',
   channels: [
-    { name: 'Telegram', desc: 'Announcements & early-supporter chat', icon: 'telegram', href: SOCIALS.telegram, cta: 'Join Telegram' },
-    { name: 'Discord', desc: 'Deeper discussion, dev updates, Q&A', icon: 'discord', href: SOCIALS.discord, cta: 'Join Discord' },
+    { name: 'GitHub', desc: 'Public project repository and code history', icon: 'github', href: SOCIALS.github, cta: 'View repository' },
+    { name: 'LinkedIn', desc: 'Founder profile and direct contact', icon: 'linkedin', href: SOCIALS.linkedin, cta: 'View profile' },
   ],
 } as const;
 

@@ -112,7 +112,7 @@ export function NetworkSection() {
           </div>
           <p className="mt-6 pt-5 border-t border-white/[0.06] text-center text-xs text-taupe font-grotesk inline-flex items-center justify-center gap-1.5 w-full">
             <Icon name="alert" size={13} className="text-taupe shrink-0" />
-            Protocol parameters fixed by design — illustrative of intended economics, not live network data.
+            Proposed protocol parameters — illustrative of intended economics, not live network data.
           </p>
         </div>
       </Reveal>

@@ -11,7 +11,7 @@ export default function RiskDisclosurePage() {
   return (
     <LegalLayout
       title="Risk Disclosure"
-      updated="May 2026"
+      updated="23 September 2026 (draft)"
       intro="Please read this disclosure carefully before participating in the Qryptix PreSale. Participation is entirely voluntary and carries substantial risk, including the risk of losing all funds you contribute."
     >
       <H2>1. Summary of risks</H2>
@@ -48,10 +48,9 @@ export default function RiskDisclosurePage() {
 
       <H2>6. Regulatory risk</H2>
       <P>
-        The regulatory treatment of crypto-assets varies by country and is evolving. Participation may be
-        restricted or prohibited in your jurisdiction, including the European Union under MiCAR, the United States
-        under securities laws, the United Kingdom under FCA rules, and others. You are solely responsible for
-        determining whether you are legally permitted to participate.
+        The regulatory treatment of crypto-assets varies by country and may affect whether an offer can be made
+        or a person can participate. Eligibility rules and any restrictions must be published before purchases
+        open. Seek qualified advice about the rules applicable to you.
       </P>
 
       <H2>7. Not financial advice</H2>

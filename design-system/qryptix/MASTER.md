@@ -7,6 +7,8 @@
 **Direction:** Premium Dark Luxe · cinematic · editorial
 **Authored:** 2026-06-01 (hand-authored; supersedes auto-generated seed)
 
+**Content status:** Visual design reference only. Current product copy, purchase state and roadmap are defined in `lib/config.ts`, `app/whitepaper/page.tsx` and `docs/PURCHASE-FLOW.md`.
+
 > NOTE: The `search.py --design-system` generator mis-matched this project twice
 > (gold/purple, then light-mode Liquid Glass). This file is the source of truth.
 > Treat generator output as inspiration only.
@@ -18,8 +20,7 @@
 A high-end, cinematic presale site that reads like a **luxury hardware brand**, not a
 meme coin. Near-black canvas, warm metallic gold as the single hero accent, editorial
 serif display type, and slow, weighty motion. Everything should feel deliberate,
-expensive, and trustworthy — reinforcing the honest-marketing framing (reservations,
-not investments; prominent risk disclosure).
+expensive, and trustworthy — reinforcing the prominent risk disclosure and the disabled purchase flow.
 
 **Feel:** Patek Philippe × a server-rack DePIN network. Restraint over flash.
 
@@ -118,7 +119,7 @@ Slow, eased, weighty. Motion should feel like heavy metal moving on bearings —
 
 Vertical cinematic scroll with two pinned "scenes." Sticky CTA in navbar.
 
-1. **Hero** — editorial headline + reservation widget (sealed logic core)
+1. **Hero** — editorial headline + disabled direct purchase widget
 2. **Trust strip** — doxxed founder, Base, LP lock, fixed supply (marquee or static)
 3. **The Network (DePIN)** — what the hardware layer is, network/topology visual *(new)*
 4. **Mining hardware showcase** — the rigs/miners, specs *(new — extends existing Miners)*
@@ -133,7 +134,7 @@ Vertical cinematic scroll with two pinned "scenes." Sticky CTA in navbar.
 
 > **Data integrity:** any "live" mining/network number that is not actually wired to a
 > real source MUST be labeled *illustrative / target*. Never imply live earnings. This
-> is a presale in reservation mode — honest-marketing rule overrides visual appeal.
+> is a direct presale with purchases disabled — honest-marketing rule overrides visual appeal.
 
 ---
 
@@ -193,7 +194,7 @@ box-shadow: 0 0 0 3px rgba(227,179,65,0.12);
 - [ ] No emojis as icons; consistent SVG/Lucide set
 - [ ] `cursor-pointer` on all clickable elements; visible focus rings
 - [ ] Hover transitions 150–300ms, no layout shift
-- [ ] Reservation/Web3 logic untouched; `BUY_FLOW_ENABLED` stays false
+- [ ] Purchase flow remains disabled until release preconditions are met
 - [ ] Any mining/network stat labeled illustrative unless truly wired
 - [ ] Responsive at 375 / 768 / 1024 / 1440; no horizontal scroll
 - [ ] `npm run build` green after each phase

@@ -11,7 +11,7 @@ export function RefundSection() {
       <SectionHeading
         tag="Refund Policy"
         title={<>Clear on refunds.</>}
-        subtitle="When direct purchases open and funds are accepted, the refund rules below will apply. This is a summary; the full Refund Policy governs."
+        subtitle="This is a summary of the draft refund rules. The final policy must be published before direct purchases open."
       />
 
       <div className="flex justify-center -mt-6 mb-10">

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { SUPABASE_CONFIGURED } from '@/lib/data';
 import type { Purchase, RefundRequest } from '@/lib/supabase/types';
 import { StatusBadge } from './StatusBadge';
 import { fmtQtx, fmtMoney } from './dashboard-ui';
@@ -36,11 +35,11 @@ export function RefundManager({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ purchase_id: selected, reason }),
       });
-      if (!res.ok && SUPABASE_CONFIGURED) {
+      if (!res.ok) {
         const j = await res.json().catch(() => ({}));
         throw new Error(j.error ?? 'Request failed');
       }
-      setMsg(SUPABASE_CONFIGURED ? 'Refund request submitted. Track its status below.' : 'Preview mode: request would be submitted in production.');
+      setMsg('Refund request submitted. Track its status below.');
       setLocalRefunds([
         {
           id: `tmp-${Date.now()}`,
@@ -74,7 +73,7 @@ export function RefundManager({
 
         {refundable.length === 0 ? (
           <p className="text-sm text-ash">
-            No confirmed purchases are currently eligible for a new refund request.
+            No confirmed purchases are currently available for a new refund request.
           </p>
         ) : (
           <>
@@ -114,9 +113,8 @@ export function RefundManager({
         {err && <p className="text-sm text-red-400 mt-3">{err}</p>}
 
         <p className="text-xs text-taupe mt-4 leading-relaxed">
-          Refunds are possible only under the published{' '}
-          <a href="/refund-policy" className="text-gold hover:underline">Refund Policy</a>, and only up to
-          Token Claim / TGE.
+          Requests are reviewed under the final{' '}
+          <a href="/refund-policy" className="text-gold hover:underline">Refund Policy</a>. A request is not an automatic refund.
         </p>
       </div>
 

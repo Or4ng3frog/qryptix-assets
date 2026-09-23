@@ -11,7 +11,7 @@ export default function PrivacyPage() {
   return (
     <LegalLayout
       title="Privacy Policy"
-      updated="May 2026"
+      updated="23 September 2026 (draft)"
       intro="This policy explains what data Qryptix collects, why, and how it is handled. We aim to collect only what is necessary to operate the PreSale and your account."
     >
       <H2>1. Data we collect</H2>

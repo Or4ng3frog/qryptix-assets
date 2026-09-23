@@ -11,8 +11,8 @@ export default function TermsPage() {
   return (
     <LegalLayout
       title="Terms of Use"
-      updated="May 2026"
-      intro={`These terms govern your use of ${SITE.domain} and your participation in the Qryptix PreSale. By using the site you agree to these terms.`}
+      updated="23 September 2026 (draft)"
+      intro={`Draft terms for use of ${SITE.domain} and any future Qryptix PreSale. Final terms must be published before purchases open.`}
     >
       <H2>1. Eligibility</H2>
       <P>
@@ -23,8 +23,8 @@ export default function TermsPage() {
 
       <H2>2. Nature of the PreSale</H2>
       <P>
-        Participation in the Qryptix PreSale is offered as early supporter participation, not as an investment
-        product. No promise of profit, value increase, listing, liquidity, or rewards is made. Tokens are not
+        Participation in the Qryptix PreSale is speculative and subject to the final eligibility and legal terms.
+        No promise of profit, value increase, listing, liquidity, or rewards is made. Tokens are not
         claimable until launch / TGE.
       </P>
 

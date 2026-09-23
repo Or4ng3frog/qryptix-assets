@@ -12,7 +12,7 @@ export default async function RefundPage() {
     <>
       <PageTitle
         title="Refund"
-        subtitle="Request and track refunds. Refunds are possible only under the published Refund Policy and only up to Token Claim / TGE."
+        subtitle="Request and track a policy review for confirmed purchases. Eligibility depends on the final Refund Policy."
       />
 
       {/* Policy summary */}

@@ -11,13 +11,13 @@ export default function PresaleTermsPage() {
   return (
     <LegalLayout
       title="PreSale Terms"
-      updated="May 2026"
-      intro="These terms apply specifically to participation in the Qryptix PreSale, in addition to the general Terms of Use, Risk Disclosure, and Refund Policy."
+      updated="23 September 2026 (draft)"
+      intro="Draft terms for any future Qryptix PreSale. Final participation terms, eligibility rules and related policies must be published before purchases open."
     >
       <H2>1. What you are participating in</H2>
       <P>
         The Qryptix PreSale offers early supporters the opportunity to participate ahead of the Token Generation
-        Event (TGE). Participation is described as early supporter participation and is not an investment product.
+        Event (TGE). Participation is speculative and subject to the final eligibility and legal terms.
         QTX tokens are not claimable until launch / TGE.
       </P>
 
@@ -45,9 +45,8 @@ export default function PresaleTermsPage() {
 
       <H2>5. Refunds</H2>
       <P>
-        Refunds are governed solely by the published Refund Policy. In summary, refunds may apply only if the
-        project cannot deliver a viable launch, and only up to the point of token claim / TGE. Please read the
-        Refund Policy in full.
+        Refund requests are assessed under the final published Refund Policy and applicable law. There is no
+        automatic refund after tokens have been claimed or distributed. Please read the Refund Policy in full.
       </P>
 
       <H2>6. No guarantees</H2>

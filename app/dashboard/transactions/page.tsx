@@ -18,8 +18,8 @@ export default async function TransactionsPage() {
       {purchases.length === 0 ? (
         <Card className="text-center py-12">
           <p className="text-ash">No transactions yet.</p>
-          <a href="/#presale" className="inline-block mt-4 rounded-full bg-gold-gradient px-6 py-3 text-sm font-semibold text-obsidian">
-            Join the PreSale
+          <a href="/buy" className="inline-block mt-4 rounded-full bg-gold-gradient px-6 py-3 text-sm font-semibold text-obsidian">
+            View purchase details
           </a>
         </Card>
       ) : (
@@ -52,8 +52,8 @@ export default async function TransactionsPage() {
                     </td>
                     <td className="px-4 py-3"><StatusBadge status={p.status} /></td>
                     <td className="px-4 py-3 whitespace-nowrap">
-                      {p.refund_eligible ? (
-                        <span className="text-[11px] rounded-md border border-gold/25 bg-gold/5 text-gold-bright px-2 py-0.5 uppercase tracking-wider font-semibold">Eligible</span>
+                      {p.status === 'confirmed' ? (
+                        <span className="text-[11px] rounded-md border border-gold/25 bg-gold/5 text-gold-bright px-2 py-0.5 uppercase tracking-wider font-semibold">Request review</span>
                       ) : (
                         <span className="text-taupe text-xs">—</span>
                       )}

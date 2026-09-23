@@ -35,7 +35,7 @@ app/
     page.tsx          → full 15-section whitepaper
   api/
     purchase/route.ts → on-chain verified USDC purchases
-    interest/route.ts → miner interest endpoint
+    refund/route.ts   → authenticated refund request for review
 
 components/
   Navbar.tsx
@@ -66,7 +66,7 @@ Everything content-related is centralized there:
   published + entity finalized + multisig live. When disabled, the site shows
   "PreSale opens soon" and accepts neither payments nor allocations.
 - `SITE` — contract address, Basescan URL, ticker, supply, TGE target
-- `SOCIALS` — Twitter / Telegram / Discord / GitHub / LinkedIn
+- `SOCIALS` — verified GitHub and LinkedIn links
 - `FOUNDER` — name, role, bio, photo path
 - `PHASES` — the 5 presale phases + prices
 - `ALLOCATIONS` — tokenomics breakdown (donut chart reads from here)
@@ -84,7 +84,7 @@ Everything content-related is centralized there:
 | 4 | Social URLs | `lib/config.ts` → `SOCIALS` |
 | 5 | Base Sepolia purchase test and reconciliation | `docs/PURCHASE-FLOW.md` |
 | 6 | Your own bio text | `lib/config.ts` → `FOUNDER.bio` |
-| 7 | Legal pages (Terms, Privacy, Cookie) | currently `#` placeholders in Footer |
+| 7 | Final legal review and eligibility rules | draft legal pages in `app/` |
 | 8 | Replace estimated whitepaper numbers | `app/whitepaper/page.tsx` |
 
 ---
@@ -119,7 +119,7 @@ and updating the `@font-face` URLs. JetBrains Mono loads from Google Fonts.
 ## Notes on the honest-marketing approach
 
 - Direct purchase only; no funds taken until audit + entity + treasury + legal review are ready.
-- Miners are "register interest", not purchase — no prepayment for unproduced hardware.
+- Miner tiers are indicative concepts; no registration, order or prepayment is available.
 - Roadmap is status-coded (done / now / planned) — no fake "completed" items.
 - Risk disclosure is prominent — builds trust with serious buyers.
 - Real phase-based scarcity (P1→P5 price ladder) instead of fake countdowns.

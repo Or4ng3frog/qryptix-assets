@@ -32,7 +32,7 @@ export function PresaleSection() {
     <section id="presale" className="mx-auto max-w-7xl px-6 py-20 sm:py-28 scroll-mt-24">
       <SectionHeading
         tag="PreSale · Early Supporter Participation"
-        title={<>Join the PreSale.</>}
+        title={<>Direct PreSale.</>}
         subtitle="Direct purchase with USDC on Base when the sale opens. Read the terms and risks before taking part."
       />
 
@@ -60,7 +60,7 @@ export function PresaleSection() {
           {/* Current price + next */}
           <div className="flex flex-wrap items-end justify-between gap-4 mb-7">
             <div>
-              <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1">Current stage price</div>
+              <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1">{PURCHASE_READY ? 'Current stage price' : 'Planned Stage 1 price'}</div>
               <div className="font-mono font-semibold text-4xl text-gold leading-none">
                 ${active.price.toFixed(3)}
               </div>

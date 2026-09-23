@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 
 export async function POST(req: NextRequest) {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    return NextResponse.json({ ok: true, preview: true });
+    return NextResponse.json({ error: 'Admin updates are unavailable in preview mode.' }, { status: 503 });
   }
 
   try {

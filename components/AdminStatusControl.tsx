@@ -17,20 +17,27 @@ export function AdminStatusControl({
   const [status, setStatus] = useState(current);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const options = type === 'purchase' ? PURCHASE_STATUSES : REFUND_STATUSES;
 
   const update = async (newStatus: string) => {
+    const previousStatus = status;
     setStatus(newStatus);
     setSaving(true);
     setSaved(false);
+    setError(null);
     try {
-      await fetch('/api/admin', {
+      const res = await fetch('/api/admin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type, id, status: newStatus }),
       });
+      if (!res.ok) throw new Error('Status could not be saved.');
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
+    } catch {
+      setStatus(previousStatus);
+      setError('Save failed');
     } finally {
       setSaving(false);
     }
@@ -49,6 +56,7 @@ export function AdminStatusControl({
         ))}
       </select>
       {saved && <span className="text-xs text-emerald-400">✓</span>}
+      {error && <span className="text-xs text-red-400">{error}</span>}
     </div>
   );
 }

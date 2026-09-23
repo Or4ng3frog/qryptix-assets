@@ -59,9 +59,9 @@ function MinerCard({ m, rank }: { m: (typeof MINERS)[number]; rank: number }) {
           <SpecRow label="Hashrate" value={m.hashrate} />
           <SpecRow label="Power draw" value={m.power} />
           <SpecRow label="Indicative" value={m.price} accent />
-          <button className="mt-4 w-full rounded-xl border border-gold/25 py-2.5 text-sm font-grotesk text-ivory transition-all hover:border-gold/60 hover:bg-gold/5 cursor-pointer">
-            Register interest
-          </button>
+          <span className="mt-4 block text-center rounded-xl border border-gold/25 py-2.5 text-sm font-grotesk text-ash">
+            Concept · not available to order
+          </span>
         </div>
       </GlowCard>
     </StaggerItem>
@@ -108,7 +108,7 @@ export function Miners() {
       </Stagger>
       <p className="text-center text-sm text-ash mt-8 max-w-2xl mx-auto">
         All specifications are <strong className="text-ivory">indicative</strong> and subject to change based on
-        final hardware validation. Interest registration is non-binding and does not constitute a purchase.
+        final hardware validation. No reservations or preorders are accepted.
       </p>
     </section>
   );
