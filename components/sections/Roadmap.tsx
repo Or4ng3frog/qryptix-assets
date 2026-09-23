@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView, useReducedMotion } from 'framer-motion';
-import { ROADMAP } from '@/lib/config';
+import { ROADMAP, ROADMAP_NOTE } from '@/lib/config';
 import { SectionHeading } from './SectionHeading';
 
 const STATUS_STYLE: Record<string, string> = {
@@ -74,7 +74,7 @@ export function Roadmap() {
       <SectionHeading
         tag="Roadmap"
         title={<>Where we are. Where we&apos;re going.</>}
-        subtitle="Color-coded honestly: green = done & verifiable, gold = currently active, gray = planned. No vague filler."
+        subtitle={ROADMAP_NOTE}
       />
       <div ref={ref} className="relative">
         {/* Rail track */}

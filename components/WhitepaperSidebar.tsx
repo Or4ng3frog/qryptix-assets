@@ -26,14 +26,14 @@ export function WhitepaperSidebar() {
     <aside className="hidden lg:block sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pr-6 border-r border-gold/10">
       <div className="glass-luxe rounded-2xl p-4 mb-7 text-xs space-y-2">
         {[
-          ['Version', '1.3'],
-          ['Status', 'Active'],
-          ['Last update', 'May 2026'],
+          ['Based on', 'v1.3 · May 2026'],
+          ['Status', 'Draft revision'],
+          ['Content review', 'September 2026'],
           ['Network', 'Base · L2'],
         ].map(([k, v]) => (
           <div key={k} className="flex justify-between">
             <span className="text-taupe">{k}</span>
-            <span className={`font-medium ${v === 'Active' ? 'text-emerald-400' : 'text-ivory'}`}>{v}</span>
+            <span className="font-medium text-ivory">{v}</span>
           </div>
         ))}
       </div>

@@ -11,7 +11,7 @@ import { Icon } from '../Icon';
 const STATS = [
   { label: 'Total Supply', value: '1B QTX', icon: 'boxes' },
   { label: 'Network', value: 'Base · L2', icon: 'cpu' },
-  { label: 'LP Lock', value: '12 months', icon: 'lock' },
+  { label: 'Planned LP Lock', value: '12 months', icon: 'lock' },
 ];
 
 export function Hero() {
@@ -41,7 +41,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
             </span>
-            {PURCHASE_READY ? 'Phase 1 purchase open' : 'PreSale opens soon'} · Launch {SITE.tgeTarget}
+            {PURCHASE_READY ? 'Phase 1 purchase open' : 'PreSale opens soon'} · TGE target {SITE.tgeTarget}
           </StaggerItem>
 
           <StaggerItem>
@@ -55,7 +55,7 @@ export function Hero() {
           <StaggerItem>
             <p className="font-grotesk text-lg text-ash max-w-lg mb-9 leading-relaxed">
               QTX is a multi-utility token on Base with a hardware-backed rewards layer.
-              Fixed 1B supply, a published vesting schedule, LP locked 12 months at TGE —
+              Planned fixed 1B supply, a published vesting schedule and a proposed 12-month LP lock at TGE —
               built and operated by a single doxxed founder.
             </p>
           </StaggerItem>

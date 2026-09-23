@@ -74,7 +74,7 @@ export function Miners() {
       <SectionHeading
         tag="Hardware · Miner Fleet"
         title={<>Qryptix Miners.</>}
-        subtitle="The miner program is in manufacturer-selection phase. No purchases today. Register interest to be notified when the first batch opens — pricing and specs may change."
+        subtitle="The miner designs are concepts. Prototype validation and manufacturing plans are required before a shipping date can be confirmed. No purchases today; pricing and specs may change."
       />
 
       {/* Family design study — one design DNA across all four tiers */}
