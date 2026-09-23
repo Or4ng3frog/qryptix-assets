@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
 export async function POST(req: NextRequest) {
-  // Preview mode — no Supabase
+  // Preview mode — never claim a request was saved.
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    return NextResponse.json({ ok: true, preview: true });
+    return NextResponse.json({ error: 'Refund requests are unavailable in preview mode.' }, { status: 503 });
   }
 
   try {
@@ -20,11 +20,13 @@ export async function POST(req: NextRequest) {
     // Verify the purchase belongs to this user and is confirmed
     const { data: purchase } = await supabase
       .from('purchases')
-      .select('id, status, user_id')
+      .select('id, status, user_id, email')
       .eq('id', purchase_id)
       .single();
 
-    if (!purchase || purchase.user_id !== user.id) {
+    const verifiedEmailMatch = !!user.email_confirmed_at && !!user.email &&
+      purchase?.email?.toLowerCase() === user.email.toLowerCase();
+    if (!purchase || (purchase.user_id !== user.id && !verifiedEmailMatch)) {
       return NextResponse.json({ error: 'Purchase not found' }, { status: 404 });
     }
     if (purchase.status !== 'confirmed') {

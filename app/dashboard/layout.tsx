@@ -16,8 +16,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
           </a>
           <div className="flex items-center gap-3">
             {preview && (
-              <span className="hidden sm:inline rounded-full border border-amber-400/25 bg-amber-400/[0.06] px-3 py-1 text-[11px] text-amber-200/80">
-                Preview mode
+              <span className="inline rounded-full border border-amber-400/25 bg-amber-400/[0.06] px-3 py-1 text-[11px] text-amber-200/80">
+                Preview · no account data
               </span>
             )}
             <a href="/" className="text-sm font-grotesk text-ash hover:text-ivory transition-colors cursor-pointer">← Home</a>

@@ -19,9 +19,9 @@ export function WalletConnect({ initialAddress }: { initialAddress?: string }) {
       setErr('That doesn’t look like a valid EVM address.');
       return;
     }
-    setAddress(addr);
     if (!SUPABASE_CONFIGURED) {
-      setMsg('Preview mode: wallet would be saved to your account in production.');
+      setAddress(addr);
+      setMsg('Preview only: this wallet address is not saved.');
       return;
     }
     setLoading(true);
@@ -34,6 +34,7 @@ export function WalletConnect({ initialAddress }: { initialAddress?: string }) {
         { onConflict: 'user_id,address' }
       );
       if (error) throw error;
+      setAddress(addr);
       setMsg('Wallet linked.');
     } catch (e: any) {
       setErr(e.message ?? 'Could not save wallet.');
@@ -67,7 +68,7 @@ export function WalletConnect({ initialAddress }: { initialAddress?: string }) {
       {address ? (
         <div className="rounded-xl bg-obsidian/40 border border-white/5 px-4 py-3 mb-4 flex items-center justify-between">
           <span className="font-mono text-sm text-ivory">{shortAddr(address)}</span>
-          <span className="text-[11px] rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 uppercase tracking-wider font-semibold">Linked</span>
+          <span className="text-[11px] rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 uppercase tracking-wider font-semibold">{SUPABASE_CONFIGURED ? 'Linked' : 'Preview only'}</span>
         </div>
       ) : (
         <p className="text-sm text-ash mb-4">

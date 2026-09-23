@@ -60,7 +60,7 @@ export function WhitepaperCTA() {
         </div>
         <div className="relative z-10">
           <div className="text-xs font-grotesk font-semibold uppercase tracking-eyebrow text-gold mb-4">Documentation</div>
-          <h2 className="font-serif font-semibold text-display text-ivory mb-4">Whitepaper v1.3</h2>
+          <h2 className="font-serif font-semibold text-display text-ivory mb-4">Whitepaper draft revision</h2>
           <p className="font-grotesk text-ash text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
             The full technical and economic spec — tokenomics, vesting, smart-contract architecture, the miner
             program, security posture, and complete risk disclosure.

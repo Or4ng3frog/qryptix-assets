@@ -2,10 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import {
   SUPABASE_CONFIGURED,
   MOCK_PROFILE,
-  MOCK_WALLET,
-  MOCK_PURCHASES,
   MOCK_ALLOCATION,
-  MOCK_REFUNDS,
 } from '@/lib/data';
 import type { Profile, Wallet, Purchase, RefundRequest, TokenAllocation } from '@/lib/supabase/types';
 
@@ -23,10 +20,10 @@ export async function getDashboardData(): Promise<DashboardData | null> {
   if (!SUPABASE_CONFIGURED) {
     return {
       profile: MOCK_PROFILE,
-      wallets: [MOCK_WALLET],
-      purchases: MOCK_PURCHASES,
-      allocation: MOCK_ALLOCATION,
-      refunds: MOCK_REFUNDS,
+      wallets: [],
+      purchases: [],
+      allocation: { ...MOCK_ALLOCATION, total_qtx: 0, unlocked_at_tge: 0, locked_qtx: 0 },
+      refunds: [],
       preview: true,
     };
   }
@@ -41,19 +38,32 @@ export async function getDashboardData(): Promise<DashboardData | null> {
     ? `user_id.eq.${user.id},email.eq.${user.email.toLowerCase()}`
     : `user_id.eq.${user.id}`;
 
-  const [profileRes, walletsRes, purchasesRes, allocRes, refundsRes] = await Promise.all([
+  const [profileRes, walletsRes, purchasesRes, refundsRes] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', user.id).single(),
     supabase.from('wallets').select('*').eq('user_id', user.id).order('is_primary', { ascending: false }),
     supabase.from('purchases').select('*').or(purchaseFilter).order('created_at', { ascending: false }),
-    supabase.from('token_allocations').select('*').eq('user_id', user.id).single(),
     supabase.from('refund_requests').select('*').eq('user_id', user.id).order('requested_at', { ascending: false }),
   ]);
+
+  // The purchase endpoint records verified purchases but does not update
+  // token_allocations. Derive this preview of proposed vesting from the same
+  // confirmed purchases shown elsewhere in the dashboard.
+  const confirmedQtx = (purchasesRes.data ?? [])
+    .filter((purchase) => purchase.status === 'confirmed')
+    .reduce((sum, purchase) => sum + Number(purchase.qtx_amount || 0), 0);
+  const allocation = {
+    ...MOCK_ALLOCATION,
+    user_id: user.id,
+    total_qtx: confirmedQtx,
+    unlocked_at_tge: confirmedQtx * 0.1,
+    locked_qtx: confirmedQtx * 0.9,
+  };
 
   return {
     profile: profileRes.data ?? { ...MOCK_PROFILE, id: user.id, email: user.email ?? null },
     wallets: walletsRes.data ?? [],
     purchases: purchasesRes.data ?? [],
-    allocation: allocRes.data ?? { ...MOCK_ALLOCATION, user_id: user.id, total_qtx: 0, unlocked_at_tge: 0, locked_qtx: 0 },
+    allocation,
     refunds: refundsRes.data ?? [],
     preview: false,
   };

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { createClient } from '@/lib/supabase/server';
-import { SUPABASE_CONFIGURED, MOCK_PURCHASES, MOCK_REFUNDS } from '@/lib/data';
+import { SUPABASE_CONFIGURED } from '@/lib/data';
 import { AdminStatusControl } from '@/components/AdminStatusControl';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Icon } from '@/components/Icon';
@@ -13,13 +13,10 @@ export const metadata: Metadata = { title: 'Admin — Qryptix' };
 export default async function AdminPage() {
   let purchases: Purchase[] = [];
   let refunds: RefundRequest[] = [];
-  let allowed = true;
+  let allowed = false;
   let preview = !SUPABASE_CONFIGURED;
 
-  if (!SUPABASE_CONFIGURED) {
-    purchases = MOCK_PURCHASES;
-    refunds = MOCK_REFUNDS;
-  } else {
+  if (SUPABASE_CONFIGURED) {
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     const { data: profile } = await supabase.from('profiles').select('is_admin').eq('id', user?.id ?? '').single();
@@ -49,20 +46,20 @@ export default async function AdminPage() {
       <div className="mx-auto max-w-6xl px-6 py-8">
         {preview && (
           <div className="mb-6 rounded-xl border border-amber-400/20 bg-amber-400/[0.05] px-5 py-3 text-sm text-amber-200/80">
-            Preview mode — showing mock data. With Supabase configured, only users with <code className="text-amber-300">is_admin = true</code> can access this page.
+            Admin is unavailable until the database and authentication are configured. No example purchases are shown.
           </div>
         )}
 
         {!allowed ? (
           <div className="glass-luxe rounded-2xl p-10 text-center">
             <Icon name="shield" size={28} className="text-taupe mx-auto mb-3" />
-            <div className="font-serif font-medium text-ivory mb-1">Admin access required</div>
-            <p className="text-sm text-ash">Your account does not have admin privileges.</p>
+            <div className="font-serif font-medium text-ivory mb-1">{preview ? 'Admin unavailable' : 'Admin access required'}</div>
+            <p className="text-sm text-ash">{preview ? 'Configure Supabase to access purchase records.' : 'Your account does not have admin privileges.'}</p>
           </div>
         ) : (
           <>
-            <h1 className="font-serif font-semibold text-2xl mb-1">Admin preview</h1>
-            <p className="text-ash text-sm mb-7">Review participation and refund requests. Update status manually while the flow is verified by hand.</p>
+            <h1 className="font-serif font-semibold text-2xl mb-1">Admin</h1>
+            <p className="text-ash text-sm mb-7">Review verified purchases and refund requests. Refund decisions and payouts require manual review.</p>
 
             {/* Purchases */}
             <div className="glass-luxe rounded-2xl !p-0 overflow-hidden mb-6">

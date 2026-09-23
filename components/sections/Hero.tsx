@@ -4,13 +4,14 @@ import { Stagger, StaggerItem, motion } from '@/components/motion';
 import { QuantumField } from '@/components/motion/QuantumField';
 import { GlowCard } from '@/components/ui/GlowCard';
 import { SITE } from '@/lib/config';
-import { ReservationWidget } from './ReservationWidget';
+import { PURCHASE_READY } from '@/lib/chains';
+import { PurchaseWidget } from './PurchaseWidget';
 import { Icon } from '../Icon';
 
 const STATS = [
   { label: 'Total Supply', value: '1B QTX', icon: 'boxes' },
   { label: 'Network', value: 'Base · L2', icon: 'cpu' },
-  { label: 'LP Lock', value: '12 months', icon: 'lock' },
+  { label: 'Planned LP Lock', value: '12 months', icon: 'lock' },
 ];
 
 export function Hero() {
@@ -40,7 +41,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
             </span>
-            Phase 1 reservation open · Launch {SITE.tgeTarget}
+            {PURCHASE_READY ? 'Phase 1 purchase open' : 'PreSale opens soon'} · TGE target {SITE.tgeTarget}
           </StaggerItem>
 
           <StaggerItem>
@@ -53,8 +54,8 @@ export function Hero() {
 
           <StaggerItem>
             <p className="font-grotesk text-lg text-ash max-w-lg mb-9 leading-relaxed">
-              QTX is a multi-utility token on Base with a hardware-backed rewards layer.
-              Fixed 1B supply, a published vesting schedule, LP locked 12 months at TGE —
+              QTX is planned as a multi-utility token on Base with a proposed hardware rewards layer.
+              Planned fixed 1B supply, a published vesting schedule and a proposed 12-month LP lock at TGE —
               built and operated by a single doxxed founder.
             </p>
           </StaggerItem>
@@ -79,10 +80,10 @@ export function Hero() {
           <StaggerItem>
             <div className="flex flex-wrap gap-3">
               <a
-                href="#presale"
+                href="/buy"
                 className="group relative inline-flex items-center gap-2 rounded-full bg-gold-gradient px-7 py-3.5 font-grotesk font-semibold text-obsidian transition-[filter,box-shadow] duration-300 hover:brightness-105 hover:shadow-[0_12px_44px_-10px_rgba(227,179,65,0.6)] cursor-pointer"
               >
-                Join PreSale
+                {PURCHASE_READY ? 'Buy QTX' : 'View purchase details'}
                 <Icon name="arrow" size={18} className="transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
@@ -102,7 +103,7 @@ export function Hero() {
           </StaggerItem>
         </Stagger>
 
-        {/* Right: reservation widget with floating core glow behind */}
+        {/* Right: direct purchase entry with floating core glow behind */}
         <motion.div
           className="relative"
           initial={{ opacity: 0, scale: 0.96, y: 24 }}
@@ -114,7 +115,7 @@ export function Hero() {
             className="pointer-events-none absolute -inset-8 -z-10 rounded-[3rem] opacity-70"
             style={{ background: 'radial-gradient(circle at 50% 38%, rgba(227,179,65,0.18), transparent 70%)' }}
           />
-          <ReservationWidget />
+          <PurchaseWidget />
         </motion.div>
       </div>
     </section>

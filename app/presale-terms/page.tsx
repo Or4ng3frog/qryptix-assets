@@ -11,28 +11,28 @@ export default function PresaleTermsPage() {
   return (
     <LegalLayout
       title="PreSale Terms"
-      updated="May 2026"
-      intro="These terms apply specifically to participation in the Qryptix PreSale, in addition to the general Terms of Use, Risk Disclosure, and Refund Policy."
+      updated="23 September 2026 (draft)"
+      intro="Draft terms for any future Qryptix PreSale. Final participation terms, eligibility rules and related policies must be published before purchases open."
     >
       <H2>1. What you are participating in</H2>
       <P>
         The Qryptix PreSale offers early supporters the opportunity to participate ahead of the Token Generation
-        Event (TGE). Participation is described as early supporter participation and is not an investment product.
+        Event (TGE). Participation is speculative and subject to the final eligibility and legal terms.
         QTX tokens are not claimable until launch / TGE.
       </P>
 
       <H2>2. Pricing and stages</H2>
       <P>
-        The PreSale runs in sequential stages, each with a fixed price per QTX. When a stage&apos;s allocation is
-        filled, the next stage begins at a higher price. The price applicable to your participation is the price of
-        the stage active at the time your participation is recorded.
+        The PreSale plans sequential stages, each with a fixed price per QTX. The current purchase implementation
+        supports Stage 1 only. Later stages require a separate verified release. The price applicable to a purchase
+        is confirmed when the on-chain payment is recorded.
       </P>
 
       <H2>3. Limits and payment</H2>
       <UL items={[
         `Minimum participation: $${PRESALE.minBuyUsd} (USD-equivalent).`,
         `Maximum participation per wallet: $${PRESALE.maxBuyUsd.toLocaleString()} (USD-equivalent).`,
-        `Accepted currencies: ${PRESALE.currencies.join(', ')} on the Base network.`,
+        `Accepted currency: ${PRESALE.currencies.join(', ')} on the Base network.`,
         'You are responsible for sending payment from a wallet you control and for any network fees.',
       ]} />
 
@@ -45,9 +45,8 @@ export default function PresaleTermsPage() {
 
       <H2>5. Refunds</H2>
       <P>
-        Refunds are governed solely by the published Refund Policy. In summary, refunds may apply only if the
-        project cannot deliver a viable launch, and only up to the point of token claim / TGE. Please read the
-        Refund Policy in full.
+        Refund requests are assessed under the final published Refund Policy and applicable law. There is no
+        automatic refund after tokens have been claimed or distributed. Please read the Refund Policy in full.
       </P>
 
       <H2>6. No guarantees</H2>

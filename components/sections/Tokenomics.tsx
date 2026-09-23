@@ -161,8 +161,8 @@ function ReleaseTimeline() {
       </div>
 
       <p className="mt-5 pt-4 border-t border-white/[0.06] text-xs text-taupe font-grotesk">
-        Months from TGE (planned Q1 2027). Degressive bars fade to indicate a declining emission rate.
-        Schedules as published in Whitepaper v1.3 §6 — designed for on-chain enforcement at TGE.
+        Months from the targeted TGE (Q2 2027). Degressive bars illustrate a planned declining emission rate.
+        Schedules are proposals based on Whitepaper v1.3 §6; contract implementation and audit remain outstanding.
       </p>
     </div>
   );
@@ -265,12 +265,12 @@ export function Tokenomics() {
         tag="Tokenomics"
         title={
           <>
-            1B fixed supply.
+            1B planned supply.
             <br />
             <span className="text-gold">30% to mining rewards.</span>
           </>
         }
-        subtitle="Every allocation is fixed and published up front. Vesting and lock schedules are designed for on-chain enforcement — the audited contract will be linked here before any purchase opens."
+        subtitle="Proposed allocations and vesting schedules. The verified contracts and audit report must be published before purchases open."
       />
       <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-8 sm:gap-12 lg:items-start">
         {/* Sticky cinematic donut */}
@@ -281,7 +281,7 @@ export function Tokenomics() {
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <div className="text-[10px] uppercase tracking-eyebrow text-taupe">Total Supply</div>
                 <div className="font-serif font-semibold text-4xl sm:text-5xl text-gold mt-1">1B</div>
-                <div className="text-sm text-ash mt-1">QTX · Fixed</div>
+                <div className="text-sm text-ash mt-1">QTX · planned</div>
               </div>
             </div>
             {/* fixed-supply emphasis */}

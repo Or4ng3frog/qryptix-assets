@@ -28,7 +28,7 @@ export const SITE = {
   ticker: 'QTX',
   tagline: 'A practical multi-utility token on Base.',
   description:
-    'QTX is an ERC-20 token on Base with a hardware-backed rewards layer, fixed 1B supply, and a transparent, published vesting schedule. Built and operated by a single doxxed founder.',
+    'QTX is a planned ERC-20 token on Base with a proposed hardware rewards layer, fixed 1B supply and a published vesting plan. Built by a solo founder.',
   domain: 'qryptix.io',
   email: 'dennis@qryptix.io',
   // TODO: replace with real verified contract address
@@ -38,14 +38,11 @@ export const SITE = {
   chainId: 8453,
   totalSupply: '1,000,000,000',
   lpLock: '12 months',
-  tgeTarget: 'Q1 2027',
+  tgeTarget: 'Q2 2027',
 } as const;
 
 export const SOCIALS = {
-  twitter: '#', // TODO
-  telegram: '#', // TODO
-  discord: '#', // TODO
-  github: 'https://github.com/Or4ng3frog',
+  github: 'https://github.com/Or4ng3frog/qryptix-assets',
   linkedin: 'https://www.linkedin.com/in/dennis-klahn-63022a204/',
 } as const;
 
@@ -92,7 +89,7 @@ export const ALLOCATIONS: Allocation[] = [
   { name: 'Treasury / Grants', pct: 16, desc: '3-month cliff · 24-month linear · multisig-controlled', color: '#E3B341' },
   { name: 'Presale (P1–P5)', pct: 12, desc: '10% TGE · 90% linear over 8 months', color: '#D4A24A' },
   { name: 'Staking Rewards', pct: 12, desc: 'Up to 36 months · ~10% quarterly degressive', color: '#C28F3C' },
-  { name: 'Liquidity & Market-Making', pct: 10, desc: 'Initial DEX liquidity · LP locked 12 months', color: '#A87B2E' },
+  { name: 'Liquidity & Market-Making', pct: 10, desc: 'Initial DEX liquidity · 12-month LP lock planned', color: '#A87B2E' },
   { name: 'Team', pct: 10, desc: '12-month cliff · 36-month linear vest', color: '#8A6A2B' },
   { name: 'Unallocated Reserve', pct: 6, desc: 'Multisig-controlled · future governance', color: '#6E5A2E' },
   { name: 'Advisors + Community', pct: 4, desc: 'Advisors: 6m cliff · Community: 25% TGE · 6m linear', color: '#51493A' },
@@ -106,10 +103,10 @@ export type Feature = {
 
 export const WHY_FEATURES: Feature[] = [
   { icon: 'zap', title: 'Base L2 Speed', desc: "Built on Coinbase's Base. Sub-second confirmations, fees in fractions of a cent, full EVM compatibility." },
-  { icon: 'cpu', title: 'Hardware-Backed', desc: 'QTX rewards tied to verified device contribution through the Qryptix Miner program — physical hardware, not just a token.' },
+  { icon: 'cpu', title: 'Hardware Program', desc: 'QTX rewards are designed to track verified contributions from future Qryptix Miners. Hardware prototypes still require validation.' },
   { icon: 'gauge', title: 'Capped Emissions', desc: 'Degressive reward schedule with quarterly caps. Designed to prevent runaway inflation and protect long-term holders.' },
-  { icon: 'lock', title: 'LP Locked 12 Months', desc: 'Initial liquidity locked for 12 months at TGE. Team tokens vest over 36 months with a 12-month cliff.' },
-  { icon: 'shield', title: 'Multisig Treasury', desc: 'All treasury and ecosystem funds held in a 3-of-5 multisig post-launch. Quarterly transparency reports.' },
+  { icon: 'lock', title: 'Planned LP Lock', desc: 'Initial liquidity is intended to be locked for 12 months at TGE. Team vesting is planned over 36 months after a 12-month cliff.' },
+  { icon: 'shield', title: 'Planned Multisig', desc: 'A multisig treasury is required before purchases open. Quarterly transparency reports are planned.' },
   { icon: 'boxes', title: 'EVM Compatible', desc: 'Standard ERC-20 on Base. Works with MetaMask, Coinbase Wallet, and the broader Ethereum ecosystem.' },
 ];
 
@@ -126,10 +123,10 @@ export type Miner = {
 // framing: targets/parameters only, never implied live earnings.
 export const DEPIN = {
   intro:
-    'QTX is backed by a decentralized physical infrastructure layer: independently-operated Qryptix miners contribute hashpower, and a share of emissions is routed on-chain to the people running the hardware. It is designed to tie token value to real, verifiable work — not promises.',
+    'The proposed Qryptix Miner network would use independent hardware and a planned on-chain rewards mechanism. The hardware and reward system are not operating yet; prototypes and reward rules need validation.',
   pillars: [
-    { icon: 'cpu', title: 'Distributed miners', desc: 'Permissionless hardware operated by supporters worldwide — no central farm.' },
-    { icon: 'gauge', title: 'Verifiable work', desc: 'Contribution is measured on-chain; rewards follow proof, not trust.' },
+    { icon: 'cpu', title: 'Distributed miners', desc: 'Independent hardware operation is planned; no public fleet is running yet.' },
+    { icon: 'gauge', title: 'Verifiable work', desc: 'On-chain contribution verification is part of the proposed design.' },
     { icon: 'boxes', title: 'Rewards routed on-chain', desc: '30% of fixed supply earmarked for the ecosystem & miner rewards layer.' },
     { icon: 'shield', title: 'Capped & degressive', desc: 'Emissions taper ~15% YoY with quarterly caps — sustainable by design.' },
   ],
@@ -157,24 +154,26 @@ export type RoadmapItem = {
 };
 
 export const ROADMAP: RoadmapItem[] = [
-  { period: 'Q3 2025', status: 'done', title: 'Token Contract Deployed on Base', items: ['ERC-20 contract live on Base mainnet (verified)', '1B total supply, fixed', 'Website v1 launched'] },
-  { period: 'Q2–Q3 2026', status: 'now', title: 'Reservation Phase · Operating Entity', items: ['Pre-sale reservations open (Phase 1 at $0.006)', 'Operating entity setup in progress (Dubai · VARA-aligned)', 'Smart-contract audit in vendor selection', 'Whitepaper v1.3 published'] },
-  { period: 'Q3–Q4 2026', status: 'planned', title: 'Audit · Multisig · Hardware Prototype', items: ['Independent smart-contract audit published', 'Treasury migrated to 3-of-5 multisig', 'Miner hardware prototype', 'Staking program testnet'] },
-  { period: 'Q1 2027', status: 'planned', title: 'TGE & Initial DEX Listing', items: ['Token Generation Event — claim portal live', 'Initial DEX listing on Base · LP locked 12 months', '10% unlock at TGE, 90% vests over 8 months'] },
-  { period: 'Early Q2 2027', status: 'planned', title: 'Hardware Batch #1', items: ['First miner batch ships — contingent on validation', 'Firmware OTA + device management portal', 'Post-launch optimization based on telemetry'] },
+  { period: 'Q3 2025', status: 'done', title: 'Website v1 launched', items: ['Initial Qryptix website published'] },
+  { period: 'Current work', status: 'now', title: 'Direct Purchase Preparation · Operating Entity', items: ['USDC direct purchase flow built, currently disabled', 'Operating entity and jurisdiction to be finalised', 'Audit and independent review still required', 'Whitepaper v1.3 published; updated release copy in review'] },
+  { period: 'Through Q1 2027 · target', status: 'planned', title: 'Audit · Multisig · Hardware Prototype', items: ['Verified token contract address and independent audit report published', 'Treasury configured as multisig', 'Claim and vesting mechanism tested', 'Miner prototype validated before manufacturing commitments'] },
+  { period: 'Q2 2027 · target', status: 'planned', title: 'TGE & Initial DEX Listing', items: ['Only after audit, entity, treasury and claim readiness', 'TGE and claim portal launch', 'Initial DEX listing on Base · planned LP lock of 12 months', 'Planned vesting: 10% at TGE, 90% over 8 months'] },
+  { period: 'Early Q3 2027 · estimate', status: 'planned', title: 'Hardware Batch #1', items: ['Shipping depends on validated prototype, production and required approvals', 'Firmware, device management and support ready before dispatch'] },
 ];
+
+export const ROADMAP_NOTE = 'Q2 2027 for TGE and early Q3 2027 for hardware are targets, not confirmed dates. Both depend on the preceding audit, legal, technical and manufacturing milestones; they may move.';
 
 export type FaqItem = { q: string; a: string };
 
 export const FAQS: FaqItem[] = [
-  { q: 'Why a reservation instead of a real buy flow today?', a: "Because charging real money for unaudited contract access under an unfinished legal entity isn't responsible. The reservation locks in your Phase 1 price ($0.006) and your spot on the allocation list. When the audit is published and the operating entity is finalized, the buy flow goes live and you complete your purchase with USDC on Base. Reservations are non-binding until then." },
-  { q: 'Who is behind Qryptix?', a: 'Dennis Klahn, independent developer based in Bremen, Germany. Solo founder, fully doxxed. LinkedIn and GitHub are linked in the Founder section. No fake team, no anonymous advisors. Operations move to a Dubai-based entity once setup is complete.' },
-  { q: 'Is the smart contract audited?', a: 'Not yet. Audit vendor selection is underway. The buy flow will not be enabled until an independent audit (Coinsult, CertiK, Hacken, or equivalent) is completed and published. The report will be linked directly on this page.' },
-  { q: 'What does the reservation actually do?', a: 'It records your email, wallet address, and intended purchase amount, and locks in the Phase 1 price. When the buy flow opens, your reserved spot is held for 72 hours. No payment is taken at reservation time.' },
-  { q: 'When will tokens be claimable?', a: 'At TGE (planned Q1 2027). 10% of your allocation unlocks immediately; the remaining 90% vests linearly over 8 months through the claim portal. This applies to all presale phases.' },
-  { q: 'What if the project fails or is delayed?', a: "Reservations are non-binding — if the project doesn't reach TGE for any reason, no payment has been taken from you. After the buy flow opens, the contract and treasury are multisig-controlled, but as with any crypto project, only allocate funds you can afford to lose." },
-  { q: 'Why Dubai?', a: 'Dubai (via VARA — Virtual Assets Regulatory Authority) offers a clear regulatory framework well-suited to projects of this scale. The choice is operational — Qryptix itself remains a global, permissionless project once launched on Base.' },
-  { q: 'Do I need to do KYC?', a: "Not for the reservation. KYC requirements at purchase time depend on jurisdiction and entity setup at launch. We'll publish exact requirements before the buy flow opens. You are responsible for complying with your local regulations." },
+  { q: 'Can I buy QTX today?', a: 'Not yet. Qryptix will use direct purchases with USDC on Base. The purchase flow remains disabled until the audit, operating entity, treasury and legal requirements are complete. No payment or allocation is accepted before then.' },
+  { q: 'Who is behind Qryptix?', a: 'Dennis Klahn, independent developer based in Germany. Qryptix is currently a solo-founder project; the final operating entity and jurisdiction have not been published. LinkedIn and GitHub are linked in the Founder section.' },
+  { q: 'Is the smart contract audited?', a: 'No independent audit report is linked here. Purchases will remain disabled until an independent audit has been completed, findings addressed and the report published.' },
+  { q: 'How will I buy QTX?', a: 'When purchases open, connect a self-custody wallet on Base, enter your USDC amount, review the terms and approve the transfer. The server checks the confirmed on-chain payment before recording QTX in your dashboard. Claim begins at TGE.' },
+  { q: 'When will tokens be claimable?', a: 'The current target for TGE is Q2 2027, conditional on the audit, legal setup and claim contract. The planned schedule is 10% at TGE and 90% vesting linearly over 8 months. Final claim terms and dates must be confirmed before purchases open.' },
+  { q: 'What if the project fails or is delayed?', a: 'No payment is accepted while the sale is closed. Once purchases open, refund eligibility is governed by the published Refund Policy. QTX is speculative and could lose all value.' },
+  { q: 'Where will Qryptix operate?', a: 'The final operating entity, jurisdiction and participant eligibility will be published before purchases open. Access may be restricted depending on applicable law.' },
+  { q: 'Do I need to do KYC?', a: "KYC requirements at purchase time depend on jurisdiction and entity setup. We'll publish exact requirements before purchases open. You are responsible for complying with your local regulations." },
 ];
 
 // ============================================================
@@ -183,7 +182,7 @@ export const FAQS: FaqItem[] = [
 
 export const PRESALE = {
   // Accepted payment currencies (Base network)
-  currencies: ['USDC', 'USDT', 'ETH'] as const,
+  currencies: ['USDC'] as const,
   // Per-wallet limits (USD-equivalent). null = no limit.
   minBuyUsd: 50,
   maxBuyUsd: 25000,
@@ -193,7 +192,7 @@ export const PRESALE = {
   framing: 'Early Supporter / PreSale Participation',
 } as const;
 
-// Mandatory acknowledgement checkboxes before any purchase/reservation
+// Mandatory acknowledgement checkboxes before any purchase
 export const PURCHASE_ACKS = [
   'I understand that Qryptix is an early-stage crypto project, that participation is speculative, and that no listing, liquidity, reward or value increase is guaranteed.',
   'I have read and accept the PreSale Terms, Refund Policy and Risk Disclosure.',
@@ -204,7 +203,7 @@ export const PURCHASE_ACKS = [
 // ============================================================
 
 export const REFUND_ELIGIBLE = [
-  'Qryptix is not launch-ready by the defined target date',
+  'Any binding launch deadline stated in the final purchase terms is missed',
   'No viable token launch is carried out',
   'No functional claim / distribution system is provided',
   'The project is officially discontinued',
@@ -216,12 +215,11 @@ export const REFUND_NOT_ELIGIBLE = [
   'The market price later falls',
   'The token does not rise after launch',
   'Exchange listings take longer than hoped',
-  'Roadmap items are adjusted',
   'General market risks materialise',
 ] as const;
 
 export const REFUND_RULES = [
-  'Refunds are only possible up to Token Claim / TGE — not after tokens are distributed',
+  'Requests are assessed under the final Refund Policy; no automatic refund after tokens are claimed or distributed',
   'Network / gas fees are generally not refundable',
   'Refund currency matches the original payment currency where possible',
   'Refund requests are submitted and tracked through the Dashboard',
@@ -260,10 +258,10 @@ export const RISKS = [
 // ============================================================
 
 export const COMMUNITY = {
-  intro: 'Community-first, with transparent updates. No hype, no inflated promises — just regular, honest progress reports from the founder.',
+  intro: 'Follow the public project repository or contact the founder directly. Community channels will be linked when they exist.',
   channels: [
-    { name: 'Telegram', desc: 'Announcements & early-supporter chat', icon: 'telegram', href: SOCIALS.telegram, cta: 'Join Telegram' },
-    { name: 'Discord', desc: 'Deeper discussion, dev updates, Q&A', icon: 'discord', href: SOCIALS.discord, cta: 'Join Discord' },
+    { name: 'GitHub', desc: 'Public project repository and code history', icon: 'github', href: SOCIALS.github, cta: 'View repository' },
+    { name: 'LinkedIn', desc: 'Founder profile and direct contact', icon: 'linkedin', href: SOCIALS.linkedin, cta: 'View profile' },
   ],
 } as const;
 

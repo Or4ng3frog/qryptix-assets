@@ -34,15 +34,15 @@ app/
   whitepaper/
     page.tsx          → full 15-section whitepaper
   api/
-    reserve/route.ts  → reservation endpoint (Brevo-ready)
-    interest/route.ts → miner interest endpoint
+    purchase/route.ts → on-chain verified USDC purchases
+    refund/route.ts   → authenticated refund request for review
 
 components/
   Navbar.tsx
   Icon.tsx            → inline SVG icons (no dependency)
   WhitepaperSidebar.tsx
   sections/
-    Hero.tsx, ReservationWidget.tsx, TrustStrip.tsx,
+    Hero.tsx, PurchaseWidget.tsx, TrustStrip.tsx,
     Features.tsx, Tokenomics.tsx, Founder.tsx,
     Roadmap.tsx, Miners.tsx, FAQ.tsx, Footer.tsx
 
@@ -63,10 +63,10 @@ public/
 Everything content-related is centralized there:
 
 - **`FEATURES.BUY_FLOW_ENABLED`** — the kill switch. Keep `false` until audit
-  published + entity finalized + multisig live. Flip to `true` and the same
-  reservation button becomes a real purchase button.
+  published + entity finalized + multisig live. When disabled, the site shows
+  "PreSale opens soon" and accepts neither payments nor allocations.
 - `SITE` — contract address, Basescan URL, ticker, supply, TGE target
-- `SOCIALS` — Twitter / Telegram / Discord / GitHub / LinkedIn
+- `SOCIALS` — verified GitHub and LinkedIn links
 - `FOUNDER` — name, role, bio, photo path
 - `PHASES` — the 5 presale phases + prices
 - `ALLOCATIONS` — tokenomics breakdown (donut chart reads from here)
@@ -82,9 +82,9 @@ Everything content-related is centralized there:
 | 2 | Founder photo | drop `founder.jpg` into `/public` |
 | 3 | Real phase allocations (mine are estimates) | `lib/config.ts` → `PHASES`, `ALLOCATIONS` |
 | 4 | Social URLs | `lib/config.ts` → `SOCIALS` |
-| 5 | Brevo wiring for reservations | `app/api/reserve/route.ts` (Option A block, commented) |
+| 5 | Base Sepolia purchase test and reconciliation | `docs/PURCHASE-FLOW.md` |
 | 6 | Your own bio text | `lib/config.ts` → `FOUNDER.bio` |
-| 7 | Legal pages (Terms, Privacy, Cookie) | currently `#` placeholders in Footer |
+| 7 | Final legal review and eligibility rules | draft legal pages in `app/` |
 | 8 | Replace estimated whitepaper numbers | `app/whitepaper/page.tsx` |
 
 ---
@@ -94,8 +94,6 @@ Everything content-related is centralized there:
 Copy `.env.example` → `.env.local`:
 
 ```
-BREVO_API_KEY=
-BREVO_RESERVATION_LIST_ID=
 NEXT_PUBLIC_BUY_FLOW_ENABLED=false
 ```
 
@@ -120,8 +118,8 @@ and updating the `@font-face` URLs. JetBrains Mono loads from Google Fonts.
 
 ## Notes on the honest-marketing approach
 
-- Reservation flow, not a live buy flow — no funds taken until audit + entity ready.
-- Miners are "register interest", not purchase — no prepayment for unproduced hardware.
+- Direct purchase only; no funds taken until audit + entity + treasury + legal review are ready.
+- Miner tiers are indicative concepts; no registration, order or prepayment is available.
 - Roadmap is status-coded (done / now / planned) — no fake "completed" items.
 - Risk disclosure is prominent — builds trust with serious buyers.
 - Real phase-based scarcity (P1→P5 price ladder) instead of fake countdowns.

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { WhitepaperSidebar } from '@/components/WhitepaperSidebar';
 import { Logo } from '@/components/Logo';
-import { SITE } from '@/lib/config';
+import { SITE, ROADMAP, ROADMAP_NOTE } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: 'Qryptix Whitepaper v1.3 — Technical & Economic Specification',
+  title: 'Qryptix Whitepaper — Draft Revision',
   description: 'The full technical and economic specification for Qryptix (QTX): tokenomics, vesting, architecture, miner program, security, and risk disclosure.',
 };
 
@@ -92,7 +92,7 @@ export default function WhitepaperPage() {
           <a href="/" className="flex items-center gap-3">
             <Logo variant="full" size={30} />
             <span className="text-xs text-taupe ml-2 pl-3 border-l border-gold/15 hidden sm:inline">
-              Whitepaper v1.3
+              Whitepaper draft revision
             </span>
           </a>
           <a href="/" className="text-sm text-ash hover:text-ivory transition-colors">
@@ -110,13 +110,14 @@ export default function WhitepaperPage() {
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold mb-4">
               Qryptix · Technical & Economic Specification
             </div>
-            <h1 className="font-serif font-semibold text-5xl mb-4 leading-tight">Qryptix Whitepaper v1.3</h1>
+            <h1 className="font-serif font-semibold text-5xl mb-4 leading-tight">Qryptix Whitepaper</h1>
             <p className="text-xl text-ash leading-relaxed mb-7">
-              A practical multi-utility token on Base (Ethereum L2), with a hardware-backed rewards layer and
-              transparent emissions. This document describes what QTX is, how it works, and what it is not.
+              A proposed multi-utility token on Base (Ethereum L2), with a planned hardware rewards layer and
+              transparent emission design. This draft distinguishes current progress from planned mechanisms.
             </p>
+            <p className="text-xs text-taupe mb-5">Draft content review · September 2026 · based on Whitepaper v1.3 (May 2026). Formal version and legal review pending.</p>
             <div className="flex flex-wrap gap-2">
-              {['ERC-20', 'Base · chain 8453', '1B total supply', 'LP locked 12m', 'TGE Q1 2027'].map((t) => (
+              {['ERC-20 design', 'Base · chain 8453', '1B planned supply', '12m LP lock planned', 'TGE Q2 2027 target'].map((t) => (
                 <span key={t} className="rounded-full glass-luxe px-3 py-1.5 text-xs font-mono text-ash">
                   {t}
                 </span>
@@ -127,16 +128,16 @@ export default function WhitepaperPage() {
           {/* 01 Summary */}
           <H2 id="summary" num="01">Executive summary</H2>
           <Lead>
-            Qryptix (QTX) is an ERC-20 token deployed on Base, Coinbase&apos;s Ethereum Layer-2 network. It is
-            designed as a multi-utility token for trading, payments, hardware-backed mining rewards, and staking —
-            built around a fixed supply of 1,000,000,000 QTX, on-chain enforced vesting, and a transparent
+            Qryptix (QTX) is a planned ERC-20 token on Base, Coinbase&apos;s Ethereum Layer-2 network. A verified
+            public contract address has not yet been published. It is designed for trading, payments, hardware-backed mining rewards, and staking —
+            built around a planned fixed supply of 1,000,000,000 QTX, a proposed on-chain vesting design, and a transparent
             five-phase pre-sale.
           </Lead>
           <P>
-            The project is operated as a solo founder endeavour, with the operating entity in setup (Dubai,
-            VARA-aligned jurisdiction). Pre-sale reservations are open today; actual token purchases will only be
-            enabled after an independent smart-contract audit is published and the operating entity is finalised.
-            The first hardware miner batch is planned to ship in early Q2 2027, contingent on prototype validation
+            The project is operated by a solo founder; the final operating entity and jurisdiction have not been
+            published. QTX is planned to be sold by direct purchase with USDC on Base. The purchase flow
+            will only be enabled after an independent smart-contract audit is published and the operating entity is finalised.
+            The first hardware miner batch is estimated for early Q3 2027, contingent on prototype validation
             with selected manufacturers.
           </P>
           <P>
@@ -146,10 +147,10 @@ export default function WhitepaperPage() {
             <Mono>{SITE.email}</Mono>.
           </P>
           <Callout label="Quick facts">
-            <p><strong className="text-ivory">Total supply:</strong> 1,000,000,000 QTX (fixed, no mint function after deployment).</p>
+            <p><strong className="text-ivory">Planned supply:</strong> 1,000,000,000 QTX, with no mint function after deployment; contract not yet published.</p>
             <p><strong className="text-ivory">Network:</strong> Base mainnet (chain ID 8453). Compatible with all EVM tooling.</p>
-            <p><strong className="text-ivory">Vesting:</strong> 10% at TGE, 90% linear over 8 months for presale buyers. Team locked 12 months + 36-month linear.</p>
-            <p><strong className="text-ivory">LP lock:</strong> Initial DEX liquidity locked for 12 months at launch.</p>
+            <p><strong className="text-ivory">Proposed vesting:</strong> 10% at TGE, 90% linear over 8 months for presale buyers. Team: 12-month cliff + 36-month linear release.</p>
+            <p><strong className="text-ivory">LP lock:</strong> Initial DEX liquidity is planned to be locked for 12 months at launch.</p>
             <p><strong className="text-ivory">Presale:</strong> 5 phases · $0.006 → $0.015 → $0.030 → $0.060 → $0.125 per QTX.</p>
           </Callout>
 
@@ -169,10 +170,9 @@ export default function WhitepaperPage() {
             difficult to distinguish from extractive ones.
           </P>
           <P>
-            Qryptix is designed against both patterns. The token has a defined utility floor — it rewards verified
-            hardware contribution and stakers — and the project structure is built to be verifiable: doxxed
-            founder, on-chain enforced tokenomics, reservation-based presale with no funds taken until audit and
-            entity are in place.
+            Qryptix is designed against both patterns. The proposed token utility includes rewards for verified
+            hardware contribution and stakers, contingent on implementation. The project structure aims to be verifiable: doxxed
+            founder, planned on-chain tokenomics, and a direct purchase flow gated until audit and entity are in place.
           </P>
 
           {/* 03 Solution */}
@@ -180,28 +180,26 @@ export default function WhitepaperPage() {
           <P>The design rests on three principles, each chosen because it is verifiable rather than aspirational.</P>
           <H3>3.1 Verifiable on-chain mechanics</H3>
           <P>
-            Every economic parameter that matters — total supply, vesting schedule, LP lock duration, emission caps
-            — is enforced by the smart contract on Base, not by a Medium post or a Discord announcement. Once
-            deployed and verified on Basescan, the rules cannot be changed retroactively without on-chain
-            governance.
+            The intended contract design covers total supply, vesting, liquidity lock duration and emission caps.
+            These rules are not yet documented here as deployed and audited. Before purchases open, verified
+            contract addresses and the audit report must be published so participants can check the implementation.
           </P>
           <H3>3.2 Hardware-backed utility</H3>
           <P>
-            The largest single allocation (30% of supply) is dedicated to rewards for verified hardware
-            contribution through the Qryptix Miner program. This creates a structural reason for QTX to exist
-            beyond speculation: hardware operators earn QTX, demand is partially driven by exposure to that reward
-            stream, and supply is metered out over up to 48 months under a degressive emission schedule.
+            The proposed 30% ecosystem allocation is intended for rewards from verified hardware contributions.
+            Hardware, verification and emission controls are still to be implemented and validated. The proposed
+            reward schedule runs for up to 48 months with decreasing emissions.
           </P>
           <P>
-            The hardware program is treated as a real product, not a marketing prop. Manufacturer engagement is in
-            progress as of Q2 2026; no preorders are accepted today, and published specifications are explicitly
+            The hardware program is a proposed product. Manufacturer engagement is at
+            a concept stage in this document; no preorders are accepted here, and published specifications are explicitly
             indicative until validated against working prototypes.
           </P>
           <H3>3.3 Transparency over momentum</H3>
           <P>
             Where most presales optimise for fast capital intake, Qryptix is structured to optimise for participant
-            safety. Reservations are non-binding, no payment is taken before audit completion, and the buy flow is
-            gated behind a public list of preconditions (Section 11). This is slower than aggressive marketing
+            safety. No payment is taken before the purchase flow opens, and activation is
+            gated behind a public list of preconditions (Section 7.2). This is slower than aggressive marketing
             playbooks — and it is the right default given the regulatory and reputational environment for token
             launches in 2026.
           </P>
@@ -209,7 +207,7 @@ export default function WhitepaperPage() {
           {/* 04 Architecture */}
           <H2 id="architecture" num="04">Technical architecture</H2>
           <H3>4.1 Contract design</H3>
-          <P>QTX is a standard ERC-20 on Base, with the following supplementary mechanisms:</P>
+          <P>QTX is designed as an ERC-20 on Base, with the following proposed mechanisms:</P>
           <UL items={[
             <><strong className="text-ivory">Vesting registry:</strong> on-chain allocations with cliff and linear-release parameters per category.</>,
             <><strong className="text-ivory">Claim portal:</strong> lets presale participants claim vested tokens after TGE.</>,
@@ -229,7 +227,7 @@ contract QryptixToken is ERC20, Ownable {
 }`}
           </pre>
           <Callout variant="warn" label="Important">
-            <p>The contract address and verified source code will be linked here once the audit is complete. Until then, on-chain interaction is limited to view functions.</p>
+            <p>The contract address and verified source code will be linked here once confirmed. No QTX contract interaction is offered through this site today.</p>
           </Callout>
           <H3>4.2 Why Base</H3>
           <P>
@@ -240,14 +238,14 @@ contract QryptixToken is ERC20, Ownable {
           </P>
           <H3>4.3 Off-chain components</H3>
           <P>
-            A Next.js dApp for reservation, presale, and claim interfaces; a Postgres database for reservation
-            records; event indexers reading from Base for state synchronisation; and the manufacturer-side firmware
+            A Next.js dApp for presale and claim interfaces; a Postgres database for verified purchase
+            records; planned event indexers reading from Base for state synchronisation; and the manufacturer-side firmware
             stack for miners (specified separately).
           </P>
 
           {/* 05 Tokenomics */}
           <H2 id="tokenomics" num="05">Tokenomics</H2>
-          <P>The total supply of 1,000,000,000 QTX is allocated across nine categories, each paired with a specific vesting schedule (Section 6).</P>
+          <P>The proposed supply of 1,000,000,000 QTX is allocated across nine categories, each paired with a proposed vesting schedule (Section 6).</P>
           <Table
             head={['Allocation', 'Share']}
             rows={[
@@ -273,7 +271,7 @@ contract QryptixToken is ERC20, Ownable {
 
           {/* 06 Vesting */}
           <H2 id="vesting" num="06">Vesting & emissions</H2>
-          <P>All schedules are enforced by the on-chain vesting registry and cannot be modified after TGE without on-chain governance.</P>
+          <P>The schedules below are proposed. An audited on-chain vesting and claim mechanism is still required before these can be described as enforceable.</P>
           <Table
             head={['Allocation', 'Share', 'Cliff', 'Vesting', 'TGE']}
             rows={[
@@ -289,27 +287,22 @@ contract QryptixToken is ERC20, Ownable {
             ]}
           />
           <H3>6.1 Circulating supply projection</H3>
-          <P>Theoretical maximums; actual figures depend on miner activation and stake participation.</P>
+          <P>Under the proposed schedule, at most ~17M QTX would be unlocked at TGE if the full 120M presale allocation and 20M community allocation were assigned: 10% of presale plus 25% of community. This excludes the proposed 100M locked liquidity allocation. Actual circulating supply depends on how much is allocated and on the final contracts; later projections are not available.</P>
           <Table
             head={['From TGE', 'Circulating', '% of total']}
             rows={[
               ['TGE', <Mono key="a">~17M</Mono>, '~1.7%'],
-              ['+3 months', <Mono key="b">~80M</Mono>, '~8%'],
-              ['+8 months', <Mono key="c">~200M</Mono>, '~20%'],
-              ['+12 months', <Mono key="d">~310M</Mono>, '~31%'],
-              ['+24 months', <Mono key="e">~580M</Mono>, '~58%'],
-              ['+48 months', <Mono key="f">~1B</Mono>, '~100%'],
             ]}
           />
           <H3>6.2 Degressive emission curve</H3>
           <P>
-            The Ecosystem allocation follows a degressive schedule, rewarding early miner operators more heavily and
+            The proposed Ecosystem allocation would follow a degressive schedule, rewarding early miner operators more heavily and
             reducing emissions ~15% year-on-year, with quarterly caps to prevent gaming via short-term hash bursts.
           </P>
 
           {/* 07 Presale */}
           <H2 id="presale" num="07">Pre-sale structure</H2>
-          <P>Five sequential phases. When a phase is fully allocated, the next begins at the higher price. Progression is determined by allocation fill rate, not manual triggers.</P>
+          <P>Five sequential phases are planned. The current purchase implementation supports only Stage 1; later stages require an additional verified release. No allocation is accepted while purchases are disabled.</P>
           <Table
             head={['Phase', 'Price', 'Allocation', 'Raise target']}
             rows={[
@@ -320,8 +313,8 @@ contract QryptixToken is ERC20, Ownable {
               ['P5', <Mono key="5">$0.125</Mono>, '~28M', '~$3.5M'],
             ]}
           />
-          <H3>7.1 Reservation phase</H3>
-          <P>Today the site accepts <strong className="text-ivory">reservations</strong>, not purchases. A reservation records email, wallet address, and intended amount, and locks in the current phase price. No funds are accepted; reservations can be cancelled anytime.</P>
+          <H3>7.1 Sale status</H3>
+          <P>The direct purchase flow is currently disabled. No payments or allocations are accepted while the sale is closed. The displayed Stage 1 price is planned and does not lock in an allocation.</P>
           <H3>7.2 Purchase preconditions</H3>
           <P>The buy flow activates only when <strong className="text-ivory">all</strong> of the following are met:</P>
           <UL items={[
@@ -331,15 +324,15 @@ contract QryptixToken is ERC20, Ownable {
             'Updated whitepaper published reflecting audit findings.',
           ]} />
           <H3>7.3 Purchase mechanics (when active)</H3>
-          <P>Purchases are made in USDC on Base via a self-custody wallet. Reserved participants get a 72-hour priority window at the reserved phase price; after that, unfilled reservations return to the open pool.</P>
+          <P>When the sale opens, participants pay USDC on Base from a self-custody wallet. The server verifies the on-chain transfer and records the purchase at the applicable stage price. No priority window or reservation is offered.</P>
           <H3>7.4 Claim at TGE</H3>
-          <P>No tokens are delivered immediately. At TGE (planned Q1 2027), 10% becomes claimable; the remaining 90% vests linearly over 8 months.</P>
+          <P>No tokens are delivered immediately. The current TGE target is Q2 2027, subject to audit, legal and claim readiness. The planned unlock is 10% at TGE, with the remaining 90% vesting linearly over 8 months; final terms must be confirmed before purchases open.</P>
 
           {/* 08 Miners */}
           <H2 id="miners" num="08">Hardware miner program</H2>
-          <P>The primary mechanism for distributing the 30% Ecosystem allocation. Operators run physical hardware that contributes verified work and earn QTX in return.</P>
-          <Callout variant="warn" label="Status as of May 2026">
-            <p>The miner program is in <strong className="text-ivory">manufacturer-selection phase</strong>. No units are available for purchase. Published specifications are indicative and may change. Pre-orders are not accepted.</p>
+          <P>The proposed mechanism for distributing the 30% Ecosystem allocation would reward operators of physical hardware for verified contributions if the program is implemented.</P>
+          <Callout variant="warn" label="Current documentation status">
+            <p>Miner renders and specifications are <strong className="text-ivory">concepts</strong>; prototype validation and production commitments are not documented here. No units are available for purchase and no preorders are accepted.</p>
           </Callout>
           <H3>8.1 Device tiers (indicative)</H3>
           <Table
@@ -352,15 +345,15 @@ contract QryptixToken is ERC20, Ownable {
             ]}
           />
           <H3>8.2 Reward distribution</H3>
-          <P>Rewards are distributed pro-rata to verified contribution per emission window. Individual operator weight is capped to prevent centralisation — no single address earns more than a defined percentage of any window regardless of hash contribution.</P>
+          <P>The proposed model would distribute rewards pro-rata to verified contribution per emission window, subject to individual operator caps. Verification and cap rules are not yet implemented or published.</P>
           <H3>8.3 Manufacturing & delivery</H3>
-          <P>Manufacturer engagement is in early discussion as of Q2 2026. First batch targeted for early Q2 2027, contingent on prototype validation. Should validation fail or be delayed, the timeline will be updated transparently.</P>
+          <P>The first batch is estimated for early Q3 2027, conditional on prototype validation, production planning and required approvals. This document does not establish a confirmed shipping date.</P>
 
           {/* 09 Staking */}
           <H2 id="staking" num="09">Staking design</H2>
-          <P>A 12% allocation is dedicated to staking. Stakers lock QTX for fixed terms in exchange for a share of pool emissions; longer locks receive higher reward weights.</P>
+          <P>The proposed 12% staking allocation would reward fixed-term locks, with longer locks receiving higher reward weights. This functionality has not launched.</P>
           <H3>9.1 Lock tiers</H3>
-          <P>Three tiers: 30 days (1.0×), 90 days (1.5×), 180 days (2.5×). Early unstaking forfeits accumulated rewards for that period; principal is always returnable.</P>
+          <P>Proposed tiers: 30 days (1.0×), 90 days (1.5×), 180 days (2.5×). Early unstaking would forfeit accumulated rewards; principal withdrawal mechanics must be confirmed in the audited contract.</P>
           <H3>9.2 Emission schedule</H3>
           <P>Degressive, ~10% quarterly decay — rewarding early stakers more heavily and tapering as staked supply grows.</P>
           <H3>9.3 Anti-gaming</H3>
@@ -369,36 +362,36 @@ contract QryptixToken is ERC20, Ownable {
           {/* 10 Governance */}
           <H2 id="governance" num="10">Governance & treasury</H2>
           <H3>10.1 Multisig structure</H3>
-          <P>Treasury and ecosystem-emission contracts are controlled by a 3-of-5 multisig after launch. Signers: the founder, one technical advisor, one legal/compliance advisor, one community-elected signer, and one rotating quarterly signer. Identities are public.</P>
+          <P>A 3-of-5 multisig for treasury and ecosystem operations is planned before the sale opens. The proposed signer roles are founder, technical advisor, legal/compliance advisor, community representative and rotating signer; the final signers and addresses have not been published here.</P>
           <H3>10.2 Treasury operations</H3>
-          <P>The 16% Treasury funds development and audits, legal and compliance, infrastructure, ecosystem grants, and a contingency reserve. Quarterly transparency reports detail expenditures by category.</P>
+          <P>The proposed 16% Treasury would fund development and audits, legal and compliance, infrastructure, ecosystem grants, and a contingency reserve. Quarterly transparency reports are planned.</P>
           <H3>10.3 Future governance</H3>
-          <P>Token-weighted governance is planned post-launch. Core economic parameters (total supply, cliff durations, LP lock) are <strong className="text-ivory">not</strong> governance-adjustable; scope is added incrementally as the system matures.</P>
+          <P>Token-weighted governance is proposed after launch. The intended design excludes changes to core economic parameters such as total supply, cliff durations and the LP lock; these limits require confirmation in the deployed contracts.</P>
 
           {/* 11 Security */}
           <H2 id="security" num="11">Security & audits</H2>
           <H3>11.1 Audit status</H3>
-          <P>As of May 2026, the smart contract has <strong className="text-ivory">not yet been independently audited</strong>. Vendor selection is in progress (candidates: Coinsult, CertiK, Hacken). The buy flow will not activate until the audit is completed and published.</P>
+          <P>No independent audit report is linked in this document. The buy flow remains disabled until the relevant contracts have been audited, findings addressed and the report published.</P>
           <Callout variant="warn" label="Why this matters">
             <p>Many presales advertise &quot;audit in progress&quot; with vendor logos without an active engagement. We do not list vendor logos until an audit is actively underway with a signed engagement.</p>
           </Callout>
           <H3>11.2 Audit scope</H3>
           <P>Token contract, vesting registry, claim portal, and staking/miner-reward modules. The report will include severity-classified findings, the team&apos;s response, and verification of fixes.</P>
           <H3>11.3 Bug bounty</H3>
-          <P>Active from TGE onwards, covering critical and high-severity findings in deployed contracts.</P>
+          <P>A bug bounty covering critical and high-severity findings in deployed contracts is planned from TGE, subject to a published program.</P>
           <H3>11.4 Operational security</H3>
-          <P>Deployer keys on hardware-secured signing devices; multisig signers on independent hardware wallets; no private keys on cloud infrastructure; cold-signed deployment transactions.</P>
+          <P>The intended controls include hardware-secured signing devices, independent hardware wallets for multisig signers, no cloud-hosted private keys and cold-signed deployment transactions. These controls must be verified before launch.</P>
 
           {/* 12 Legal */}
           <H2 id="legal" num="12">Legal & compliance</H2>
           <H3>12.1 Operating entity</H3>
-          <P>Being established in Dubai under the VARA framework. Once established, it assumes all operational responsibilities including treasury, supplier contracts, and customer-facing obligations.</P>
+          <P>The final operating entity and jurisdiction have not been published. These details and the applicable participation terms must be confirmed before purchases open.</P>
           <H3>12.2 Jurisdictional restrictions</H3>
-          <P>Participation may be restricted or prohibited in certain jurisdictions — the EU under MiCAR, the US under securities laws, the UK under FCA rules, and others. Participants are responsible for ensuring compliance with local law. The site may apply geographic restrictions.</P>
+          <P>Eligibility and compliance requirements depend on the participant&apos;s jurisdiction and the final structure of the offer. Applicable restrictions and verification requirements must be published and implemented before purchases open.</P>
           <H3>12.3 No financial advice</H3>
           <P>Nothing here constitutes financial, investment, legal, tax, or accounting advice. Consult qualified professional advisors before any decision regarding QTX.</P>
           <H3>12.4 KYC / AML</H3>
-          <P>KYC at purchase time depends on the final entity&apos;s obligations and purchase size, and will be published before the buy flow opens. Reservation does not require KYC.</P>
+          <P>KYC at purchase time depends on the final entity&apos;s obligations and purchase size, and will be published before the buy flow opens.</P>
 
           {/* 13 Risk */}
           <H2 id="risk" num="13">Risk factors</H2>
@@ -410,31 +403,25 @@ contract QryptixToken is ERC20, Ownable {
           <H3>13.3 Regulatory risk</H3>
           <P>The regulatory environment is evolving rapidly. Future action could materially affect Qryptix&apos;s ability to operate, list, or distribute rewards.</P>
           <H3>13.4 Execution risk</H3>
-          <P>The project is operated by a single founder. Founder unavailability could materially delay or prevent execution. Multisig and treasury structures provide some continuity, but solo-founder execution concentration is higher than larger teams.</P>
+          <P>The project is operated by a single founder. Founder unavailability could materially delay or prevent execution. Planned multisig and treasury structures may provide some continuity once established, but execution remains concentrated.</P>
           <H3>13.5 Hardware program risk</H3>
-          <P>Miner development depends on manufacturer engagement, prototype validation, and supply-chain conditions. The program may be delayed, scaled down, or cancelled; in that case the Ecosystem allocation would be redirected per multisig-approved governance.</P>
+          <P>Miner development depends on manufacturer engagement, prototype validation, and supply-chain conditions. The program may be delayed, scaled down, or cancelled. Any alternative use of the Ecosystem allocation would require a published decision process and applicable terms.</P>
           <H3>13.6 Market risk</H3>
-          <P>Post-TGE price is market-determined. Initial liquidity is locked, but secondary trading may be thin or volatile. There is no obligation on the entity to support price.</P>
+          <P>Post-TGE price would be market-determined. An initial liquidity lock is planned, but secondary trading may be thin or volatile. No price support is promised.</P>
 
           {/* 14 Roadmap */}
           <H2 id="roadmap" num="14">Roadmap</H2>
-          <P>Reflects current planning as of Q2 2026. Dates are targets, not commitments.</P>
+          <P>{ROADMAP_NOTE}</P>
           <Table
             head={['Period', 'Status', 'Milestone']}
-            rows={[
-              ['Q3 2025', 'Done', 'Token contract deployed on Base; website v1 live'],
-              ['Q2 2026', 'Active', 'Reservation phase; entity setup; audit selection; whitepaper v1.3'],
-              ['Q3–Q4 2026', 'Planned', 'Audit published; multisig migration; manufacturer engagement; staking testnet'],
-              ['Q1 2027', 'Planned', 'TGE; DEX listing; claim portal; staking launch'],
-              ['Early Q2 2027', 'Planned', 'Hardware miner Batch #1 (contingent on validation)'],
-            ]}
+            rows={ROADMAP.map((item) => [item.period, item.status === 'now' ? 'Active' : item.status === 'done' ? 'Done' : 'Planned', `${item.title}: ${item.items.join('; ')}`])}
           />
 
           {/* 15 Disclaimers */}
           <H2 id="disclaimers" num="15">Disclaimers</H2>
           <Callout variant="danger" label="Final disclaimer">
-            <p>This whitepaper is provided for informational purposes only. It is not an offer to sell or a solicitation of an offer to buy QTX in any jurisdiction where such offer or solicitation would be unlawful. QTX is a speculative digital asset. Nothing herein constitutes financial, investment, legal, tax, or accounting advice. Information is current as of publication and may become outdated; the most recent version on the official website governs in case of conflict.</p>
-            <p>By accessing this document and participating in any way, you confirm that you understand the risks in Section 13, that you have consulted appropriate professional advisors as needed, and that you are not located in a jurisdiction where participation is restricted. The founder, contributors, and any future operating entity disclaim all liability to the maximum extent permitted by law for losses arising from participation in or use of the Qryptix project.</p>
+            <p>This draft describes proposed mechanics and risks. Purchases are disabled; final terms, eligibility and verified contracts must be published before any sale opens. QTX would be a speculative digital asset. Nothing here constitutes financial, investment, legal, tax or accounting advice. Information may change as the project develops.</p>
+            <p>Participation may be restricted depending on your jurisdiction. Read the final purchase terms and risk disclosure before participating if the sale opens, and seek professional advice where appropriate. The legal pages on this site are drafts pending review.</p>
           </Callout>
 
           {/* Bottom nav */}

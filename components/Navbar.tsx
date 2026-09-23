@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { SITE } from '@/lib/config';
+import { PURCHASE_READY } from '@/lib/chains';
 import { Logo } from './Logo';
 
 const NAV = [
@@ -61,7 +62,7 @@ export function Navbar() {
             href="/buy"
             className="relative inline-flex items-center gap-2 rounded-full bg-gold-gradient px-4 py-2 sm:px-5 sm:py-2.5 text-sm font-grotesk font-semibold text-obsidian transition-[filter,box-shadow] duration-300 hover:brightness-105 hover:shadow-[0_8px_30px_-8px_rgba(227,179,65,0.55)] cursor-pointer"
           >
-            Join PreSale
+            {PURCHASE_READY ? 'Buy QTX' : 'PreSale details'}
           </a>
         </div>
       </div>

@@ -11,8 +11,8 @@ export default function RefundPolicy() {
   return (
     <LegalLayout
       title="Refund Policy"
-      updated="May 2026"
-      intro="This policy explains the limited circumstances under which a PreSale participant may receive a refund, and the circumstances under which refunds do not apply. Participation in the Qryptix PreSale is speculative; this policy is not a guarantee of return."
+      updated="23 September 2026 (draft)"
+      intro="This draft outlines circumstances under which a PreSale participant may request a refund review. It must be finalised before purchases open. Participation is speculative; a request does not guarantee a refund."
     >
       <H2>1. Purpose</H2>
       <P>
@@ -25,7 +25,7 @@ export default function RefundPolicy() {
       <P>A refund may be available if any of the following occur:</P>
       <UL items={REFUND_ELIGIBLE.map((r) => r)} />
       <P>
-        In these situations, eligible participants may request a refund through the Dashboard, subject to the
+        In these situations, participants may request a refund review through the Dashboard, subject to the
         conditions in Section 4.
       </P>
 
@@ -46,7 +46,7 @@ export default function RefundPolicy() {
 
       <H2>5. How to request a refund</H2>
       <P>
-        Eligible refund requests are submitted through your Qryptix Dashboard under the Refund section. Each
+        Refund requests are submitted through your Qryptix Dashboard under the Refund section. Each
         request moves through the following states: requested → under review → approved or rejected → paid. You can
         track the status of your request at any time in the Dashboard.
       </P>
@@ -54,7 +54,7 @@ export default function RefundPolicy() {
       <H2>6. Refund currency and fees</H2>
       <P>
         Where technically possible, refunds are issued in the same currency used for the original payment (for
-        example USDC, USDT, or ETH on Base). Network and gas fees incurred during the original transaction or the
+        example USDC on Base). Network and gas fees incurred during the original transaction or the
         refund transaction are generally not refundable.
       </P>
 

@@ -11,12 +11,12 @@ export function RefundSection() {
       <SectionHeading
         tag="Refund Policy"
         title={<>Clear on refunds.</>}
-        subtitle="No payment is required during the current reservation phase. Once the purchase flow opens and funds are accepted before launch, the refund rules below will apply. This is a summary; the full Refund Policy governs."
+        subtitle="This is a summary of the draft refund rules. The final policy must be published before direct purchases open."
       />
 
       <div className="flex justify-center -mt-6 mb-10">
         <span className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-gold/5 px-4 py-1.5 text-xs font-grotesk text-gold-bright">
-          <Icon name="shield" size={13} /> No payment required during the current reservation phase
+          <Icon name="shield" size={13} /> No payments accepted until the direct purchase flow opens
         </span>
       </div>
 

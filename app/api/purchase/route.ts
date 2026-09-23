@@ -23,15 +23,28 @@ function fail(error: string, status: number) {
   return NextResponse.json({ error }, { status });
 }
 
-export async function POST(req: NextRequest) {
-  // Preview mode (no Supabase at all) — short-circuit, never pretend to record.
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    return NextResponse.json({ ok: true, preview: true });
+// Check server configuration and database reachability before a wallet transfer.
+export async function GET() {
+  if (!BUY_ENABLED) return fail('Purchase flow is not active.', 403);
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || !HAS_SERVICE_ROLE) {
+    return fail('Server is not configured for verified purchases.', 503);
   }
+  if (!getTreasury().valid) return fail('Treasury is not configured for verified purchases.', 503);
+  try {
+    const { error } = await createServiceClient().from('purchases').select('id').limit(1);
+    if (error) return fail('Purchase database is unavailable.', 503);
+  } catch {
+    return fail('Purchase database is unavailable.', 503);
+  }
+  return NextResponse.json({ ready: true }, { headers: { 'Cache-Control': 'no-store' } });
+}
 
+export async function POST(req: NextRequest) {
   // ---- Hard runtime guards ----
   if (!BUY_ENABLED) return fail('Purchase flow is not active.', 403);
-  if (!HAS_SERVICE_ROLE) return fail('Server is not configured for verified purchases.', 503);
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || !HAS_SERVICE_ROLE) {
+    return fail('Server is not configured for verified purchases.', 503);
+  }
 
   const treasury = getTreasury();
   if (!treasury.valid) return fail(`Treasury misconfigured: ${treasury.error}`, 503);
@@ -130,7 +143,8 @@ export async function POST(req: NextRequest) {
     phase: PURCHASE_PARAMS.phaseCode,
     price_usd: PURCHASE_PARAMS.priceUsd,
     status: 'confirmed',
-    refund_eligible: true,
+    // Eligibility requires a case-by-case assessment under the final policy.
+    refund_eligible: false,
     confirmed_at: new Date().toISOString(),
   });
   if (error) {

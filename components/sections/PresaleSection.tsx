@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { PHASES, PRESALE } from '@/lib/config';
+import { PURCHASE_READY, ACTIVE_CHAIN_LABEL } from '@/lib/chains';
 import { SectionHeading } from './SectionHeading';
 import { Reveal } from '@/components/motion';
 import { GlowCard } from '@/components/ui/GlowCard';
@@ -31,12 +32,12 @@ export function PresaleSection() {
     <section id="presale" className="mx-auto max-w-7xl px-6 py-20 sm:py-28 scroll-mt-24">
       <SectionHeading
         tag="PreSale · Early Supporter Participation"
-        title={<>Join the PreSale.</>}
-        subtitle="Qryptix is currently in PreSale. This is early supporter participation — not an investment product. Read the notes below before taking part."
+        title={<>Direct PreSale.</>}
+        subtitle="Direct purchase with USDC on Base when the sale opens. Read the terms and risks before taking part."
       />
 
       <Reveal className="grid lg:grid-cols-[1.35fr_1fr] gap-6">
-        {/* ── LEFT: reservation terminal ── */}
+        {/* ── LEFT: purchase overview ── */}
         <GlowCard className="glass-luxe rounded-3xl p-6 md:p-8">
           {/* Terminal header */}
           <div className="flex items-center justify-between mb-6 pb-5 border-b border-white/[0.06]">
@@ -45,9 +46,9 @@ export function PresaleSection() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-60" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-gold" />
               </span>
-              <span className="text-sm font-grotesk font-medium text-ivory">Reservation terminal</span>
+              <span className="text-sm font-grotesk font-medium text-ivory">Purchase overview</span>
               <span className="rounded-md border border-gold/30 bg-gold/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-eyebrow text-gold-bright">
-                Stage {active.id} live
+                Stage {active.id} · {PURCHASE_READY ? 'purchase open' : 'planned'}
               </span>
             </div>
             <span className="hidden sm:flex items-center gap-1.5 text-xs text-taupe font-mono">
@@ -59,11 +60,11 @@ export function PresaleSection() {
           {/* Current price + next */}
           <div className="flex flex-wrap items-end justify-between gap-4 mb-7">
             <div>
-              <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1">Current stage price</div>
+              <div className="text-[10px] uppercase tracking-eyebrow text-taupe mb-1">{PURCHASE_READY ? 'Current stage price' : 'Planned Stage 1 price'}</div>
               <div className="font-mono font-semibold text-4xl text-gold leading-none">
                 ${active.price.toFixed(3)}
               </div>
-              <div className="text-xs text-taupe mt-1.5">per QTX · reserve to lock this price</div>
+              <div className="text-xs text-taupe mt-1.5">per QTX · indicative until purchases open</div>
             </div>
             {next && (
               <div className="rounded-2xl bg-obsidian/40 border border-white/[0.06] px-4 py-3 text-right">
@@ -114,15 +115,14 @@ export function PresaleSection() {
             </div>
           </div>
 
-          {/* Reservation status — factual, no fabricated fill */}
+          {/* Purchase status */}
           <div className="mb-7 flex items-center gap-3 rounded-2xl bg-obsidian/40 border border-white/[0.06] px-4 py-3.5">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
             </span>
             <span className="text-sm text-ash">
-              Reservations open · <span className="text-ivory">no payment today</span> · your Stage {active.id} price
-              locks at reservation
+              {PURCHASE_READY ? `Direct purchase open · USDC on ${ACTIVE_CHAIN_LABEL}` : 'PreSale opens soon · no payment or allocation accepted yet'}
             </span>
           </div>
 
@@ -164,7 +164,7 @@ export function PresaleSection() {
         {/* ── RIGHT: secure participation + notes ── */}
         <GlowCard className="glass-luxe rounded-3xl p-8 flex flex-col">
           <div className="inline-flex items-center gap-2 self-start rounded-full border border-gold/25 bg-gold/5 px-3 py-1 text-[11px] font-grotesk text-gold-bright mb-4">
-            <Icon name="shield" size={13} /> Secure reservation
+            <Icon name="shield" size={13} /> Direct purchase
           </div>
           <h3 className="font-serif font-medium text-xl text-ivory mb-2">Participate as an early supporter</h3>
           <p className="font-grotesk text-sm text-ash leading-relaxed mb-6">
@@ -177,7 +177,7 @@ export function PresaleSection() {
               href="/buy"
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gold-gradient px-6 py-3.5 font-grotesk font-semibold text-obsidian transition-[filter,box-shadow] duration-300 hover:brightness-105 hover:shadow-[0_10px_40px_-12px_rgba(227,179,65,0.5)] cursor-pointer"
             >
-              Join PreSale
+              {PURCHASE_READY ? 'Buy QTX' : 'View purchase details'}
               <Icon name="arrow" size={18} />
             </a>
             <a

@@ -40,4 +40,5 @@ export const TREASURY = validateTreasury(process.env.NEXT_PUBLIC_TREASURY_WALLET
 
 // Live purchase requires BOTH the flag AND a valid treasury.
 export const BUY_FLOW_ENABLED = process.env.NEXT_PUBLIC_BUY_FLOW_ENABLED === 'true';
-export const PURCHASE_READY = BUY_FLOW_ENABLED && TREASURY.valid;
+export const PURCHASE_READY = BUY_FLOW_ENABLED && TREASURY.valid &&
+  !!process.env.NEXT_PUBLIC_SUPABASE_URL && !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;

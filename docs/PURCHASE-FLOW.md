@@ -1,6 +1,6 @@
 # Qryptix — Verified Purchase Flow
 
-Production-ready USDC purchase flow with server-side on-chain verification and
+Gated USDC purchase flow with server-side on-chain verification and
 refund-policy tracking. **Gated off** (`NEXT_PUBLIC_BUY_FLOW_ENABLED=false`) and
 **testnet-default** (`NEXT_PUBLIC_CHAIN_MODE=testnet`) until a Base Sepolia
 purchase has been verified end-to-end.
@@ -33,10 +33,10 @@ purchase has been verified end-to-end.
 | `lib/server/onchain.ts` *(new, server-only)* | viem public client + `verifyUsdcPayment()` + server `getTreasury()` |
 | `app/api/purchase/route.ts` | hardened, verified, service-role insert |
 | `supabase/migrations/0002_purchase_flow.sql` *(new)* | purchase columns, nullable `user_id`, unique `tx_hash`, email-linked RLS read |
-| `lib/supabase/types.ts`, `lib/data.ts` | extended `Purchase` type + mock |
+| `lib/supabase/types.ts`, `lib/data.ts` | extended `Purchase` type + empty preview state |
 | `components/BuyFlow.tsx` | USDC-only, network guard, treasury guard, email, verified submit |
 | `lib/dashboard-data.ts` | purchases linked by `user_id` OR email |
-| `app/dashboard/page.tsx`, `app/dashboard/transactions/page.tsx` | refund eligibility + required copy + chain-aware explorer links |
+| `app/dashboard/page.tsx`, `app/dashboard/transactions/page.tsx` | refund request status + chain-aware explorer links |
 | `.env.example` | all vars |
 
 ## Required env vars
@@ -64,9 +64,9 @@ read purchases matching their email. **RLS stays enabled.** Inserts are server-o
 
 ## Local test steps (preview / no funds)
 
-- With **Supabase env unset**: app runs in preview/mock mode. `/api/purchase` returns
-  `{ ok:true, preview:true }` and records nothing. Dashboard shows clearly-labelled mock data.
-- With **Supabase set but `BUY_FLOW_ENABLED=false`**: hero/`/buy` stay in **reservation** mode;
+- With **Supabase env unset**: app runs in preview mode. `/api/purchase` returns
+  `503` and records nothing. Dashboard shows an empty, clearly-labelled preview.
+- With **`BUY_FLOW_ENABLED=false`**: hero/`/buy` show **PreSale opens soon**;
   `/api/purchase` returns `403 Purchase flow is not active`.
 
 ## Base Sepolia test steps (real end-to-end, no real money)
@@ -76,7 +76,7 @@ read purchases matching their email. **RLS stays enabled.** Inserts are server-o
 2. Run `0001` + `0002` migrations on the Supabase project.
 3. Get Base Sepolia ETH (faucet) + test USDC (`0x036CbD53842c5426634e7929541eC2318f3dCF7e`, Circle faucet).
 4. Open `/buy`, connect wallet, enter email + amount (≥ 50), switch to Base Sepolia if prompted, pay.
-5. Expect: tx confirms → `/api/purchase` verifies → dashboard shows a **confirmed** purchase with the Sepolia tx link + "Eligible" refund.
+5. Expect: tx confirms → `/api/purchase` verifies → dashboard shows a **confirmed** purchase with the Sepolia tx link and the option to request refund review.
 
 ### Negative tests (all must be rejected, no record created)
 
@@ -91,7 +91,7 @@ read purchases matching their email. **RLS stays enabled.** Inserts are server-o
 | Tx to wrong recipient | API → 400 "did not match … treasury" |
 | Tx with wrong token (not USDC) | API → 400 "No USDC transfer found" |
 | Tx amount mismatch | recorded amount = **on-chain** amount (client value ignored) |
-| Dashboard | confirmed purchase + refund eligibility visible |
+| Dashboard | confirmed purchase + request review option visible |
 
 ## Production go-live checklist (do NOT skip)
 
@@ -110,10 +110,11 @@ read purchases matching their email. **RLS stays enabled.** Inserts are server-o
   "claim" stays locked. Backing the claim promise needs a real contract.
 - **Confirmed on first receipt** — we treat a successful receipt as final. For large amounts
   consider waiting N confirmations / re-checking before `confirmed`.
-- **`token_allocations` not auto-updated** by verified purchases — the overview derives
-  "Purchased QTX" by summing purchases, but the allocation row isn't recomputed yet
-  (add a trigger or post-insert recompute).
+- **`token_allocations` not auto-updated** by verified purchases — dashboard allocation
+  is derived from confirmed purchases and the proposed vesting terms. Before claims,
+  implement an authoritative on-chain allocation and reconcile it against purchases.
 - **Refunds are tracked, not automated** — admin moves status manually; no on-chain payout.
-- **Rate limiting** — `/api/reserve` + `/api/interest` are still open/unauthenticated.
-- **Reservations** are still not persisted (separate from this purchase work).
+- **Rate limiting** — protect purchase and account endpoints before enabling the sale.
+- **No reservation** — direct purchase is the only participation path.
+- **Payment before allocation** — direct USDC transfers can succeed even when the server later rejects an over-cap or concurrent purchase. Resolve with an atomic on-chain sale/escrow or a robust refund and reconciliation process before mainnet.
 - **RLS email match** assumes verified Supabase emails; keep email confirmation on.
