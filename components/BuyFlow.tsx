@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useAccount, useChainId, useSwitchChain, useWriteContract } from 'wagmi';
+import { useAccount, useChainId, usePublicClient, useSwitchChain, useWriteContract } from 'wagmi';
 import { parseUnits } from 'viem';
-import { FEATURES, PHASES, PRESALE, PURCHASE_ACKS } from '@/lib/config';
-import { ACTIVE_USDC, TREASURY, ACTIVE_CHAIN_ID, ACTIVE_CHAIN_LABEL } from '@/lib/chains';
+import { PHASES, PRESALE, PURCHASE_ACKS } from '@/lib/config';
+import { ACTIVE_USDC, TREASURY, ACTIVE_CHAIN_ID, ACTIVE_CHAIN_LABEL, PURCHASE_READY } from '@/lib/chains';
 import { ERC20_ABI } from '@/lib/wagmi';
 import { ConnectButton } from './ConnectButton';
 import { Icon } from './Icon';
@@ -16,62 +16,51 @@ const PURCHASE_COPY =
   'Your purchase is recorded after on-chain confirmation. Tokens are not claimable until TGE. Refund eligibility is governed by the Qryptix refund policy.';
 
 export function BuyFlow() {
-  const buyEnabled = FEATURES.BUY_FLOW_ENABLED;
   const activePhase = PHASES.find((p) => p.active) ?? PHASES[0];
 
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { switchChain, isPending: switching } = useSwitchChain();
   const { writeContractAsync } = useWriteContract();
+  const publicClient = usePublicClient({ chainId: ACTIVE_CHAIN_ID });
 
   const [usd, setUsd] = useState('500');
   const [email, setEmail] = useState('');
   const [step, setStep] = useState<Step>('amount');
   const [ack1, setAck1] = useState(false);
   const [ack2, setAck2] = useState(false);
-  const [txHash, setTxHash] = useState<string | null>(null);
+  const [txHash, setTxHash] = useState<`0x${string}` | null>(null);
   const [result, setResult] = useState<{ amount_usd: number; qtx_amount: number } | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
-  const usdNum = parseFloat(usd) || 0;
+  const usdNum = Number(usd) || 0;
   const qtx = usdNum / activePhase.price;
   const belowMin = usdNum < PRESALE.minBuyUsd;
   const aboveMax = usdNum > PRESALE.maxBuyUsd;
-  const amountValid = usdNum > 0 && !belowMin && !aboveMax;
+  const amountValid = Number.isFinite(usdNum) && usdNum > 0 && !belowMin && !aboveMax && Math.round(usdNum * 1e6) === usdNum * 1e6;
   const emailValid = EMAIL_RE.test(email);
-  const wrongNetwork = buyEnabled && isConnected && chainId !== ACTIVE_CHAIN_ID;
+  const wrongNetwork = isConnected && chainId !== ACTIVE_CHAIN_ID;
 
-  // ---- Reservation path (buy flow OFF) ----
-  const submitReservation = async () => {
-    setErr(null);
-    if (!emailValid || !address) {
-      setErr('Connect a wallet and enter a valid email to reserve.');
-      return;
-    }
-    setStep('processing');
-    await fetch('/api/reserve', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, wallet: address, usdc: usd, phase: activePhase.id }),
-    }).catch(() => {});
-    setStep('done');
-  };
-
-  // ---- Purchase path (buy flow ON) — USDC only, server-verified ----
+  // USDC only; the server verifies and records the transaction.
   const executePurchase = async () => {
     setErr(null);
-    if (!TREASURY.valid) {
-      setErr(TREASURY.error ?? 'Treasury wallet is not configured.');
-      return;
-    }
+    if (!PURCHASE_READY) return;
+    if (!address || !emailValid || !amountValid) return;
     if (wrongNetwork) {
       setErr(`Switch to ${ACTIVE_CHAIN_LABEL} to continue.`);
       return;
     }
     setStep('processing');
     try {
+      if (!txHash) {
+        const check = await fetch('/api/purchase', { cache: 'no-store' });
+        if (!check.ok) {
+          const status = await check.json();
+          throw new Error(status.error ?? 'Purchases are temporarily unavailable.');
+        }
+      }
       const units = parseUnits(usdNum.toFixed(ACTIVE_USDC.decimals), ACTIVE_USDC.decimals);
-      const hash = await writeContractAsync({
+      const hash = txHash ?? await writeContractAsync({
         address: ACTIVE_USDC.address,
         abi: ERC20_ABI,
         functionName: 'transfer',
@@ -79,6 +68,11 @@ export function BuyFlow() {
         chainId: ACTIVE_CHAIN_ID,
       });
       setTxHash(hash);
+
+      // Wait for inclusion before asking the server to verify the receipt.
+      if (!publicClient) throw new Error('Network connection unavailable. Retry verification with your transaction hash.');
+      const receipt = await publicClient.waitForTransactionReceipt({ hash });
+      if (receipt.status !== 'success') throw new Error('The transfer failed on-chain. Check the transaction in the explorer.');
 
       // Server verifies the tx on-chain and records it (source of truth).
       const res = await fetch('/api/purchase', {
@@ -88,31 +82,30 @@ export function BuyFlow() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setErr(data.error ?? 'On-chain verification failed. If your payment went through, contact support with your tx hash.');
+        setErr(`${data.error ?? 'On-chain verification failed.'} If the transfer succeeded, retry verification or contact support with your transaction hash. Do not send another payment.`);
         setStep('review');
         return;
       }
       setResult({ amount_usd: data.amount_usd, qtx_amount: data.qtx_amount });
       setStep('done');
     } catch (e: any) {
-      setErr(e?.shortMessage ?? e?.message ?? 'Transaction was rejected or failed.');
+      setErr(`${e?.shortMessage ?? e?.message ?? 'Transaction was rejected or failed.'}${txHash ? ' Your transfer may have succeeded. Retry verification; do not send another payment.' : ''}`);
       setStep('review');
     }
   };
 
   // ============================================================
-  //  Treasury misconfigured while buy flow is ON → block purchase
+  //  Closed sale or missing configuration: no wallet transfer available.
   // ============================================================
-  if (buyEnabled && !TREASURY.valid) {
+  if (!PURCHASE_READY) {
     return (
       <div className="glass-luxe rounded-3xl p-7 text-center">
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 text-red-400">
-          <Icon name="alert" size={24} />
+          <Icon name="lock" size={24} />
         </div>
-        <h3 className="font-serif font-medium text-lg text-ivory mb-2">Purchases temporarily unavailable</h3>
+        <h3 className="font-serif font-medium text-lg text-ivory mb-2">PreSale opens soon</h3>
         <p className="text-sm text-ash">
-          The treasury wallet is not configured correctly, so purchases are disabled for safety.
-          {TREASURY.error ? ` (${TREASURY.error})` : ''}
+          Direct purchases in USDC on Base will open once the sale is ready. No payments or allocations are being accepted now.
         </p>
       </div>
     );
@@ -128,17 +121,11 @@ export function BuyFlow() {
           <Icon name="check" size={26} />
         </div>
         <h3 className="font-serif font-medium text-xl text-ivory mb-2">
-          {buyEnabled ? 'Purchase confirmed' : 'Spot reserved'}
+          Purchase confirmed
         </h3>
         <p className="text-sm text-ash mb-5 max-w-sm mx-auto">
-          {buyEnabled ? (
-            <>
-              {result ? `${result.qtx_amount.toLocaleString('en-US', { maximumFractionDigits: 2 })} QTX recorded for $${result.amount_usd.toLocaleString()}.` : 'Your purchase has been verified on-chain.'}{' '}
-              {PURCHASE_COPY}
-            </>
-          ) : (
-            `Your Phase ${activePhase.id} price of $${activePhase.price.toFixed(3)} is locked. We'll email you the moment the buy flow opens.`
-          )}
+          {result ? `${result.qtx_amount.toLocaleString('en-US', { maximumFractionDigits: 2 })} QTX recorded for $${result.amount_usd.toLocaleString()}.` : 'Your purchase has been verified on-chain.'}{' '}
+          {PURCHASE_COPY}
         </p>
         {txHash && (
           <a
@@ -167,12 +154,10 @@ export function BuyFlow() {
       <div className="glass-luxe rounded-3xl p-8 text-center">
         <div className="mx-auto mb-4 h-12 w-12 rounded-full border-2 border-gold/20 border-t-gold animate-spin" />
         <h3 className="font-serif font-medium text-lg text-ivory mb-1">
-          {buyEnabled ? 'Confirming…' : 'Reserving your spot…'}
+          Confirming…
         </h3>
         <p className="text-sm text-ash">
-          {buyEnabled
-            ? 'Approve the USDC transfer in your wallet, then we verify it on-chain. Don’t close this window.'
-            : 'One moment.'}
+          Approve the USDC transfer in your wallet, then we verify it on-chain. Don’t close this window.
         </p>
       </div>
     );
@@ -184,7 +169,7 @@ export function BuyFlow() {
   if (step === 'review') {
     return (
       <div className="glass-luxe rounded-3xl p-7">
-        <button onClick={() => setStep('amount')} className="text-xs text-ash hover:text-ivory mb-4 cursor-pointer">← Back</button>
+        {!txHash && <button onClick={() => setStep('amount')} className="text-xs text-ash hover:text-ivory mb-4 cursor-pointer">← Back</button>}
         <h3 className="font-serif font-medium text-lg text-ivory mb-5">Review &amp; confirm</h3>
 
         <div className="rounded-2xl bg-obsidian/40 border border-white/[0.06] p-4 mb-4 space-y-2.5">
@@ -212,13 +197,14 @@ export function BuyFlow() {
         </div>
 
         {err && <p className="text-sm text-red-400 mb-3">{err}</p>}
+        {txHash && <a href={`https://${ACTIVE_CHAIN_LABEL === 'Base' ? 'basescan.org' : 'sepolia.basescan.org'}/tx/${txHash}`} target="_blank" rel="noopener noreferrer" className="block text-xs text-gold mb-3 underline">View submitted transaction</a>}
 
         <button
           onClick={executePurchase}
           disabled={!ack1 || !ack2 || wrongNetwork}
           className="w-full rounded-xl bg-gold-gradient py-3.5 font-grotesk font-semibold text-obsidian transition-transform enabled:hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
         >
-          Confirm &amp; pay with USDC
+          {txHash ? 'Retry verification (no new payment)' : 'Confirm & pay with USDC'}
         </button>
         <p className="text-[11px] text-taupe text-center mt-3 leading-relaxed">{PURCHASE_COPY}</p>
       </div>
@@ -232,24 +218,25 @@ export function BuyFlow() {
     <div className="glass-luxe rounded-3xl p-7">
       <div className="flex items-center justify-between mb-5">
         <h3 className="font-serif font-medium text-lg text-ivory">
-          {buyEnabled ? 'Buy QTX' : 'Reserve your allocation'}
+          Buy QTX
         </h3>
         <span className="rounded-lg border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-semibold text-gold-bright">
           {activePhase.id} · ${activePhase.price.toFixed(3)}
         </span>
       </div>
 
-      {buyEnabled && (
-        <div className="flex items-center gap-2 mb-4 rounded-xl border border-gold/20 bg-gold/5 px-3 py-2 text-xs font-grotesk text-gold-bright">
-          <Icon name="shield" size={13} /> Paying with USDC on {ACTIVE_CHAIN_LABEL}
-        </div>
-      )}
+      <div className="flex items-center gap-2 mb-4 rounded-xl border border-gold/20 bg-gold/5 px-3 py-2 text-xs font-grotesk text-gold-bright">
+        <Icon name="shield" size={13} /> Paying with USDC on {ACTIVE_CHAIN_LABEL}
+      </div>
 
       <label className="block text-xs text-ash mb-1.5">
-        {buyEnabled ? 'Amount (USDC)' : 'You will pay (USDC, when launch goes live)'}
+        Amount (USDC)
       </label>
       <input
         type="number"
+        min={PRESALE.minBuyUsd}
+        max={PRESALE.maxBuyUsd}
+        step="0.000001"
         value={usd}
         onChange={(e) => setUsd(e.target.value)}
         placeholder="0.00"
@@ -270,7 +257,7 @@ export function BuyFlow() {
         <div className="text-right text-xs text-taupe">@ ${activePhase.price.toFixed(3)}<br />Claim at TGE</div>
       </div>
 
-      {/* Email (required for both paths) */}
+      {/* Email for purchase receipt and dashboard access */}
       <input
         type="email"
         value={email}
@@ -306,27 +293,19 @@ export function BuyFlow() {
         onClick={() => {
           if (!isConnected) { setErr('Please connect your wallet first.'); return; }
           if (!emailValid) { setErr('Please enter a valid email.'); return; }
-          if (!amountValid) { setErr(`Enter an amount between $${PRESALE.minBuyUsd} and $${PRESALE.maxBuyUsd.toLocaleString()}.`); return; }
+          if (!amountValid) { setErr(`Enter an amount between $${PRESALE.minBuyUsd} and $${PRESALE.maxBuyUsd.toLocaleString()}, with at most 6 decimal places.`); return; }
           if (wrongNetwork) { setErr(`Switch to ${ACTIVE_CHAIN_LABEL} to continue.`); return; }
           setErr(null);
-          if (buyEnabled) setStep('review');
-          else submitReservation();
+          setStep('review');
         }}
         disabled={!amountValid || wrongNetwork}
         className="w-full rounded-xl bg-gold-gradient py-3.5 font-grotesk font-semibold text-obsidian transition-transform enabled:hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
       >
-        {buyEnabled ? 'Continue to review' : 'Reserve My Spot'}
+        Continue to review
       </button>
 
       <p className="text-[11px] text-taupe text-center mt-3 leading-relaxed">
-        {buyEnabled ? (
-          PURCHASE_COPY
-        ) : (
-          <span className="inline-flex flex-wrap items-center justify-center gap-1">
-            <Icon name="alert" size={12} className="text-amber-400 shrink-0" />
-            <span className="text-amber-400 font-medium">No payment required today.</span> Reservations lock in the Phase price. Purchase opens once the audit is published and the operating entity is finalized.
-          </span>
-        )}
+        {PURCHASE_COPY}
       </p>
     </div>
   );

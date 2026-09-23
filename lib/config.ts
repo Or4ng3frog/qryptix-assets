@@ -157,8 +157,8 @@ export type RoadmapItem = {
 };
 
 export const ROADMAP: RoadmapItem[] = [
-  { period: 'Q3 2025', status: 'done', title: 'Token Contract Deployed on Base', items: ['ERC-20 contract live on Base mainnet (verified)', '1B total supply, fixed', 'Website v1 launched'] },
-  { period: 'Q2–Q3 2026', status: 'now', title: 'Reservation Phase · Operating Entity', items: ['Pre-sale reservations open (Phase 1 at $0.006)', 'Operating entity setup in progress (Dubai · VARA-aligned)', 'Smart-contract audit in vendor selection', 'Whitepaper v1.3 published'] },
+  { period: 'Q3 2025', status: 'done', title: 'Website v1 launched', items: ['Initial Qryptix website published', 'Token contract address to be published after verification'] },
+  { period: 'Q2–Q3 2026', status: 'now', title: 'Direct Purchase Preparation · Operating Entity', items: ['USDC direct purchase flow built, currently disabled', 'Operating entity setup in progress (Dubai · VARA-aligned)', 'Smart-contract audit in vendor selection', 'Whitepaper v1.3 published'] },
   { period: 'Q3–Q4 2026', status: 'planned', title: 'Audit · Multisig · Hardware Prototype', items: ['Independent smart-contract audit published', 'Treasury migrated to 3-of-5 multisig', 'Miner hardware prototype', 'Staking program testnet'] },
   { period: 'Q1 2027', status: 'planned', title: 'TGE & Initial DEX Listing', items: ['Token Generation Event — claim portal live', 'Initial DEX listing on Base · LP locked 12 months', '10% unlock at TGE, 90% vests over 8 months'] },
   { period: 'Early Q2 2027', status: 'planned', title: 'Hardware Batch #1', items: ['First miner batch ships — contingent on validation', 'Firmware OTA + device management portal', 'Post-launch optimization based on telemetry'] },
@@ -167,14 +167,14 @@ export const ROADMAP: RoadmapItem[] = [
 export type FaqItem = { q: string; a: string };
 
 export const FAQS: FaqItem[] = [
-  { q: 'Why a reservation instead of a real buy flow today?', a: "Because charging real money for unaudited contract access under an unfinished legal entity isn't responsible. The reservation locks in your Phase 1 price ($0.006) and your spot on the allocation list. When the audit is published and the operating entity is finalized, the buy flow goes live and you complete your purchase with USDC on Base. Reservations are non-binding until then." },
+  { q: 'Can I buy QTX today?', a: 'Not yet. Qryptix will use direct purchases with USDC on Base. The purchase flow remains disabled until the audit, operating entity, treasury and legal requirements are complete. No payment or allocation is accepted before then.' },
   { q: 'Who is behind Qryptix?', a: 'Dennis Klahn, independent developer based in Bremen, Germany. Solo founder, fully doxxed. LinkedIn and GitHub are linked in the Founder section. No fake team, no anonymous advisors. Operations move to a Dubai-based entity once setup is complete.' },
   { q: 'Is the smart contract audited?', a: 'Not yet. Audit vendor selection is underway. The buy flow will not be enabled until an independent audit (Coinsult, CertiK, Hacken, or equivalent) is completed and published. The report will be linked directly on this page.' },
-  { q: 'What does the reservation actually do?', a: 'It records your email, wallet address, and intended purchase amount, and locks in the Phase 1 price. When the buy flow opens, your reserved spot is held for 72 hours. No payment is taken at reservation time.' },
+  { q: 'How will I buy QTX?', a: 'When purchases open, connect a self-custody wallet on Base, enter your USDC amount, review the terms and approve the transfer. The server checks the confirmed on-chain payment before recording QTX in your dashboard. Claim begins at TGE.' },
   { q: 'When will tokens be claimable?', a: 'At TGE (planned Q1 2027). 10% of your allocation unlocks immediately; the remaining 90% vests linearly over 8 months through the claim portal. This applies to all presale phases.' },
-  { q: 'What if the project fails or is delayed?', a: "Reservations are non-binding — if the project doesn't reach TGE for any reason, no payment has been taken from you. After the buy flow opens, the contract and treasury are multisig-controlled, but as with any crypto project, only allocate funds you can afford to lose." },
+  { q: 'What if the project fails or is delayed?', a: 'No payment is accepted while the sale is closed. Once purchases open, refund eligibility is governed by the published Refund Policy. QTX is speculative and could lose all value.' },
   { q: 'Why Dubai?', a: 'Dubai (via VARA — Virtual Assets Regulatory Authority) offers a clear regulatory framework well-suited to projects of this scale. The choice is operational — Qryptix itself remains a global, permissionless project once launched on Base.' },
-  { q: 'Do I need to do KYC?', a: "Not for the reservation. KYC requirements at purchase time depend on jurisdiction and entity setup at launch. We'll publish exact requirements before the buy flow opens. You are responsible for complying with your local regulations." },
+  { q: 'Do I need to do KYC?', a: "KYC requirements at purchase time depend on jurisdiction and entity setup. We'll publish exact requirements before purchases open. You are responsible for complying with your local regulations." },
 ];
 
 // ============================================================
@@ -183,7 +183,7 @@ export const FAQS: FaqItem[] = [
 
 export const PRESALE = {
   // Accepted payment currencies (Base network)
-  currencies: ['USDC', 'USDT', 'ETH'] as const,
+  currencies: ['USDC'] as const,
   // Per-wallet limits (USD-equivalent). null = no limit.
   minBuyUsd: 50,
   maxBuyUsd: 25000,
@@ -193,7 +193,7 @@ export const PRESALE = {
   framing: 'Early Supporter / PreSale Participation',
 } as const;
 
-// Mandatory acknowledgement checkboxes before any purchase/reservation
+// Mandatory acknowledgement checkboxes before any purchase
 export const PURCHASE_ACKS = [
   'I understand that Qryptix is an early-stage crypto project, that participation is speculative, and that no listing, liquidity, reward or value increase is guaranteed.',
   'I have read and accept the PreSale Terms, Refund Policy and Risk Disclosure.',

@@ -127,15 +127,15 @@ export default function WhitepaperPage() {
           {/* 01 Summary */}
           <H2 id="summary" num="01">Executive summary</H2>
           <Lead>
-            Qryptix (QTX) is an ERC-20 token deployed on Base, Coinbase&apos;s Ethereum Layer-2 network. It is
-            designed as a multi-utility token for trading, payments, hardware-backed mining rewards, and staking —
+            Qryptix (QTX) is a planned ERC-20 token on Base, Coinbase&apos;s Ethereum Layer-2 network. A verified
+            public contract address has not yet been published. It is designed for trading, payments, hardware-backed mining rewards, and staking —
             built around a fixed supply of 1,000,000,000 QTX, on-chain enforced vesting, and a transparent
             five-phase pre-sale.
           </Lead>
           <P>
             The project is operated as a solo founder endeavour, with the operating entity in setup (Dubai,
-            VARA-aligned jurisdiction). Pre-sale reservations are open today; actual token purchases will only be
-            enabled after an independent smart-contract audit is published and the operating entity is finalised.
+            VARA-aligned jurisdiction). QTX will be sold by direct purchase with USDC on Base. The purchase flow
+            will only be enabled after an independent smart-contract audit is published and the operating entity is finalised.
             The first hardware miner batch is planned to ship in early Q2 2027, contingent on prototype validation
             with selected manufacturers.
           </P>
@@ -171,8 +171,7 @@ export default function WhitepaperPage() {
           <P>
             Qryptix is designed against both patterns. The token has a defined utility floor — it rewards verified
             hardware contribution and stakers — and the project structure is built to be verifiable: doxxed
-            founder, on-chain enforced tokenomics, reservation-based presale with no funds taken until audit and
-            entity are in place.
+            founder, planned on-chain tokenomics, and a direct purchase flow gated until audit and entity are in place.
           </P>
 
           {/* 03 Solution */}
@@ -200,8 +199,8 @@ export default function WhitepaperPage() {
           <H3>3.3 Transparency over momentum</H3>
           <P>
             Where most presales optimise for fast capital intake, Qryptix is structured to optimise for participant
-            safety. Reservations are non-binding, no payment is taken before audit completion, and the buy flow is
-            gated behind a public list of preconditions (Section 11). This is slower than aggressive marketing
+            safety. No payment is taken before the purchase flow opens, and activation is
+            gated behind a public list of preconditions (Section 7.2). This is slower than aggressive marketing
             playbooks — and it is the right default given the regulatory and reputational environment for token
             launches in 2026.
           </P>
@@ -229,7 +228,7 @@ contract QryptixToken is ERC20, Ownable {
 }`}
           </pre>
           <Callout variant="warn" label="Important">
-            <p>The contract address and verified source code will be linked here once the audit is complete. Until then, on-chain interaction is limited to view functions.</p>
+            <p>The contract address and verified source code will be linked here once confirmed. No QTX contract interaction is offered through this site today.</p>
           </Callout>
           <H3>4.2 Why Base</H3>
           <P>
@@ -240,8 +239,8 @@ contract QryptixToken is ERC20, Ownable {
           </P>
           <H3>4.3 Off-chain components</H3>
           <P>
-            A Next.js dApp for reservation, presale, and claim interfaces; a Postgres database for reservation
-            records; event indexers reading from Base for state synchronisation; and the manufacturer-side firmware
+            A Next.js dApp for presale and claim interfaces; a Postgres database for verified purchase
+            records; planned event indexers reading from Base for state synchronisation; and the manufacturer-side firmware
             stack for miners (specified separately).
           </P>
 
@@ -309,7 +308,7 @@ contract QryptixToken is ERC20, Ownable {
 
           {/* 07 Presale */}
           <H2 id="presale" num="07">Pre-sale structure</H2>
-          <P>Five sequential phases. When a phase is fully allocated, the next begins at the higher price. Progression is determined by allocation fill rate, not manual triggers.</P>
+          <P>Five sequential phases are planned. The current purchase implementation supports only Stage 1; later stages require an additional verified release. No allocation is accepted while purchases are disabled.</P>
           <Table
             head={['Phase', 'Price', 'Allocation', 'Raise target']}
             rows={[
@@ -320,8 +319,8 @@ contract QryptixToken is ERC20, Ownable {
               ['P5', <Mono key="5">$0.125</Mono>, '~28M', '~$3.5M'],
             ]}
           />
-          <H3>7.1 Reservation phase</H3>
-          <P>Today the site accepts <strong className="text-ivory">reservations</strong>, not purchases. A reservation records email, wallet address, and intended amount, and locks in the current phase price. No funds are accepted; reservations can be cancelled anytime.</P>
+          <H3>7.1 Sale status</H3>
+          <P>The direct purchase flow is currently disabled. No payments or allocations are accepted while the sale is closed. The displayed Stage 1 price is planned and does not lock in an allocation.</P>
           <H3>7.2 Purchase preconditions</H3>
           <P>The buy flow activates only when <strong className="text-ivory">all</strong> of the following are met:</P>
           <UL items={[
@@ -331,7 +330,7 @@ contract QryptixToken is ERC20, Ownable {
             'Updated whitepaper published reflecting audit findings.',
           ]} />
           <H3>7.3 Purchase mechanics (when active)</H3>
-          <P>Purchases are made in USDC on Base via a self-custody wallet. Reserved participants get a 72-hour priority window at the reserved phase price; after that, unfilled reservations return to the open pool.</P>
+          <P>When the sale opens, participants pay USDC on Base from a self-custody wallet. The server verifies the on-chain transfer and records the purchase at the applicable stage price. No priority window or reservation is offered.</P>
           <H3>7.4 Claim at TGE</H3>
           <P>No tokens are delivered immediately. At TGE (planned Q1 2027), 10% becomes claimable; the remaining 90% vests linearly over 8 months.</P>
 
@@ -398,7 +397,7 @@ contract QryptixToken is ERC20, Ownable {
           <H3>12.3 No financial advice</H3>
           <P>Nothing here constitutes financial, investment, legal, tax, or accounting advice. Consult qualified professional advisors before any decision regarding QTX.</P>
           <H3>12.4 KYC / AML</H3>
-          <P>KYC at purchase time depends on the final entity&apos;s obligations and purchase size, and will be published before the buy flow opens. Reservation does not require KYC.</P>
+          <P>KYC at purchase time depends on the final entity&apos;s obligations and purchase size, and will be published before the buy flow opens.</P>
 
           {/* 13 Risk */}
           <H2 id="risk" num="13">Risk factors</H2>
@@ -422,8 +421,8 @@ contract QryptixToken is ERC20, Ownable {
           <Table
             head={['Period', 'Status', 'Milestone']}
             rows={[
-              ['Q3 2025', 'Done', 'Token contract deployed on Base; website v1 live'],
-              ['Q2 2026', 'Active', 'Reservation phase; entity setup; audit selection; whitepaper v1.3'],
+              ['Q3 2025', 'Done', 'Website v1 live; token contract address pending publication'],
+              ['Q2–Q3 2026', 'Active', 'Direct purchase preparation; entity setup; audit selection; whitepaper v1.3'],
               ['Q3–Q4 2026', 'Planned', 'Audit published; multisig migration; manufacturer engagement; staking testnet'],
               ['Q1 2027', 'Planned', 'TGE; DEX listing; claim portal; staking launch'],
               ['Early Q2 2027', 'Planned', 'Hardware miner Batch #1 (contingent on validation)'],

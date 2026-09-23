@@ -23,16 +23,16 @@ export default function PresaleTermsPage() {
 
       <H2>2. Pricing and stages</H2>
       <P>
-        The PreSale runs in sequential stages, each with a fixed price per QTX. When a stage&apos;s allocation is
-        filled, the next stage begins at a higher price. The price applicable to your participation is the price of
-        the stage active at the time your participation is recorded.
+        The PreSale plans sequential stages, each with a fixed price per QTX. The current purchase implementation
+        supports Stage 1 only. Later stages require a separate verified release. The price applicable to a purchase
+        is confirmed when the on-chain payment is recorded.
       </P>
 
       <H2>3. Limits and payment</H2>
       <UL items={[
         `Minimum participation: $${PRESALE.minBuyUsd} (USD-equivalent).`,
         `Maximum participation per wallet: $${PRESALE.maxBuyUsd.toLocaleString()} (USD-equivalent).`,
-        `Accepted currencies: ${PRESALE.currencies.join(', ')} on the Base network.`,
+        `Accepted currency: ${PRESALE.currencies.join(', ')} on the Base network.`,
         'You are responsible for sending payment from a wallet you control and for any network fees.',
       ]} />
 

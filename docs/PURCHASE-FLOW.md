@@ -1,6 +1,6 @@
 # Qryptix — Verified Purchase Flow
 
-Production-ready USDC purchase flow with server-side on-chain verification and
+Gated USDC purchase flow with server-side on-chain verification and
 refund-policy tracking. **Gated off** (`NEXT_PUBLIC_BUY_FLOW_ENABLED=false`) and
 **testnet-default** (`NEXT_PUBLIC_CHAIN_MODE=testnet`) until a Base Sepolia
 purchase has been verified end-to-end.
@@ -65,8 +65,8 @@ read purchases matching their email. **RLS stays enabled.** Inserts are server-o
 ## Local test steps (preview / no funds)
 
 - With **Supabase env unset**: app runs in preview/mock mode. `/api/purchase` returns
-  `{ ok:true, preview:true }` and records nothing. Dashboard shows clearly-labelled mock data.
-- With **Supabase set but `BUY_FLOW_ENABLED=false`**: hero/`/buy` stay in **reservation** mode;
+  `503` and records nothing. Dashboard shows clearly-labelled mock data.
+- With **`BUY_FLOW_ENABLED=false`**: hero/`/buy` show **PreSale opens soon**;
   `/api/purchase` returns `403 Purchase flow is not active`.
 
 ## Base Sepolia test steps (real end-to-end, no real money)
@@ -114,6 +114,7 @@ read purchases matching their email. **RLS stays enabled.** Inserts are server-o
   "Purchased QTX" by summing purchases, but the allocation row isn't recomputed yet
   (add a trigger or post-insert recompute).
 - **Refunds are tracked, not automated** — admin moves status manually; no on-chain payout.
-- **Rate limiting** — `/api/reserve` + `/api/interest` are still open/unauthenticated.
-- **Reservations** are still not persisted (separate from this purchase work).
+- **Rate limiting** — `/api/interest` is still open/unauthenticated.
+- **No reservation** — direct purchase is the only participation path.
+- **Payment before allocation** — direct USDC transfers can succeed even when the server later rejects an over-cap or concurrent purchase. Resolve with an atomic on-chain sale/escrow or a robust refund and reconciliation process before mainnet.
 - **RLS email match** assumes verified Supabase emails; keep email confirmation on.

@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import { BuyFlow } from '@/components/BuyFlow';
-import { FEATURES, PHASES, PRESALE } from '@/lib/config';
+import { PHASES, PRESALE } from '@/lib/config';
+import { PURCHASE_READY } from '@/lib/chains';
 import { Icon } from '@/components/Icon';
 import { Logo } from '@/components/Logo';
 
 export const metadata: Metadata = {
-  title: 'Join PreSale — Qryptix',
+  title: 'Buy QTX — Qryptix',
   description: 'Participate in the Qryptix PreSale as an early supporter.',
 };
 
@@ -36,24 +37,22 @@ export default function BuyPage() {
         <div className="text-xs font-grotesk font-semibold uppercase tracking-eyebrow text-gold mb-3">
           PreSale · Early Supporter Participation
         </div>
-        <h1 className="font-serif font-semibold text-3xl md:text-4xl text-ivory mb-3">Join the PreSale</h1>
+        <h1 className="font-serif font-semibold text-3xl md:text-4xl text-ivory mb-3">Buy QTX</h1>
         <p className="font-grotesk text-ash max-w-2xl leading-relaxed mb-10">
-          Qryptix is currently in PreSale. This is early supporter participation — not an investment product. Read
-          the notes before taking part.
+          Direct purchase with USDC on Base when the sale opens. Review the terms and risks before taking part.
         </p>
 
         <div className="grid lg:grid-cols-[1fr_0.9fr] gap-6 items-start">
           {/* Left: context */}
           <div className="space-y-5">
-            {!FEATURES.BUY_FLOW_ENABLED && (
+            {!PURCHASE_READY && (
               <div className="rounded-2xl border border-amber-400/20 bg-amber-400/[0.05] p-5">
                 <div className="flex items-center gap-2 text-amber-300 font-grotesk font-medium text-sm mb-1.5">
-                  <Icon name="alert" size={16} /> Reservation mode
+                  <Icon name="alert" size={16} /> PreSale opens soon
                 </div>
                 <p className="text-sm text-amber-200/70 leading-relaxed">
-                  The live buy flow is not yet active. Until the smart-contract audit is published and the
-                  operating entity is finalized, you can reserve your allocation at the current price with no
-                  payment. You&apos;ll be notified the moment purchasing opens.
+                  The direct purchase flow is not yet active. No payments or allocations are accepted.
+                  Purchases will open after the published launch requirements are met.
                 </p>
               </div>
             )}

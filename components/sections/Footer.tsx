@@ -44,7 +44,7 @@ export function Footer() {
               <Logo variant="full" size={34} />
             </div>
             <p className="font-grotesk text-sm text-ash max-w-xs leading-relaxed mb-5">
-              A practical multi-utility token on Base. Solo-founder operated. Pre-sale reservation active · TGE
+              A practical multi-utility token on Base. Solo-founder operated. Direct PreSale planned · TGE
               planned {SITE.tgeTarget}.
             </p>
             <div className="flex gap-2.5">

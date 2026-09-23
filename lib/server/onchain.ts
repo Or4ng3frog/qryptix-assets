@@ -43,7 +43,12 @@ export const ONCHAIN = {
 
 /** Server treasury source — prefers server-only TREASURY_WALLET, falls back to the public one. */
 export function getTreasury(): { valid: boolean; address?: Address; error?: string } {
-  const raw = process.env.TREASURY_WALLET || process.env.NEXT_PUBLIC_TREASURY_WALLET || '';
+  const publicWallet = process.env.NEXT_PUBLIC_TREASURY_WALLET || '';
+  const serverWallet = process.env.TREASURY_WALLET || '';
+  if (serverWallet && publicWallet && (!isAddress(serverWallet) || !isAddress(publicWallet) || getAddress(serverWallet) !== getAddress(publicWallet))) {
+    return { valid: false, error: 'Public and server treasury wallets differ.' };
+  }
+  const raw = serverWallet || publicWallet;
   if (!raw) return { valid: false, error: 'Treasury wallet is not configured (set TREASURY_WALLET).' };
   if (!isAddress(raw)) return { valid: false, error: 'Treasury wallet is not a valid EVM address.' };
   const address = getAddress(raw);

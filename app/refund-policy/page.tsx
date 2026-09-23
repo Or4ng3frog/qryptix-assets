@@ -54,7 +54,7 @@ export default function RefundPolicy() {
       <H2>6. Refund currency and fees</H2>
       <P>
         Where technically possible, refunds are issued in the same currency used for the original payment (for
-        example USDC, USDT, or ETH on Base). Network and gas fees incurred during the original transaction or the
+        example USDC on Base). Network and gas fees incurred during the original transaction or the
         refund transaction are generally not refundable.
       </P>
 
